@@ -12,9 +12,11 @@ body {
 }
 
 #sidebar > li > img {
-    max-width: 50%; max-height: auto
+    max-width: 50%;
+    max-height: auto;
 }
 
 .pagebody {
-    width: 100%; height: 100vh
+    width: 100%;
+    height: 100vh;
 }

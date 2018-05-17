@@ -1,8 +1,19 @@
-angular.module('escolando').controller('HomeCtrl', function ($scope, $rootScope) {
-    $scope.student = {};
-    $rootScope.students = [];
+(function() {
+    'use strict';
 
-    $scope.register = function () {
-        $rootScope.students.push($scope.student);
+    angular
+        .module('escolando')
+        .controller('HomeController', HomeController);
+
+    HomeController.$inject = ['$scope', '$rootScope', '$state'];
+
+    function HomeController ($scope, $rootScope, $state) {
+
+      $scope.student = {};
+      $rootScope.students = [];
+
+      $scope.register = function () {
+          $rootScope.students.push($scope.student);
+      }
     }
-});
+})();
