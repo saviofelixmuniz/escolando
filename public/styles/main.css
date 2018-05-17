@@ -1,0 +1,20 @@
+body {
+    height: 100vh;
+}
+
+#sidebar > li > a {
+    color: white;
+    font-size: 14px;
+}
+
+#sidebar > li > p {
+    color: white;
+}
+
+#sidebar > li > img {
+    max-width: 50%; max-height: auto
+}
+
+.pagebody {
+    width: 100%; height: 100vh
+}

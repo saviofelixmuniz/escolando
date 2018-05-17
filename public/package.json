@@ -1,0 +1,17 @@
+{
+  "name": "escolando",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.16",
+    "admin-lte": "^3.0.0-alpha.2",
+    "bootstrap": "^4.1.1",
+    "ngstorage": "^0.3.11"
+  }
+}

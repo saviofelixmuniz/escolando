@@ -1,0 +1,44 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container" style="width: 80%; margin: 5% 0 0 10%; float: left;">
+        <h1>Turmas</h1>
+        <div style="margin-top: 3%">
+            <div class="col-md-6" style="float: left">
+                <label for="inputCourse" style="float: left">Série</label>
+                <select id="inputCourse" class="form-control" ng-model="course">
+                    <option selected disabled>Série</option>
+                    <option value="1">1ª</option>
+                </select>
+            </div>
+            <div class="col-md-6" style="float: right;">
+                <label for="inputGroup">Turma</label>
+                <select id="inputGroup" class="form-control" ng-model="group">
+                    <option selected disabled>Turma</option>
+                    <option value="a">A</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <table class="table" style="border-spacing: 20px 0;" ng-show="group && course">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cadastro realizado?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Aluno exemplo</td>
+                <td style="color: green;"><strong>Sim</strong></td>
+            </tr>
+            <tr ng-repeat="student in students track by $index">
+                <th scope="row">{{$index + 2}}</th>
+                <td>{{student.name}}</td>
+                <td style="color: red;"><strong>Não</strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
