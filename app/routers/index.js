@@ -4,6 +4,9 @@
 
 const express = require('express');
 
-const router = express.Router();
+const rootRouter = express.Router();
+const users = require('./routes/users');
 
-module.exports = router;
+rootRouter.use('/users', users);
+
+module.exports = rootRouter;

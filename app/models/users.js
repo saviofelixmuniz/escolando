@@ -5,24 +5,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const statusSchema = Schema({
-    user: {
+const userSchema = Schema({
+    name: {
         type: String,
         required: true
     },
-    question: {
-        type: Number,
-        required: true
-    },
-    quiz: {
+    email: {
         type: String,
         required: true
     },
-    group : {
-        type: Schema.Types.ObjectId,
-        ref : "Groups",
+    role: {
+        type: String,
+        enum: ['student', 'parent', 'admin', 'coordinator', 'admin_aux'],
         required: true
+    },
+    reg_token : {
+        type: String,
+        required : true
     }
-}, {collection : 'status'});
+}, {collection : 'user'});
 
-module.exports = mongoose.model("Status", statusSchema);
+module.exports = mongoose.model("User", userSchema);
