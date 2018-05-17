@@ -2,10 +2,9 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// const RestHelper = require('./app/helpers/rest-helper');
 const debug = require('debug')('Express4');
 
-// require('./app/models/db');
+require('./app/models/db');
 //require('./app/helpers/passport');
 
 const routesAPI = require('./app/routers/index');
