@@ -1,8 +1,13 @@
-/**
- * @author Sávio Muniz
- */
 
-angular.module('escolando').config(function($stateProvider,$urlRouterProvider, $locationProvider) {
+angular.module('escolando')
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    const intro = {
+      name : 'intro',
+      url : '/intro',
+      templateUrl : '/views/intro.html',
+      controller : 'IntroController'
+    };
 
     const home = {
         name : 'home',
@@ -22,10 +27,11 @@ angular.module('escolando').config(function($stateProvider,$urlRouterProvider, $
         name : 'groups',
         url : '/groups',
         templateUrl : '/views/groups.html',
-        controller : 'GroupsCtrl'
+        controller : 'GroupsController'
     };
 
     $stateProvider
+        .state(intro)
         .state(home)
         .state(token_auth)
         .state(register);
