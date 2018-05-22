@@ -2,6 +2,25 @@ body {
     height: 100vh;
 }
 
+.container {
+  float: left;
+  margin: 5% 0 0 10%;
+  width: 80%;
+}
+
+#sidebar {
+  background-color: #008db6;
+  float: left;
+  height: 100vh;
+  text-align: center;
+  width: 10%;
+}
+
+#sidebar .nav-item {
+  margin-top: 15%;
+  cursor: pointer;
+}
+
 #sidebar > li > a {
     color: white;
     font-size: 14px;
@@ -14,6 +33,69 @@ body {
 #sidebar > li > img {
     max-width: 50%;
     max-height: auto;
+}
+
+/* ====================================================================
+Intro Page
+==================================================================== */
+
+.intro-page {
+  color: white;
+  position: relative;
+  background-color: #e94d03;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  overflow: auto;
+  padding-bottom: 30%;
+}
+
+.intro-page .escolando-icon {
+  position: relative;
+  margin: 0 auto;
+  width: 30%;
+  padding: 10px;
+  text-align: center;
+}
+
+.intro-page .sign-up {
+  border: 1px solid #f1681e;
+  position: relative;
+  margin: 0 auto;
+  width: 30%;
+  padding: 10px 20px;
+}
+
+.sign-up a {
+  color: #ff9200;
+}
+
+.sign-up a:hover {
+  color: white;
+}
+
+.sign-up .form-group .form-control {
+  width: 360px;
+  color: #222222;
+  font-size: 12pt;
+}
+
+.intro-page .escolando-icon img {
+  max-height: auto;
+  max-width: 60%;
+  padding-top: 25px;
+}
+
+.intro-page .escolando-icon p {
+  font-family: 'Indie Flower', cursive;
+  font-size: 42pt;
+}
+
+.intro-page h1 {
+  text-align: center;
+  color: blue;
 }
 
 .pagebody {
