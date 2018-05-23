@@ -4,6 +4,7 @@
 var express = require('express');
 var usersRouter = express.Router();
 var usersController = require('../../controllers/users');
+var loggedInMW = require('../../middlewares/loggedIn');
 
 usersRouter.post('/', usersController.registerUser);
 usersRouter.get('/token/:token', usersController.getUserByToken);
