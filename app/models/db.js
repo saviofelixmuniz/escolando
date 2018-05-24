@@ -53,3 +53,10 @@ process.on('SIGTERM', function () {
 
 // Models
 require('./users');
+require('./roles/aux_admin');
+require('./roles/student');
+require('./roles/teacher');
+require('./course_section');
+require('./courses');
+require('./groups');
+require('./subjects');

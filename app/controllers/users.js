@@ -9,7 +9,7 @@ const CodeGenerator = require ('../helpers/code-generator');
 const ROLE_MODELS = {
     student : require('../models/roles/student'),
     teacher : require('../models/roles/teacher'),
-    coordinator : require('../models/roles/coordinator'),
+    coordinator : require('../models/roles/aux_admin'),
     aux_admin : require('../models/roles/aux_admin')
 };
 
@@ -46,13 +46,11 @@ async function registerRoledUser(req, res) {
 
     newRoledUser.user_id = user[0]._id;
 
-    console.log(newRoledUser);
-
-    ROLE_MODELS[role].create(newRoledUser).then(function (user) {
+    ROLE_MODELS[role].update({user_id : newRoledUser.user_id}, {$set : newRoledUser}, {upsert : true}).then(function (user) {
         RestHelper.sendJsonResponse(res, 201, user);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res, 400, err);
-    })
+    });
 }
 
 async function getStudents(req, res) {

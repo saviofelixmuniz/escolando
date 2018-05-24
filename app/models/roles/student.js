@@ -6,30 +6,37 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const studentSchema = Schema({
-    group: {
-        type: String,
-        required: true
+    group_id: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Group"
     },
-    course: {
-        type : String,
-        required: true
+    course_id: {
+        type : Schema.Types.ObjectId,
+        required: true,
+        ref: "Course"
+    },
+    allergies: {
+        type: [String],
+        required: false
     },
     user_id: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: "User"
     },
-    parent_email: {
-        type: String,
-        required: true
+    disabilities: {
+        type: [String],
+        required: false
     },
-    parent_phone: {
-        type: String,
-        required: true
+    parent_ids: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+        ref: "User"
     },
-    address : {
-        type: String,
-        required: true
+    notes: {
+        type: [String],
+        required: false
     }
 }, {collection : 'student'});
 
