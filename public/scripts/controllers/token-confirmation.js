@@ -1,3 +1,4 @@
+
 (function() {
     'use strict';
 
@@ -19,7 +20,7 @@
       ];
 
       $scope.roles = [];
-      $scope.token_auth = true;
+      $scope.token_code = null;
 
       $scope.search_roles = function() {
 

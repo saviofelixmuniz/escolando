@@ -1,3 +1,4 @@
+
 (function() {
     'use strict';
 
@@ -16,4 +17,5 @@
           $rootScope.students.push($scope.student);
       }
     }
+
 })();
