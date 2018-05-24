@@ -1,0 +1,30 @@
+
+<div class="pagebody">
+    <div class="container intro-page">
+        <div class="escolando-icon">
+            <img src="/images/e-icon.png" alt="">
+            <p>escolando</p>
+        </div>
+
+        <div class="sign-up">
+            <form class="form" role="form" ng-submit="login($event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="text" class="form-control" id="inputEmail" ng-model="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPwd">Senha</label>
+                        <input type="password" class="form-control" id="inputPwd" ng-model="password" placeholder="Senha">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Entrar</button>
+
+                <span style="margin-left: 20px"><a href="#" class="active">cadastrar-se</a></span>
+            </form>
+            <p ng-hide="!authenticationError">Erro</p>
+        </div>
+
+    </div>
+</div>
