@@ -1,1 +1,1 @@
-angular.module('escolando', ['ui.router', 'ngStorage']);
+angular.module('escolando', ['ui.router', 'ngStorage', 'ngResource']);

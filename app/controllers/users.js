@@ -17,8 +17,13 @@ function registerUser(req, res) {
     var newUser = req.body;
     newUser.reg_token = CodeGenerator(5);
 
+    if (!newUser.password || !newUser.email) {
+        return RestHelper.sendJsonResponse(res, 400, {err: 'Email and password are required.'})
+    }
+
     User.create(newUser).then(function (user) {
-        RestHelper.sendJsonResponse(res, 200, user);
+        var userObj = user.toObject();
+        RestHelper.sendJsonResponse(res, 200, userObj);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res, 400, err);
     });
