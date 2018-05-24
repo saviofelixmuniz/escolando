@@ -42,7 +42,7 @@ const userSchema = Schema({
         required: true
     },
     registered_by: {
-        type: Schema.types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: false
     },
     photo: {
