@@ -11,6 +11,15 @@ const userSchema = Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        required : true,
+        select: false
+    },
+    phone: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
@@ -20,15 +29,36 @@ const userSchema = Schema({
         enum: ['student', 'parent', 'admin', 'coordinator', 'admin_aux'],
         required: true
     },
+    birthday: {
+        type: Date,
+        required: true
+    },
     reg_token : {
         type: String,
-        required : true
+        required : false
     },
-    password : {
+    registered_on: {
+        type: Date,
+        required: true
+    },
+    registered_by: {
+        type: Schema.types.ObjectId,
+        required: false
+    },
+    photo: {
         type: String,
-        required : true,
-        select: false
+        required: false
     },
+    attachments: {
+        type: [String],
+        required: false
+    },
+    address: {
+        street: String,
+        city: String,
+        state: String,
+        zip: String
+    }
 }, { collection: 'user',
     toObject: {
         transform: function (doc, ret) {
