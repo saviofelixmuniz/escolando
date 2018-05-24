@@ -15,7 +15,9 @@
 
       $scope.register = function () {
           $rootScope.students.push($scope.student);
+          console.log( $rootScope.students );
       }
+
     }
 
 })();

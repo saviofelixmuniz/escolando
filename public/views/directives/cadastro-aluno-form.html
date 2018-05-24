@@ -1,0 +1,47 @@
+
+<h3>Informações do Aluno</h3>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+      <label for="inputEmail">Email do responsável</label>
+      <input type="email" class="form-control" id="inputEmailParent" ng-model="student.responsible.email"  placeholder="Email do responsável">
+  </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="inputCourse">Série</label>
+        <select id="inputCourse" class="form-control" ng-model="student.course">
+            <option selected disabled>Série</option>
+            <option value="1">1ª</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputGroup">Turma</label>
+        <select id="inputGroup" class="form-control" ng-model="student.group">
+            <option selected disabled>Turma</option>
+            <option value="a">A</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-6">
+      <label for="inputAlergias">Alergias</label>
+      <textarea id="inputAlergias" class="form-control" ng-model="student.allergies"></textarea>
+  </div>
+
+  <div class="form-group col-md-6">
+      <label for="inputDisabilities">Deficiências</label>
+      <textarea id="inputDisabilities" class="form-control" ng-model="student.disabilities"></textarea>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-12">
+      <label for="inputNotes">Observações</label>
+      <textarea id="inputNotes" class="form-control" ng-model="student.notes"></textarea>
+  </div>
+</div>
+
+<button type="submit" class="btn btn-primary" ng-click="">Cadastrar Aluno</button>

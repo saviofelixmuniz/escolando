@@ -1,71 +1,15 @@
 <div class="pagebody">
     <navbar></navbar>
     <div class="container">
-        <h1>Cadastro de aluno</h1>
-        <div class="form-group" style="margin-top: 5%">
-            <label for="inputAddress">Nome</label>
-            <input type="text" class="form-control" id="inputName" ng-model="student.name" placeholder="Nome">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputAddress">Nome do responsável</label>
-                <input type="text" class="form-control" id="inputNameParent" ng-model="student.responsible.name" placeholder="Nome do responsável">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPhone">Telefone</label>
-                <div class="form-row">
-                    <input type="text" class="form-control col-md-2" id="inputArea" ng-model="student.responsible.phone.code" placeholder="">
-                    <input type="text" class="form-control col-md-10" id="inputPhone" ng-model="student.responsible.phone.number" placeholder="">
-                </div>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" ng-model="student.email" placeholder="Email">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputEmail">Email do responsável</label>
-                <input type="email" class="form-control" id="inputEmailParent" ng-model="student.responsible.email"  placeholder="Email do responsável">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">Endereço</label>
-            <input type="text" class="form-control" id="inputAddress" ng-model="student.address.address" placeholder="Endereço">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">Cidade</label>
-                <input type="text" class="form-control" ng-model="student.address.city"  id="inputCity">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">Estado</label>
-                <select id="inputState" class="form-control" ng-model="student.address.state" >
-                    <option selected disabled>Estado</option>
-                    <option value="pb">Paraíba</option>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">CEP</label>
-                <input type="text" class="form-control" ng-model="student.address.zip"  id="inputZip">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputState">Série</label>
-                <select id="inputCourse" class="form-control" ng-model="student.course">
-                    <option selected disabled>Série</option>
-                    <option value="1">1ª</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputState">Turma</label>
-                <select id="inputGroup" class="form-control" ng-model="student.group">
-                    <option selected disabled>Turma</option>
-                    <option value="a">A</option>
-                </select>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" ng-click="register()">Cadastrar</button>
+
+        <h1>Cadastro</h1>
+
+        <cadastro-geral-form></cadastro-geral-form>
+        <br></br>
+
+        <!-- <cadastro-aluno-form></cadastro-aluno-form> -->
+
+        <!-- <cadastro-professor-form></cadastro-professor-form> -->
+
     </div>
 </div>
