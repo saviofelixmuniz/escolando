@@ -16,11 +16,23 @@ function register(req, res) {
     });
 }
 
-function search(req, res) {
+function getAll(req, res) {
     var table = req.params.table;
     var objModel = require(`../models/${table}`);
 
     objModel.find({}).then(function (objs) {
+        RestHelper.sendJsonResponse(res, 200, objs);
+    }).catch(function (err) {
+        RestHelper.sendJsonResponse(res, 400, err);
+    });
+}
+
+function query(req, res) {
+    var table = req.params.table;
+    var query = req.body;
+    var objModel = require(`../models/${table}`);
+
+    objModel.find(query).then(function (objs) {
         RestHelper.sendJsonResponse(res, 200, objs);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res, 400, err);
@@ -66,8 +78,9 @@ function remove(req, res) {
 
 module.exports = {
     register : register,
-    search: search,
+    getAll: getAll,
     update: update,
     findOne: findOne,
-    remove : remove
+    remove : remove,
+    query: query
 };

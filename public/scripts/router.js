@@ -43,6 +43,7 @@ angular.module('escolando')
         .state(token_auth)
         .state(register);
 
+
     $urlRouterProvider.otherwise("/");
 
     $locationProvider.html5Mode(true);

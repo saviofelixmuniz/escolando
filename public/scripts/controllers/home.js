@@ -1,4 +1,3 @@
-
 (function() {
     'use strict';
 
@@ -6,17 +5,43 @@
         .module('escolando')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$rootScope', '$state', 'Principal'];
+    HomeController.$inject = ['$scope', '$state', 'Principal', 'Easy', 'User'];
 
-    function HomeController ($scope, $rootScope, $state, Principal) {
-
+    function HomeController ($scope, $state, Principal, Easy, User) {
       $scope.student = {};
-      $rootScope.students = [];
 
-      $scope.register = function () {
-          $rootScope.students.push($scope.student);
-          console.log( $rootScope.students );
-      }
+      Easy.getAll('courses').then(function (courses) {
+          $scope.courses = courses;
+      });
+
+      $scope.registerToken = function () {
+          //TODO Tirar email e password
+          var form = {
+              "email" : "savio",
+              "password" : "1234",
+              "student_name" : $scope.student.name,
+              "student_email" : $scope.student.email,
+              "parent_name": $scope.parent.name,
+              "parent_email": $scope.parent.email,
+              "course_id": $scope.student.course,
+              "group_id": $scope.student.group,
+              "role" : "student"
+          };
+
+          User.registerToken(form).then(function (res) {
+              $scope.token = res.token;
+              $scope.student = {};
+              $scope.groups = [];
+              $scope.parent = {};
+              alert('Aluno cadastrado com sucesso. Token: ' + $scope.token);
+          });
+      };
+      
+      $scope.$watch('student.course', function (course) {
+          Easy.query('groups', {'course_id' : course}).then(function (groups) {
+              $scope.groups = groups;
+          });
+      });
 
     }
 

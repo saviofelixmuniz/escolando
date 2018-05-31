@@ -10,5 +10,7 @@ usersRouter.post('/', usersController.registerUser);
 usersRouter.get('/token/:token', usersController.getUserByToken);
 usersRouter.post('/role/:role/:token', usersController.registerRoledUser);
 usersRouter.get('/students', usersController.getStudents);
+usersRouter.put('/:role/:id', usersController.updateRoleObj);
+usersRouter.get('/students/parent/:parentId', usersController.getStudentByParent);
 
 module.exports = usersRouter;

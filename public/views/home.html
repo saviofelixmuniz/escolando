@@ -1,21 +1,50 @@
 <div class="pagebody">
     <navbar></navbar>
     <div class="container">
-
         <h1>Cadastro</h1>
 
-        <cadastro-geral-form></cadastro-geral-form>
-        </br></br></br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome do aluno</label>
+                <input type="text" class="form-control" id="name" ng-model="student.name" placeholder="Nome">
+            </div>
 
-        <!-- <cadastro-aluno-form></cadastro-aluno-form> -->
+            <div class="form-group col-md-6">
+                <label for="name">E-mail do aluno</label>
+                <input type="text" class="form-control" id="email" ng-model="student.email" placeholder="E-Mail">
+            </div>
+        </div>
 
-        <!-- <cadastro-professor-form></cadastro-professor-form> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nome do responsável</label>
+                <input type="text" class="form-control" id="parentname" ng-model="parent.name" placeholder="Nome">
+            </div>
 
-        <!-- <cadastro-coordenador-form></cadastro-coordenador-form> -->
+            <div class="form-group col-md-6">
+                <label for="name">E-mail do responsável</label>
+                <input type="text" class="form-control" id="parentemail" ng-model="parent.email" placeholder="E-Mail">
+            </div>
+        </div>
 
-        <!-- <cadastro-assist-adm-form></cadastro-assist-adm-form> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="course">Série</label>
+                <select id="course" ng-model="student.course" class="form-control">
+                    <option value="" selected disabled>Selecione uma série</option>
+                    <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="group">Turma</label>
+                <select id="group" ng-model="student.group" class="form-control">
+                    <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
+                    <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                    <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
+                </select>
+            </div>
+        </div>
 
-        <!-- <cadastro-responsavel-form></cadastro-responsavel-form> -->
-
+        <button class="btn btn-primary" ng-click="registerToken()">Cadastrar Token</button>
     </div>
 </div>

@@ -1,50 +1,59 @@
-
-<h3>Informações básicas</h3>
+<h3 ng-if="user && user.role === 'parent'">Informações do responsável</h3>
 
 <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputAddress">Nome</label>
-      <input type="text" class="form-control" id="inputName" ng-model="student.name" placeholder="Nome">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" id="name" ng-model="user.name" placeholder="Nome" ng-disabled="isPreSelected">
     </div>
+
     <div class="form-group col-md-6">
-        <label for="inputEmail">Email</label>
-        <input type="email" class="form-control" id="inputEmail" ng-model="student.email" placeholder="Email">
+        <label for="name">E-mail</label>
+        <input type="text" class="form-control" id="email" ng-model="user.email" placeholder="E-Mail" ng-disabled="isPreSelected">
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputBirthday">Data de Nascimento</label>
-      <input type="date" class="form-control" id="inputPhoto" ng-model="student.birthday" placeholder="Data de nascimento">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Senha">
+    </div>
+
+    <div class="form-group col-md-6">
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input type="password" class="form-control" id="confirmPassword" ng-model="params.confirmPassword" placeholder="Confirmar Senha">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="inputBirthday">Data de Nascimento</label>
+        <input type="date" class="form-control" id="inputBirthday" ng-model="user.birthday" placeholder="Data de nascimento">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputPhone">Telefone</label>
+        <input type="text" name="phone2" class="form-control" mask="(99) 9?9999-9999" id="inputPhone" ng-model="user.phone">
     </div>
 </div>
 
 <div class="form-group">
     <label for="inputAddress">Endereço</label>
-    <input type="text" class="form-control" id="inputAddress" ng-model="student.address.address" placeholder="Endereço">
+    <input type="text" class="form-control" id="inputAddress" ng-model="user.address.address" placeholder="Endereço">
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-6">
         <label for="inputCity">Cidade</label>
-        <input type="text" class="form-control" ng-model="student.address.city"  id="inputCity">
+        <input type="text" class="form-control" ng-model="user.address.city"  id="inputCity">
     </div>
     <div class="form-group col-md-4">
         <label for="inputState">Estado</label>
-        <select id="inputState" class="form-control" ng-model="student.address.state" >
-            <option selected disabled>Estado</option>
-            <option value="pb">Paraíba</option>
+        <select id="inputState" class="form-control" ng-model="user.address.state">
+            <option value="" selected disabled>Estado</option>
+            <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
         </select>
     </div>
     <div class="form-group col-md-2">
         <label for="inputZip">CEP</label>
-        <input type="text" class="form-control" ng-model="student.address.zip"  id="inputZip">
+        <input type="text" class="form-control" mask="99999-999" id="inputZip" ng-model="user.address.zipcode">
     </div>
 </div>
-
-<div class="form-group">
-    <label for="inputAttachments">Anexos</label>
-    <input type="file" class="form-control" id="inputAttachments" ng-model="student.attachments" placeholder="Anexos">
-</div>
-
-<button type="submit" class="btn btn-primary" ng-click="">Cadastrar</button>

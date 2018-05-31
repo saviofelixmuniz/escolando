@@ -1,10 +1,19 @@
 <div class="pagebody">
     <div class="container">
         <h1>Cadastro de usuário</h1>
-        <div class="form-group">
-            <label for="inputAddress">Token</label>
-            <input type="text" class="form-control" id="inputToken" ng-model="token_code" placeholder="Token code">
+        <div ng-if="!user">
+            <div class="form-group">
+                <label for="inputToken">Token</label>
+                <input type="text" class="form-control" id="inputToken" ng-model="token_code" placeholder="Token code">
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="searchRoles(token_code)">Procurar</button>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="search_roles()">Cadastrar</button>
+        <cadastro-geral-form user="user" ng-if="user" is-pre-selected="true"></cadastro-geral-form>
+        <div ng-if="user.role === 'parent'">
+            <cadastro-geral-form ng-repeat="parent in extraParents" user="parent" is-pre-selected="false"></cadastro-geral-form>
+            <button type="button" class="btn btn-warning" ng-click="addParent()">Adicionar outro responsável</button>
+            <cadastro-aluno-form student="student"></cadastro-aluno-form>
+        </div>
+        <button ng-if="user" type="submit" class="btn btn-primary" ng-click="register()">Cadastrar</button>
     </div>
 </div>
