@@ -13,26 +13,84 @@ const ROLE_MODELS = {
     aux_admin : require('../models/roles/aux_admin')
 };
 
-function registerUser(req, res) {
-    var newUser = req.body;
-    newUser.reg_token = CodeGenerator(5);
+const ROLE_REGISTER_FLOW = {
+    student: registerStudent
+};
 
-    if (!newUser.password || !newUser.email) {
+async function registerUser(req, res) {
+    var form = req.body;
+    form.reg_token = CodeGenerator(5);
+
+    //TODO Tirar isso
+    if (!form.password || !form.email) {
         return RestHelper.sendJsonResponse(res, 400, {err: 'Email and password are required.'})
     }
 
-    User.create(newUser).then(function (user) {
-        var userObj = user.toObject();
-        RestHelper.sendJsonResponse(res, 200, userObj);
-    }).catch(function (err) {
-        RestHelper.sendJsonResponse(res, 400, err);
-    });
+    try {
+        await ROLE_REGISTER_FLOW[req.body.role](form);
+        RestHelper.sendJsonResponse(res, 200, {message: 'User registered successfully', token: form.reg_token})
+    } catch (e) {
+        RestHelper.sendJsonResponse(res, 400, e);
+    }
+}
+
+async function registerStudent(form) {
+    var parentUser = {
+        name: form.parent_name,
+        email: form.parent_email,
+        role: 'parent',
+        password: '1234',
+        reg_token: form.reg_token,
+        registered_on: new Date(),
+        register_by: form.registered_by
+    };
+
+    var studentUser = {
+        name: form.student_name,
+        email: form.student_email,
+        role: 'student',
+        password: '1234',
+        registered_on: new Date(),
+        register_by: form.registered_by
+    };
+
+    studentUser = await User.create(studentUser);
+    parentUser = await User.create(parentUser);
+
+    var studentObj = {
+        group_id: form.group_id,
+        course_id: form.course_id,
+        user_id: studentUser._id,
+        parent_ids: [parentUser._id]
+    };
+
+    await ROLE_MODELS['student'].create(studentObj);
 }
 
 function getUserByToken(req, res) {
     var query = {reg_token : req.params.token};
 
-    User.find(query).then(function (user) {
+    User.findOne(query).then(function (user) {
+        RestHelper.sendJsonResponse(res, 200, user);
+    }).catch(function (err) {
+        RestHelper.sendJsonResponse(res, 400, err);
+    });
+}
+
+async function getStudentByParent(req, res) {
+    var student = await ROLE_MODELS['student'].findOne({parent_ids: req.params.parentId}, '', {lean: true});
+    var userStudent = await User.findOne({_id: student.user_id}, '', {lean: true});
+
+    var mergedObj = {...userStudent, ...student};
+
+    RestHelper.sendJsonResponse(res, 200, mergedObj);
+}
+
+async function updateRoleObj(req, res) {
+    var roleId = req.params.id;
+    var role = req.params.role;
+
+    ROLE_MODELS[role].update({_id: roleId}, {$set : req.body}, {upsert: true}).then(function (user) {
         RestHelper.sendJsonResponse(res, 200, user);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res, 400, err);
@@ -83,5 +141,7 @@ module.exports = {
     registerUser : registerUser,
     getUserByToken: getUserByToken,
     registerRoledUser: registerRoledUser,
-    getStudents : getStudents
+    getStudents : getStudents,
+    getStudentByParent: getStudentByParent,
+    updateRoleObj: updateRoleObj
 };

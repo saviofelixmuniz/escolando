@@ -11,6 +11,7 @@ const userSchema = Schema({
         type: String,
         required: true
     },
+    //TODO Tirar required de senha
     password: {
         type: String,
         required : true,
@@ -18,7 +19,7 @@ const userSchema = Schema({
     },
     phone: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
@@ -31,7 +32,7 @@ const userSchema = Schema({
     },
     birthday: {
         type: Date,
-        required: true
+        required: false
     },
     reg_token : {
         type: String,
@@ -69,6 +70,8 @@ const userSchema = Schema({
     }
 });
 
+//TODO Trocar para _id
+
 userSchema.methods.comparePassword = function (password, next) {
     var user = this;
     bcrypt.compare(password, user.password, function(err, match){
@@ -92,6 +95,7 @@ userSchema.pre('save', function(next) {
         return next();
     }
 
+    //TODO Colocar no controller
     bcrypt.genSalt(10, function(err, salt){
         if(err) return next(err);
         bcrypt.hash(user.password, salt, function(err, hash){
