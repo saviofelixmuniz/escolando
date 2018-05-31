@@ -5,6 +5,7 @@
 const User = require('../models/users');
 const RestHelper = require('../helpers/rest-helper');
 const CodeGenerator = require ('../helpers/code-generator');
+const Mail = require('../helpers/mail');
 
 const ROLE_MODELS = {
     student : require('../models/roles/student'),
@@ -28,6 +29,7 @@ async function registerUser(req, res) {
 
     try {
         await ROLE_REGISTER_FLOW[req.body.role](form);
+        mailToken(req.body.role === 'student' ? form.parent_email : form.email, form.reg_token);
         RestHelper.sendJsonResponse(res, 200, {message: 'User registered successfully', token: form.reg_token})
     } catch (e) {
         RestHelper.sendJsonResponse(res, 400, e);
@@ -65,6 +67,13 @@ async function registerStudent(form) {
     };
 
     await ROLE_MODELS['student'].create(studentObj);
+}
+
+function mailToken(email, token) {
+    var html = `Um usuário foi pré-cadastrado para você em nosso sistema, acesse
+                <a href="http://localhost:8080/token-confirmation">EscolandoApp</a> e use o token 
+                <strong>${token}</strong> para terminar o seu cadastro!`;
+    Mail.send(email, 'Token de cadastro', html);
 }
 
 function getUserByToken(req, res) {
