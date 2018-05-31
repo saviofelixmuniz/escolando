@@ -1,0 +1,22 @@
+
+<h3>Informações do Coordenador</h3>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputAdmissionDate">Data de Admissão</label>
+      <input type="date" class="form-control" id="inputAdmissionDate" ng-model="student.admission_date" placeholder="Data de Admissão">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="inputCourseSection">Setor responsável</label>
+        <select id="inputCourseSection" class="form-control" ng-model="student.course_section_id">
+            <option selected disabled>Setor</option>
+            <option value="setor-a">A</option>
+            <option value="setor-b">B</option>
+        </select>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary" ng-click="register()">Cadastrar Coordenador</button>
