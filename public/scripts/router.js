@@ -2,11 +2,17 @@
 angular.module('escolando')
   .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
-    const intro = {
-      name : 'intro',
-      url : '/intro',
-      templateUrl : '/views/intro.html',
-      controller : 'IntroController'
+    const login = {
+      name : 'login',
+      url : '/login',
+      templateUrl : '/views/login.html',
+      controller : 'LoginController'
+    };
+
+    const accessdenied = {
+      name : 'accessdenied',
+      url : '/accessdenied',
+      templateUrl : '/views/accessdenied.html'
     };
 
     const home = {
@@ -21,7 +27,7 @@ angular.module('escolando')
       url : '/token-confirmation',
       templateUrl : '/views/token-confirmation.html',
       controller : 'TokenConfirmationController'
-    }
+    };
 
     const register = {
         name : 'groups',
@@ -31,7 +37,8 @@ angular.module('escolando')
     };
 
     $stateProvider
-        .state(intro)
+        .state(login)
+        .state(accessdenied)
         .state(home)
         .state(token_auth)
         .state(register);

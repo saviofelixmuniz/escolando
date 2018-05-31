@@ -6,16 +6,18 @@
         .module('escolando')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$rootScope', '$state'];
+    HomeController.$inject = ['$scope', '$rootScope', '$state', 'Principal'];
 
-    function HomeController ($scope, $rootScope, $state) {
+    function HomeController ($scope, $rootScope, $state, Principal) {
 
       $scope.student = {};
       $rootScope.students = [];
 
       $scope.register = function () {
           $rootScope.students.push($scope.student);
+          console.log( $rootScope.students );
       }
+
     }
 
 })();

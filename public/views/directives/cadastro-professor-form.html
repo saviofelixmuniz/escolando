@@ -1,0 +1,25 @@
+
+<h3>Informações do Professor</h3>
+
+<!-- Data de admissão (admission_date)
+Disciplinas ministradas (subject_ids)
+Id de usuário (user_id)
+Cursos que pode ministrar (course_ids) -->
+
+<div class="form-group" style="margin-top: 5%">
+    <label for="inputDisciplinesTaught">Disciplinas ministradas</label>
+    <ul id="inputDisciplinesTaught" ng-model="student.subject_ids" >
+        <li selected disabled>Disciplina A</li>
+        <li selected disabled>Disciplina B</li>
+    </ul>
+</div>
+
+<div class="form-group" style="margin-top: 5%">
+    <label for="inputDisciplinesTaught">Disciplinas habilitadas</label>
+    <ul id="inputDisciplinesTaught" ng-model="student.course_ids" >
+        <li selected disabled>Disciplina C</li>
+        <li selected disabled>Disciplina D</li>
+    </ul>
+</div>
+
+<button type="submit" class="btn btn-primary" ng-click="">Cadastrar Professor</button>

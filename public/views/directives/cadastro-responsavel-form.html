@@ -1,0 +1,16 @@
+
+<h3>Informações do responsável</h3>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="inputResponsablesBy">Responsável por:</label>
+        <select class="form-control" id="inputResponsablesBy" name="responsable_by" ng-model="student.responsable_by" multiple>
+            <option selected disabled>Aluno</option>
+            <option value="aluno-1">Joao</option>
+            <option value="aluno-2">Maria</option>
+            <option value="aluno-3">Jose</option>
+        </select>
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary" ng-click="register()">Cadastrar Responsável</button>
