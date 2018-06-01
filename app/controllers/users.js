@@ -6,6 +6,7 @@ const User = require('../models/users');
 const RestHelper = require('../helpers/rest-helper');
 const CodeGenerator = require ('../helpers/code-generator');
 const Mail = require('../helpers/mail');
+const bcrypt = require('bcryptjs');
 
 const ROLE_MODELS = {
     student : require('../models/roles/student'),
@@ -22,17 +23,37 @@ async function registerUser(req, res) {
     var form = req.body;
     form.reg_token = CodeGenerator(5);
 
-    //TODO Tirar isso
-    if (!form.password || !form.email) {
-        return RestHelper.sendJsonResponse(res, 400, {err: 'Email and password are required.'})
-    }
-
     try {
         await ROLE_REGISTER_FLOW[req.body.role](form);
         mailToken(req.body.role === 'student' ? form.parent_email : form.email, form.reg_token);
         RestHelper.sendJsonResponse(res, 200, {message: 'User registered successfully', token: form.reg_token})
     } catch (e) {
         RestHelper.sendJsonResponse(res, 400, e);
+    }
+}
+
+async function updateUser(req, res) {
+    var userId = req.params.id;
+
+    if (req.body.password) {
+        bcrypt.genSalt(10, function (err, salt) {
+            if (err) return RestHelper.sendJsonResponse(res, 500, err);
+            bcrypt.hash(req.body.password, salt, function (err, hash) {
+                if (err) return RestHelper.sendJsonResponse(res, 500, err);
+                req.body.password = hash;
+                update();
+            })
+        });
+    } else {
+        update();
+    }
+
+    function update() {
+        User.update({_id: userId}, {$set : req.body}).then(function (user) {
+            RestHelper.sendJsonResponse(res, 200, user);
+        }).catch(function (err) {
+            RestHelper.sendJsonResponse(res, 400, err);
+        })
     }
 }
 
@@ -148,6 +169,7 @@ async function getStudents(req, res) {
 
 module.exports = {
     registerUser : registerUser,
+    updateUser : updateUser,
     getUserByToken: getUserByToken,
     registerRoledUser: registerRoledUser,
     getStudents : getStudents,

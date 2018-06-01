@@ -18,7 +18,8 @@ function login (req, res) {
     if (!email || !password) {
         return RestHelper.sendJsonResponse(res, 400, {err: 'Login and password are necessary'});
     }
-    User.findOne({email: email})
+
+    User.findOne({email: email}, )
         .select('+password')
         .then(function (user) {
             if (!user) {

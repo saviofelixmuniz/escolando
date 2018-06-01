@@ -11,10 +11,8 @@ const userSchema = Schema({
         type: String,
         required: true
     },
-    //TODO Tirar required de senha
     password: {
         type: String,
-        required : true,
         select: false
     },
     phone: {
@@ -63,14 +61,12 @@ const userSchema = Schema({
 }, { collection: 'user',
     toObject: {
         transform: function (doc, ret) {
-            delete ret._id;
+            delete ret.id;
             delete ret.password;
         },
         getters: true
     }
 });
-
-//TODO Trocar para _id
 
 userSchema.methods.comparePassword = function (password, next) {
     var user = this;
@@ -87,23 +83,5 @@ userSchema.methods.comparePassword = function (password, next) {
         }
     });
 };
-
-userSchema.pre('save', function(next) {
-    var user = this;
-
-    if (!user.isNew) {
-        return next();
-    }
-
-    //TODO Colocar no controller
-    bcrypt.genSalt(10, function(err, salt){
-        if(err) return next(err);
-        bcrypt.hash(user.password, salt, function(err, hash){
-            if(err) return next(err);
-            user.password = hash;
-            next();
-        })
-    });
-});
 
 module.exports = mongoose.model("User", userSchema);

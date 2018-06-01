@@ -7,6 +7,7 @@ var usersController = require('../../controllers/users');
 var loggedInMW = require('../../middlewares/loggedIn');
 
 usersRouter.post('/', usersController.registerUser);
+usersRouter.put('/:id', usersController.updateUser);
 usersRouter.get('/token/:token', usersController.getUserByToken);
 usersRouter.post('/role/:role/:token', usersController.registerRoledUser);
 usersRouter.get('/students', usersController.getStudents);
