@@ -28,8 +28,7 @@
               $scope.user = user;
 
               if (user.role === 'parent') {
-                  //TODO colocar _id
-                  User.getStudentByParentId(user.id).then(function (student) {
+                  User.getStudentByParentId(user._id).then(function (student) {
                       $scope.student = student;
                   });
               }
@@ -64,13 +63,13 @@
 
               await Easy.update('users', $scope.student.user_id, studentUser);
 
-              await Easy.update('users', $scope.user.id, parentUser);
+              await Easy.update('users', $scope.user._id, parentUser);
 
               var parentIds = [];
               for (let parent of $scope.extraParents) {
                   parent.registered_on = new Date();
                   parentUser = await Easy.create('users', parent);
-                  parentIds.push(parentUser.id);
+                  parentIds.push(parentUser._id);
               }
 
               studentObj.parent_ids = $scope.student.parent_ids.concat(parentIds);

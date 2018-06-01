@@ -15,10 +15,7 @@
       });
 
       $scope.registerToken = function () {
-          //TODO Tirar email e password
           var form = {
-              "email" : "savio",
-              "password" : "1234",
               "student_name" : $scope.student.name,
               "student_email" : $scope.student.email,
               "parent_name": $scope.parent.name,
