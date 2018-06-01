@@ -6,7 +6,7 @@ const User = require('../models/users');
 const RestHelper = require('../helpers/rest-helper');
 const CodeGenerator = require ('../helpers/code-generator');
 const Mail = require('../helpers/mail');
-const bcrypt = require('bcryptjs');
+const PasswordHelper = require('../helpers/password-helper');
 
 const ROLE_MODELS = {
     student : require('../models/roles/student'),
@@ -36,20 +36,18 @@ async function updateUser(req, res) {
     var userId = req.params.id;
 
     if (req.body.password) {
-        bcrypt.genSalt(10, function (err, salt) {
-            if (err) return RestHelper.sendJsonResponse(res, 500, err);
-            bcrypt.hash(req.body.password, salt, function (err, hash) {
-                if (err) return RestHelper.sendJsonResponse(res, 500, err);
-                req.body.password = hash;
-                update();
-            })
-        });
+        var user = await PasswordHelper.encryptPassword(req.body);
+        if (user) {
+            update(user);
+        } else {
+            RestHelper.sendJsonResponse(res, 500, {message: 'Error while encrypting password.'});
+        }
     } else {
-        update();
+        update(req.body);
     }
 
-    function update() {
-        User.update({_id: userId}, {$set : req.body}).then(function (user) {
+    function update(user) {
+        User.update({_id: userId}, {$set : user}).then(function (user) {
             RestHelper.sendJsonResponse(res, 200, user);
         }).catch(function (err) {
             RestHelper.sendJsonResponse(res, 400, err);
@@ -67,6 +65,7 @@ async function registerStudent(form) {
         registered_on: new Date(),
         register_by: form.registered_by
     };
+    parentUser = await PasswordHelper.encryptPassword(parentUser);
 
     var studentUser = {
         name: form.student_name,
@@ -76,6 +75,7 @@ async function registerStudent(form) {
         registered_on: new Date(),
         register_by: form.registered_by
     };
+    studentUser = await PasswordHelper.encryptPassword(studentUser);
 
     studentUser = await User.create(studentUser);
     parentUser = await User.create(parentUser);
