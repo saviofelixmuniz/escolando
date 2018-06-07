@@ -11,6 +11,7 @@
         $scope.student = {};
         $scope.coordinator = {};
         $scope.teacher = {};
+        $scope.parent = {};
         $scope.params = {};
 
         Easy.getAll('courses').then(function (courses) {
