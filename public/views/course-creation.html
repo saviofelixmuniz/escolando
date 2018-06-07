@@ -1,0 +1,47 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container">
+        <h1>Divisão de Ensino</h1>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="sectionName">Nome</label>
+                <input type="text" class="form-control" id="sectionName" ng-model="newSection.name" placeholder="Nome (ex: Ensino Médio)">
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="createSection()">Criar divisão</button>
+    </div>
+    <div class="container">
+        <h1>Série</h1>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="courseName">Nome</label>
+                <input type="text" class="form-control" id="courseName" ng-model="newCourse.name" placeholder="Nome (ex: 1º Ano)">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="course">Divisão de Ensino</label>
+                <select id="course" ng-model="newCourse.course_section_id" class="form-control">
+                    <option value="" selected disabled>Selecione uma divisão</option>
+                    <option ng-repeat="section in sections" ng-value="section._id">{{section.name}}</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="createCourse()">Criar série</button>
+    </div>
+    <div class="container">
+        <h1>Turma</h1>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="groupName">Nome</label>
+                <input type="text" class="form-control" id="groupName" ng-model="newGroup.name" placeholder="Nome (ex: A)">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="group">Série</label>
+                <select id="group" ng-model="newGroup.course_id" class="form-control">
+                    <option value="" selected disabled>Selecione uma série</option>
+                    <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" ng-click="createGroup()">Criar turma</button>
+    </div>
+</div>
