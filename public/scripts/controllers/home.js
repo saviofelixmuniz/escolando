@@ -11,10 +11,7 @@
         $scope.student = {};
         $scope.coordinator = {};
         $scope.teacher = {};
-
-        var role = 'admin';
-
-        $scope.registering = getRegisteringType(role);
+        $scope.params = {};
 
         Easy.getAll('courses').then(function (courses) {
           $scope.courses = courses;
@@ -66,7 +63,6 @@
           }
 
           else {
-              console.log('=============================================');
               var form = {
                   'name' : $scope.coordinator.name,
                   'email' : $scope.coordinator.email,
@@ -89,8 +85,16 @@
           });
         });
 
+        $scope.$watch('params.role', function (role) {
+            console.log(role);
+            if (role) {
+                $scope.registering = getRegisteringType(role);
+                console.log($scope.registering);
+            }
+        });
+
         function getRegisteringType(role) {
-            return role === 'admin_aux' ? 'student' :
+            return role === 'aux_admin' ? 'student' :
                 role === 'coordinator'? 'teacher' : 'auxCoordinator'
         }
 

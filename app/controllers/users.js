@@ -215,6 +215,19 @@ async function getStudents(req, res) {
 
 }
 
+async function getStudentsByGroup(req, res) {
+    var students = await ROLE_MODELS['student'].find({group_id: req.params.groupId}, '', {lean: true});
+    var users = [];
+
+    for (var student of students) {
+        var userStudent = await User.findOne({_id: student.user_id}, '', {lean: true});
+        var mergedObj = {...userStudent, ...student};
+
+        users.push(mergedObj)
+    }
+
+    RestHelper.sendJsonResponse(res, 200, users);
+}
 module.exports = {
     registerUser : registerUser,
     updateUser : updateUser,
@@ -222,5 +235,6 @@ module.exports = {
     registerRoledUser: registerRoledUser,
     getStudents : getStudents,
     getStudentByParent: getStudentByParent,
-    updateRoleObj: updateRoleObj
+    updateRoleObj: updateRoleObj,
+    getStudentsByGroup: getStudentsByGroup
 };

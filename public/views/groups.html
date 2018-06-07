@@ -4,17 +4,18 @@
         <h1>Turmas</h1>
         <div style="margin-top: 3%">
             <div class="col-md-6" style="float: left">
-                <label for="inputCourse" style="float: left">Série</label>
-                <select id="inputCourse" class="form-control" ng-model="course">
-                    <option selected disabled>Série</option>
-                    <option value="1">1ª</option>
+                <label for="course">Série</label>
+                <select id="course" ng-model="course" class="form-control">
+                    <option value="" selected disabled>Selecione uma série</option>
+                    <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
                 </select>
             </div>
             <div class="col-md-6" style="float: right;">
-                <label for="inputGroup">Turma</label>
-                <select id="inputGroup" class="form-control" ng-model="group">
-                    <option selected disabled>Turma</option>
-                    <option value="a">A</option>
+                <label for="group">Turma</label>
+                <select id="group" ng-model="group" class="form-control">
+                    <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
+                    <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                    <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
                 </select>
             </div>
         </div>
@@ -28,15 +29,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Aluno exemplo</td>
-                <td style="color: green;"><strong>Sim</strong></td>
-            </tr>
             <tr ng-repeat="student in students track by $index">
                 <th scope="row">{{$index + 2}}</th>
                 <td>{{student.name}}</td>
-                <td style="color: red;"><strong>Não</strong></td>
+                <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
+                <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
             </tr>
             </tbody>
         </table>

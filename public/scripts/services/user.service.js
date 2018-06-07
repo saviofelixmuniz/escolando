@@ -25,6 +25,11 @@ angular.module('escolando').factory('User', function ($http) {
             return $http.post(USERS, form, { headers: {'Content-Type': 'application/json; charset=UTF-8' } }).then(function (res) {
                 return res.data;
             });
+        },
+        getStudentsInGroup : function (groupId) {
+            return $http.get(USERS + `students/groups/${groupId}`).then(function (res) {
+                return res.data;
+            });
         }
     }
 });

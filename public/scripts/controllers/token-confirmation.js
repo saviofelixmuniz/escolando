@@ -77,6 +77,18 @@
               await User.updateStudent($scope.student._id, studentObj);
           }
 
+          else {
+              var user = {
+                  birthday: $scope.user.birthday,
+                  password: $scope.user.password,
+                  phone: $scope.user.phone,
+                  address: $scope.user.address,
+                  reg_token: null
+              };
+
+              await User.updateUser($scope.user._id, user);
+          }
+
           $scope.$apply();
           alert('Cadastro realizado com sucesso');
           $state.go('login');

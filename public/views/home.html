@@ -3,6 +3,13 @@
     <div class="container">
         <h1>Cadastro</h1>
 
+        <select ng-model="params.role" class="form-control" ng-if="!params.role">
+            <option value="" selected disabled>Selecione um tipo de usuário</option>
+            <option value="admin">Coordenador</option>
+            <option value="coordinator">Professor</option>
+            <option value="aux_admin">Aluno</option>
+        </select>
+
         <div ng-if="registering === 'student'">
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -94,6 +101,6 @@
         </div>
 
 
-        <button class="btn btn-primary" ng-click="registerToken()">Cadastrar Token</button>
+        <button class="btn btn-primary" ng-if="registering" ng-click="registerToken()">Cadastrar Token</button>
     </div>
 </div>

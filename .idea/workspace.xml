@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b77bc1d4-c83e-4e36-9ef8-6086ab650e9c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/users.js" afterPath="$PROJECT_DIR$/app/controllers/users.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/roles/aux_admin.js" afterPath="$PROJECT_DIR$/app/models/roles/aux_admin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routers/routes/users.js" afterPath="$PROJECT_DIR$/app/routers/routes/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controllers/groups.js" afterPath="$PROJECT_DIR$/public/scripts/controllers/groups.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controllers/home.js" afterPath="$PROJECT_DIR$/public/scripts/controllers/home.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js" afterPath="$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/services/user.service.js" afterPath="$PROJECT_DIR$/public/scripts/services/user.service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/directives/nav.html" afterPath="$PROJECT_DIR$/public/views/directives/nav.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/groups.html" afterPath="$PROJECT_DIR$/public/views/groups.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/home.html" afterPath="$PROJECT_DIR$/public/views/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/views/token-confirmation.html" afterPath="$PROJECT_DIR$/public/views/token-confirmation.html" />
     </list>
@@ -24,15 +28,13 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="53" column="48" lean-forward="true" selection-start-line="53" selection-start-column="48" selection-end-line="54" selection-end-column="33" />
+            <state relative-caret-position="754">
+              <caret line="228" column="47" lean-forward="false" selection-start-line="228" selection-start-column="47" selection-end-line="228" selection-end-column="47" />
               <folding>
                 <element signature="e#0#30#0" expanded="false" />
                 <element signature="n#!!block;n#registerStudent#0" expanded="false" />
-                <element signature="n#!!block;n#registerTeacher#0" expanded="false" />
                 <element signature="n#!!block;n#mailToken#0" expanded="false" />
                 <element signature="n#!!block;n#getUserByToken#0" expanded="false" />
-                <element signature="n#!!block;n#getStudentByParent#0" expanded="false" />
                 <element signature="n#!!block;n#updateRoleObj#0" expanded="false" />
                 <element signature="n#!!block;n#registerRoledUser#0" expanded="false" />
                 <element signature="n#!!block;n#getStudents#0" expanded="false" />
@@ -41,21 +43,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="aux_admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/roles/aux_admin.js">
+      <file leaf-file-name="token-confirmation.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+            <state relative-caret-position="584">
+              <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="48" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="teacher.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/roles/teacher.js">
+      <file leaf-file-name="student.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/roles/student.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="23" lean-forward="true" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+            <state relative-caret-position="136">
+              <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -64,8 +66,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/views/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="66" column="89" lean-forward="true" selection-start-line="66" selection-start-column="89" selection-end-line="66" selection-end-column="89" />
+            <state relative-caret-position="393">
+              <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="51" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -74,48 +76,64 @@
       <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/scripts/controllers/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+            <state relative-caret-position="476">
+              <caret line="82" column="10" lean-forward="false" selection-start-line="82" selection-start-column="10" selection-end-line="84" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loggedIn.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/middlewares/loggedIn.js">
+      <file leaf-file-name="nav.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/views/directives/nav.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="340">
+              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scripts/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="567">
+              <caret line="39" column="16" lean-forward="true" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routers/routes/users.js">
+      <file leaf-file-name="groups.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/views/groups.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="82" lean-forward="false" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
+            <state relative-caret-position="595">
+              <caret line="35" column="78" lean-forward="false" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/routers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="principal.service.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/scripts/services/principal.service.js">
+      <file leaf-file-name="user.service.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scripts/services/user.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="token-confirmation.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/views/token-confirmation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="493">
+              <caret line="29" column="47" lean-forward="false" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -137,6 +155,7 @@
       <find>console.log</find>
       <find>.id</find>
       <find>h</find>
+      <find>for</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -174,21 +193,24 @@
         <option value="$PROJECT_DIR$/app/routers/routes/easy.js" />
         <option value="$PROJECT_DIR$/app/controllers/easy.js" />
         <option value="$PROJECT_DIR$/public/scripts/services/easy.service.js" />
-        <option value="$PROJECT_DIR$/public/scripts/services/user.service.js" />
         <option value="$PROJECT_DIR$/app/routers/routes/auth.js" />
         <option value="$PROJECT_DIR$/public/scripts/router.js" />
         <option value="$PROJECT_DIR$/app/models/users.js" />
         <option value="$PROJECT_DIR$/app/helpers/mail.js" />
-        <option value="$PROJECT_DIR$/app/routers/routes/users.js" />
-        <option value="$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js" />
         <option value="$PROJECT_DIR$/public/scripts/directives/cadastro-aluno-form.js" />
         <option value="$PROJECT_DIR$/public/scripts/services/principal.service.js" />
-        <option value="$PROJECT_DIR$/public/views/home.html" />
         <option value="$PROJECT_DIR$/app/middlewares/loggedIn.js" />
         <option value="$PROJECT_DIR$/app/models/roles/aux_admin.js" />
-        <option value="$PROJECT_DIR$/app/controllers/users.js" />
-        <option value="$PROJECT_DIR$/public/scripts/controllers/home.js" />
         <option value="$PROJECT_DIR$/public/views/token-confirmation.html" />
+        <option value="$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js" />
+        <option value="$PROJECT_DIR$/public/views/home.html" />
+        <option value="$PROJECT_DIR$/public/scripts/controllers/home.js" />
+        <option value="$PROJECT_DIR$/public/scripts/services/user.service.js" />
+        <option value="$PROJECT_DIR$/app/controllers/users.js" />
+        <option value="$PROJECT_DIR$/app/routers/routes/users.js" />
+        <option value="$PROJECT_DIR$/public/scripts/controllers/groups.js" />
+        <option value="$PROJECT_DIR$/public/views/groups.html" />
+        <option value="$PROJECT_DIR$/public/views/directives/nav.html" />
       </list>
     </option>
   </component>
@@ -306,6 +328,13 @@
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="escolando" type="b2602c69:ProjectViewProjectNode" />
+              <item name="escolando" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="directives" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -319,7 +348,7 @@
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../FlightServer" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="SearchEverywhereHistoryKey" value="home&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/home.html&#10;teacher&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/models/roles/teacher.js&#10;logged&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/middlewares/loggedIn.js&#10;token&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/token-confirmation.html&#10;cadastro&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-geral-form.html&#10;cadas&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-aluno-form.html&#10;cadastr&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-aluno-form.js&#10;auth&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/controllers/auth.js&#10;user&#9;null&#9;null&#10;eas&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/services/easy.service.js&#10;cadastro-geral&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-geral-form.html&#10;cada&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-aluno-form.js&#10;cadas]&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-geral-form.js&#10;t&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/controllers/token-confirmation.js&#10;cadastro-geral-fo&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-geral-form.js&#10;teac&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando-nodejs/app/models/roles/teacher.js" />
+    <property name="SearchEverywhereHistoryKey" value="router&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/router.js&#10;token&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/controllers/token-confirmation.js&#10;users&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/services/user.service.js&#10;user&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/services/user.service.js&#10;groups&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/controllers/groups.js&#10;home&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/home.html&#10;teacher&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/models/roles/teacher.js&#10;logged&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/middlewares/loggedIn.js&#10;cadastro&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-geral-form.html&#10;cadas&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-aluno-form.html&#10;cadastr&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-aluno-form.js&#10;auth&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/app/controllers/auth.js&#10;eas&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/services/easy.service.js&#10;cadastro-geral&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/views/directives/cadastro-geral-form.html&#10;cada&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-aluno-form.js&#10;cadas]&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-geral-form.js&#10;t&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/controllers/token-confirmation.js&#10;cadastro-geral-fo&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando/public/scripts/directives/cadastro-geral-form.js&#10;teac&#9;FILE&#9;file:///home/saviomuniz/workspace/escolando-nodejs/app/models/roles/teacher.js" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RunDashboard">
@@ -357,12 +386,12 @@
       <workItem from="1527121290161" duration="6364000" />
       <workItem from="1527770200936" duration="27001000" />
       <workItem from="1527879417983" duration="1239000" />
-      <workItem from="1528391240190" duration="7834000" />
+      <workItem from="1528391240190" duration="10392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60291000" />
+    <option name="totallyTimeSpent" value="62849000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1922" height="1092" extended-state="6" />
@@ -431,13 +460,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/helpers/code-generator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/helpers/rest-helper.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -450,13 +472,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="61" column="22" lean-forward="false" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -482,13 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/views/groups.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/views/accessdenied.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -507,13 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" lean-forward="false" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/roles/student.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -587,13 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/groups.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/controllers/login.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -619,21 +613,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-96">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/services/user.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -700,22 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/services/principal.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/directives/cadastro-aluno-form.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -729,40 +692,6 @@
         <state relative-caret-position="163">
           <caret line="27" column="70" lean-forward="false" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="70" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routers/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="82" lean-forward="false" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/middlewares/loggedIn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="53" column="48" lean-forward="true" selection-start-line="53" selection-start-column="48" selection-end-line="54" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#30#0" expanded="false" />
-            <element signature="n#!!block;n#registerStudent#0" expanded="false" />
-            <element signature="n#!!block;n#registerTeacher#0" expanded="false" />
-            <element signature="n#!!block;n#mailToken#0" expanded="false" />
-            <element signature="n#!!block;n#getUserByToken#0" expanded="false" />
-            <element signature="n#!!block;n#getStudentByParent#0" expanded="false" />
-            <element signature="n#!!block;n#updateRoleObj#0" expanded="false" />
-            <element signature="n#!!block;n#registerRoledUser#0" expanded="false" />
-            <element signature="n#!!block;n#getStudents#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -782,27 +711,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/views/home.html">
+    <entry file="file://$PROJECT_DIR$/public/views/token-confirmation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="66" column="89" lean-forward="true" selection-start-line="66" selection-start-column="89" selection-end-line="66" selection-end-column="89" />
+        <state relative-caret-position="102">
+          <caret line="6" column="110" lean-forward="false" selection-start-line="6" selection-start-column="110" selection-end-line="6" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/services/principal.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routers/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/middlewares/loggedIn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="36" lean-forward="false" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="45" lean-forward="false" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/services/user.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="47" lean-forward="false" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="228" column="47" lean-forward="false" selection-start-line="228" selection-start-column="47" selection-end-line="228" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#30#0" expanded="false" />
+            <element signature="n#!!block;n#registerStudent#0" expanded="false" />
+            <element signature="n#!!block;n#mailToken#0" expanded="false" />
+            <element signature="n#!!block;n#getUserByToken#0" expanded="false" />
+            <element signature="n#!!block;n#updateRoleObj#0" expanded="false" />
+            <element signature="n#!!block;n#registerRoledUser#0" expanded="false" />
+            <element signature="n#!!block;n#getStudents#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/roles/student.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/controllers/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+        <state relative-caret-position="476">
+          <caret line="82" column="10" lean-forward="false" selection-start-line="82" selection-start-column="10" selection-end-line="84" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/views/token-confirmation.html">
+    <entry file="file://$PROJECT_DIR$/public/views/groups.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="41" />
+        <state relative-caret-position="595">
+          <caret line="35" column="78" lean-forward="false" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="39" column="16" lean-forward="true" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/token-confirmation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="51" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/directives/nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#li#0;n#ul#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
