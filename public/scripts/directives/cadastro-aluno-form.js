@@ -7,12 +7,14 @@ angular.module('escolando').directive('cadastroAlunoForm', function () {
         },
         restrict: 'AE',
         controller: function ($scope, Easy) {
-            Easy.getOne('courses', $scope.student.course_id).then(function (course) {
-                $scope.student.course = course.name;
-            });
+            $scope.$watchCollection('student', function (student) {
+                Easy.getOne('courses', student.course_id).then(function (course) {
+                    $scope.student.course = course.name;
+                });
 
-            Easy.getOne('groups', $scope.student.group_id).then(function (course) {
-                $scope.student.group = course.name;
+                Easy.getOne('groups', student.group_id).then(function (course) {
+                    $scope.student.group = course.name;
+                });
             });
         }
     }
