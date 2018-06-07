@@ -4,7 +4,7 @@ angular.module('escolando')
 
     const login = {
       name : 'login',
-      url : '/login',
+      url : '/',
       templateUrl : '/views/login.html',
       controller : 'LoginController'
     };
@@ -17,7 +17,7 @@ angular.module('escolando')
 
     const home = {
         name : 'home',
-        url : '/',
+        url : '/home',
         templateUrl : '/views/home.html',
         controller : 'HomeController'
     };

@@ -41,9 +41,8 @@ Intro Page
 ==================================================================== */
 
 .intro-page {
-  color: white;
+  color: black;
   position: relative;
-  background-color: #e94d03;
   width: 100%;
   max-width: 100%;
   height: 100%;
