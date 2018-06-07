@@ -16,7 +16,10 @@ const ROLE_MODELS = {
 };
 
 const ROLE_REGISTER_FLOW = {
-    student: registerStudent
+    student: registerStudent,
+    teacher: registerTeacher,
+    coordinator: registerAuxAdmin,
+    aux_admin: registerAuxAdmin
 };
 
 async function registerUser(req, res) {
@@ -88,6 +91,51 @@ async function registerStudent(form) {
     };
 
     await ROLE_MODELS['student'].create(studentObj);
+}
+
+async function registerTeacher(form) {
+    var teacherUser = {
+        name: form.name,
+        email: form.email,
+        role: 'teacher',
+        password: '1234',
+        reg_token: form.reg_token,
+        registered_on: new Date(),
+        register_by: form.registered_by
+    };
+    teacherUser = await PasswordHelper.encryptPassword(teacherUser);
+
+    teacherUser = await User.create(teacherUser);
+
+    var teacherObj = {
+        subject_ids: [form.subject_id],
+        user_id: teacherUser._id
+    };
+
+    await ROLE_MODELS['teacher'].create(teacherObj);
+}
+
+async function registerAuxAdmin(form) {
+    var auxAdminUser = {
+        name: form.name,
+        email: form.email,
+        role: form.role,
+        password: '1234',
+        reg_token: form.reg_token,
+        registered_on: new Date(),
+        register_by: form.registered_by
+    };
+    auxAdminUser = await PasswordHelper.encryptPassword(auxAdminUser);
+
+    auxAdminUser = await User.create(auxAdminUser);
+
+    var auxAdminObj = {
+        user_id: auxAdminUser._id,
+        admission_date: new Date(),
+        course_section_id: form.course_section
+    };
+
+    await ROLE_MODELS['aux_admin'].create(auxAdminObj);
 }
 
 function mailToken(email, token) {

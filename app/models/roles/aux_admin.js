@@ -18,7 +18,7 @@ const auxAdminSchema = Schema({
     course_section_id: {
         type: Schema.Types.ObjectId,
         ref: 'CourseSection',
-        required: true
+        required: false
     }
 }, {collection : 'aux_admin'});
 
