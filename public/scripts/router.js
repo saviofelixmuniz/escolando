@@ -36,12 +36,20 @@ angular.module('escolando')
         controller : 'GroupsController'
     };
 
+    const courseCreation = {
+        name : 'course-creation',
+        url : '/course-creation',
+        templateUrl : '/views/course-creation.html',
+        controller : 'CourseCreationController'
+    };
+
     $stateProvider
         .state(login)
         .state(accessdenied)
         .state(home)
         .state(token_auth)
-        .state(register);
+        .state(register)
+        .state(courseCreation);
 
 
     $urlRouterProvider.otherwise("/");
