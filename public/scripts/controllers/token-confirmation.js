@@ -61,9 +61,9 @@
                   reg_token: null
               };
 
-              await Easy.update('users', $scope.student.user_id, studentUser);
+              await User.updateUser($scope.student.user_id, studentUser);
 
-              await Easy.update('users', $scope.user._id, parentUser);
+              await User.updateUser($scope.user._id, parentUser);
 
               var parentIds = [];
               for (let parent of $scope.extraParents) {

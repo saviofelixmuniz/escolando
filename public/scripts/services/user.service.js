@@ -18,6 +18,9 @@ angular.module('escolando').factory('User', function ($http) {
         updateStudent: function (studentId, studentObj) {
             return $http.put(USERS + `student/${studentId}`, studentObj, { headers: {'Content-Type': 'application/json; charset=UTF-8' } });
         },
+        updateUser: function (userId, userObj) {
+            return $http.put(USERS + `${userId}`, userObj, { headers: {'Content-Type': 'application/json; charset=UTF-8' } });
+        },
         registerToken: function (form) {
             return $http.post(USERS, form, { headers: {'Content-Type': 'application/json; charset=UTF-8' } }).then(function (res) {
                 return res.data;
