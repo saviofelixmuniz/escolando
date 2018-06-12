@@ -9,6 +9,9 @@
     GroupsController.$inject = ['$scope', 'Easy', 'User'];
 
     function GroupsController ($scope, Easy, User) {
+        $scope.newGroup = {};
+        $scope.createGroups = false;
+
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
         });
@@ -26,6 +29,20 @@
                 console.log($scope.students);
             })
         });
+
+        $scope.createGroup = function() {
+            Easy.create('groups', $scope.newGroup).then(function (group) {
+                $scope.newGroup = {};
+            });
+        };
+
+        $scope.toggleGroups = function () {
+            $scope.createGroups = false;
+        }
+
+        $scope.toggleCreateGroups = function () {
+            $scope.createGroups = true;
+        }
     }
 
 })();
