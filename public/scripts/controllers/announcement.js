@@ -28,15 +28,14 @@
             });
         });
 
-
         $scope.$watch('group', function (group) {
-            Announcements.getAnnouncementsInGroup(group).then(function (announcements) {
-                console.log(announcements);
+            Easy.query('announcement', {'group_id': group}).then(function (announcements) {
                 $scope.announcements = announcements;
             })
         });
 
         $scope.createAnnouncement = function () {
+            $scope.newAnnouncement.group_id = $scope.group;
             Easy.create('announcement', $scope.newAnnouncement).then(function (announcement) {
                 $scope.newAnnouncement = {};
             });
