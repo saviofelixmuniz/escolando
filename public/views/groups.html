@@ -1,26 +1,58 @@
 <div class="pagebody">
     <navbar></navbar>
+
     <div class="container">
-        <h1>Turmas</h1>
-        <div style="margin-top: 3%">
-            <div class="col-md-6" style="float: left">
-                <label for="course">Série</label>
-                <select id="course" ng-model="course" class="form-control">
-                    <option value="" selected disabled>Selecione uma série</option>
-                    <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
-                </select>
+        <div class="chart-title">
+            <div class="ng-scope">
+                <span ng-hide="createGroups" style="font-size: 26px">Turmas</span>
+                <span ng-show="createGroups" style="font-size: 26px">Criar Turma</span>
+                <div class="btn-group btn-group-md" style="margin-left: 5px">
+                    <button type="button" class="btn btn-default active" ng-class="{active: !createGroups}" ng-click="toggleGroups()"><i class="fas fa-search"></i></button>
+                    <button type="button" class="btn btn-default" ng-class="{active: createGroups}" ng-click="toggleCreateGroups()"><i class="fas fa-plus"></i></button>
+                </div>
             </div>
-            <div class="col-md-6" style="float: right;">
-                <label for="group">Turma</label>
-                <select id="group" ng-model="group" class="form-control">
-                    <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
-                    <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                    <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
-                </select>
+        </div>
+
+        <div class="container" ng-hide="createGroups">
+            <div style="margin-top: 3%">
+                <div class="col-md-6" style="float: left">
+                    <label for="course">Série</label>
+                    <select id="course" ng-model="course" class="form-control">
+                        <option value="" selected disabled>Selecione uma série</option>
+                        <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6" style="float: right;">
+                    <label for="group">Turma</label>
+                    <select id="group" ng-model="group" class="form-control">
+                        <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
+                        <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                        <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" ng-show="createGroups">
+            <div style="margin-top: 3%" class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="groupName">Nome</label>
+                    <input type="text" class="form-control" id="groupName" ng-model="newGroup.name" placeholder="Nome (ex: A)">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="group">Série</label>
+                    <select id="group" ng-model="newGroup.course_id" class="form-control">
+                        <option value="" selected disabled>Selecione uma série</option>
+                        <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <button type="button" class="btn btn-primary" ng-click="createGroup()">Criar Turma</button>
+                </div>
             </div>
         </div>
         <br>
-        <table class="table" style="border-spacing: 20px 0;" ng-show="group && course">
+        <table class="table" style="border-spacing: 20px 0;" ng-show="group && course && !createGroups">
             <thead>
             <tr>
                 <th scope="col">#</th>
