@@ -6,9 +6,13 @@
         .module('escolando')
         .controller('CourseCreationController', CourseCreationController);
 
-    CourseCreationController.$inject = ['$scope', 'Easy'];
+    CourseCreationController.$inject = ['$scope', 'Easy', 'Principal'];
 
-    function CourseCreationController ($scope, Easy) {
+    function CourseCreationController ($scope, Easy, Principal) {
+        Principal.identity().then(function (user) {
+            $scope.user = user;
+        });
+
         $scope.sections = [];
         $scope.courses = [];
 

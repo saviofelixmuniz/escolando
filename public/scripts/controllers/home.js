@@ -8,6 +8,10 @@
     HomeController.$inject = ['$scope', '$state', 'Principal', 'Easy', 'User'];
 
     function HomeController ($scope, $state, Principal, Easy, User) {
+        Principal.identity().then(function (user) {
+            $scope.user = user;
+        });
+
         $scope.student = {};
         $scope.coordinator = {};
         $scope.teacher = {};
@@ -69,7 +73,7 @@
                   'email' : $scope.coordinator.email,
                   'course_section_id' : $scope.coordinator.subject,
                   'role' : 'coordinator'
-              }
+              };
               
               User.registerToken(form).then(function (res) {
                  $scope.coordinator = {};
