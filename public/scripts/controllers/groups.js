@@ -6,11 +6,15 @@
         .module('escolando')
         .controller('GroupsController', GroupsController);
 
-    GroupsController.$inject = ['$scope', 'Easy', 'User'];
+    GroupsController.$inject = ['$scope', 'Easy', 'User', 'Principal'];
 
-    function GroupsController ($scope, Easy, User) {
+    function GroupsController ($scope, Easy, User, Principal) {
         $scope.newGroup = {};
         $scope.createGroups = false;
+
+        Principal.identity().then(function (user) {
+            $scope.user = user;
+        });
 
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
@@ -25,8 +29,6 @@
         $scope.$watch('group', function (group) {
             User.getStudentsInGroup(group).then(function (students) {
                 $scope.students = students;
-
-                console.log($scope.students);
             })
         });
 

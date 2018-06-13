@@ -228,6 +228,7 @@ async function getStudentsByGroup(req, res) {
 
     RestHelper.sendJsonResponse(res, 200, users);
 }
+
 module.exports = {
     registerUser : registerUser,
     updateUser : updateUser,

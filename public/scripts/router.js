@@ -43,13 +43,31 @@ angular.module('escolando')
         controller : 'CourseCreationController'
     };
 
+
+    const announcement = {
+        name: 'announcement',
+        url: '/announcements',
+        templateUrl: '/views/announcements.html',
+        controller: 'AnnouncementsController'
+    };
+
+    const profile = {
+        name : 'profile',
+        url : '/profile',
+        templateUrl : '/views/profile.html',
+        controller : 'ProfileController'
+    };
+
     $stateProvider
         .state(login)
         .state(accessdenied)
         .state(home)
         .state(token_auth)
         .state(register)
-        .state(courseCreation);
+        .state(courseCreation)
+        .state(announcement)
+        .state(profile);
+
 
 
     $urlRouterProvider.otherwise("/");

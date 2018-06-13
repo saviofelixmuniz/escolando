@@ -15,11 +15,7 @@
       $scope.rememberMe = false;
       $scope.authenticationError = false;
 
-      Principal.identity(true).then(function (account) {
-          if (account) {
-              $state.go('home');
-          }
-      });
+      Auth.logout();
 
       $scope.login = function login (event) {
           event.preventDefault();

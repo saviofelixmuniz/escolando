@@ -68,5 +68,23 @@
                 </div>
             </div>
         </div>
+        <br>
+        <table class="table" style="border-spacing: 20px 0;" ng-show="group && course">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Cadastro realizado?</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in students track by $index">
+                    <th scope="row">{{$index + 2}}</th>
+                    <td>{{student.name}}</td>
+                    <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
+                    <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
