@@ -41,11 +41,11 @@
             });
         }
 
-        $scope.toggleAnnoucements = function () {
+        $scope.toggleAnnouncements = function () {
             $scope.createAnnouncements = false;
         }
 
-        $scope.toggleCreateAnnoucements = function () {
+        $scope.toggleCreateAnnouncements = function () {
             $scope.createAnnouncements = true;
         }
     }

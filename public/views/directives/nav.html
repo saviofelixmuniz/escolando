@@ -5,9 +5,10 @@
           <p style="font-family: 'Indie Flower', cursive; font-size: 20px">escolando</p>
       </li>
       <li class="nav-item">
-          <img src="/images/foto.png" alt="">
-          <p style="margin-top: 8%"><strong>Sávio</strong></p>
-          <p style="margin-top: -10%">Assistente Administrativo</p>
+          <img src="/images/avatar.png" ui-sref="profile" alt="">
+          <p style="margin-top: 1rem" ui-sref="profile"><strong>{{user.name}}</strong></p>
+          <p style="margin-top: -1rem">{{user.role}}</p>
+          <a ui-sref="login">Logout</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" ui-sref="groups" style="cursor: pointer">Turmas</a>

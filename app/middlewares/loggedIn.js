@@ -21,9 +21,9 @@ function verifyJWToken (req, res, next) {
     JWT.verify(token, function (err, validToken) {
         // Se o token não for válido
         if (err) return RestHelper.sendJsonResponse(res, 401, {err: 'Invalid token.'});
-        User.findOne({_id: validToken.id}).then(function(user){
+        User.findOne({_id: validToken._id}, '', {lean: true}).then(function(user){
             if(user){
-                req.user = user.toObject();
+                req.user = user;
                 next();
             } else {
                 return RestHelper.sendJsonResponse(res, 401, {err: 'User no longer exists.'});
