@@ -29,12 +29,12 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="student in students track by $index">
-                <th scope="row">{{$index + 2}}</th>
-                <td>{{student.name}}</td>
-                <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
-                <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
-            </tr>
+                <tr ng-repeat="student in students track by $index">
+                    <th scope="row">{{$index + 2}}</th>
+                    <td>{{student.name}}</td>
+                    <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
+                    <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
+                </tr>
             </tbody>
         </table>
     </div>

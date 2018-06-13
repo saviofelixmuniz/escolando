@@ -60,3 +60,4 @@ require('./course_section');
 require('./courses');
 require('./groups');
 require('./subjects');
+require('./announcement');

@@ -26,8 +26,6 @@
         $scope.$watch('group', function (group) {
             User.getStudentsInGroup(group).then(function (students) {
                 $scope.students = students;
-
-                console.log($scope.students);
             })
         });
     }
