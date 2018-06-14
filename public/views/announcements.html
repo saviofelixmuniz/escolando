@@ -17,17 +17,17 @@
             <div style="margin-top: 3%">
                 <div class="col-md-6" style="float: left">
                     <label for="course">Série</label>
-                    <select id="course" ng-model="course" class="form-control">
+                    <select id="course" ng-model="course" class="form-control" ng-change="loadGroups(course)">
                         <option value="" selected disabled>Selecione uma série</option>
                         <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
                     </select>
                 </div>
                 <div class="col-md-6" style="float: right;">
                     <label for="group">Turma</label>
-                    <select id="group" ng-model="group" class="form-control">
+                    <select id="group" ng-model="group" class="form-control" ng-change="loadAnnouncements(group)">
                         <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
                         <option value="" selected disabled ng-if="course">Selecione uma turma</option>
-                        <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
+                        <option ng-repeat="group in groups" ng-value="group">{{group.name}}</option>
                     </select>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <textarea id="announcementText" ng-model="newAnnouncement.text" class="form-control" aria-label="Digite o texto"></textarea>
 
                     <br>
-                    <button type="button" class="btn btn-primary" ng-click="createAnnouncement()">Criar Comunicado</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="!newAnnouncement.title || !newAnnouncement.text || !group" ng-click="createAnnouncement()">Criar Comunicado</button>
                 </div>
             </div>
         </div>
