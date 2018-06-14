@@ -1,7 +1,8 @@
 const Marks = require('../models/marks');
 
 module.exports = {
-    getMappedMarks: getMappedMarks
+    getMappedMarks: getMappedMarks,
+    commitMarks: commitMarks
 };
 
 function getMappedMarks(req, res) {
@@ -20,4 +21,20 @@ function getMappedMarks(req, res) {
 
         res.status(200).json(result);
     });
+}
+
+async function commitMarks(req, res) {
+    var marks = req.body;
+    var students = Object.keys(marks);
+
+    for (var student of students) {
+        var activities = Object.keys(marks[student]);
+        for (var activity of activities) {
+            var markId = marks[student][activity]._id;
+            var value = marks[student][activity].value;
+            await Marks.update({_id: markId}, {"$set": {value: value}})
+        }
+    }
+
+    res.status(200).json({message: 'Commited sucessfully'});
 }

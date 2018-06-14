@@ -31,18 +31,19 @@ angular.module('escolando')
         if (newVal.course && newVal.group && newVal.subject) {
             Easy.query('activities', {group_id: newVal.group, subject_id: newVal.subject}).then(function (activities) {
                 $scope.activities = activities;
-                console.log($scope.activities);
             });
 
             User.getStudentsInGroup(newVal.group).then(function (students) {
                 $scope.students = students;
-                console.log($scope.students);
             });
 
             Marks.getGroupSubjectMarks(newVal.group, newVal.subject).then(function (marks) {
                 $scope.marks = marks;
-                console.log($scope.marks);
             });
         }
     });
+
+    $scope.$watch('marks', function (marks) {
+        Marks.commitMarks($scope.group, $scope.subject, marks).then();
+    }, true)
 });
