@@ -1,4 +1,3 @@
-
 (function() {
     'use strict';
 
@@ -39,15 +38,15 @@
             Easy.create('announcement', $scope.newAnnouncement).then(function (announcement) {
                 $scope.newAnnouncement = {};
             });
-        }
+        };
 
         $scope.toggleAnnouncements = function () {
             $scope.createAnnouncements = false;
-        }
+        };
 
         $scope.toggleCreateAnnouncements = function () {
             $scope.createAnnouncements = true;
-        }
+        };
     }
 
 })();
