@@ -1,5 +1,9 @@
 angular.module('escolando')
-.controller('ActivityController', function controller ($scope, Easy) {
+.controller('ActivityController', function controller ($scope, Easy, Principal) {
+    Principal.identity().then(function (user) {
+        $scope.user = user;
+    });
+    
     $scope.params = {};
     Easy.getAll('courses').then(function (courses) {
         $scope.courses = courses;
