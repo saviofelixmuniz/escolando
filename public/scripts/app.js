@@ -1,1 +1,1 @@
-angular.module('escolando', ['ui.router', 'ngStorage', 'ngResource', 'ngMask']);
+angular.module('escolando', ['ui.router', 'ngStorage', 'ngResource', 'ngMask', 'ngAnimate']);
