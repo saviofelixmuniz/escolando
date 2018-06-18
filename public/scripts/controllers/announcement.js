@@ -5,9 +5,9 @@
         .module('escolando')
         .controller('AnnouncementsController', AnnouncementsController);
 
-    AnnouncementsController.$inject = ['$scope', 'Easy', 'User', 'Announcement', 'Principal'];
+    AnnouncementsController.$inject = ['$scope', 'Easy', 'User', 'Announcement', 'Toaster', 'Principal'];
 
-    function AnnouncementsController ($scope, Easy, User, Announcements, Principal) {
+    function AnnouncementsController ($scope, Easy, User, Announcements, Toaster, Principal) {
         Principal.identity().then(function (user) {
             $scope.user = user;
         });
@@ -50,6 +50,13 @@
             Easy.create('announcement', $scope.newAnnouncement).then(function (announcement) {
                 $scope.newAnnouncement = {};
             });
+
+            // Toaster.pop('success', "title", 'jumping to https://google.com.', 15000, 'trustedHtml');
+            Toaster.pop('success', 'Comunicado criado!', '<ul><li>' + $scope.newAnnouncement.title + '</li></ul>', 5000, 'trustedHtml');
+            // Toaster.pop('error', "title", '<ul><li>Render html</li></ul>', null, 'trustedHtml');
+            // Toaster.pop('wait', "title", null, null, 'template');
+            // Toaster.pop('warning', "title", "myTemplate.html", null, 'template');
+            // Toaster.pop('note', "title", "text");
         };
 
         $scope.toggleAnnouncements = function () {
