@@ -1,4 +1,3 @@
-
 (function() {
     'use strict';
 
@@ -66,7 +65,7 @@
 
         $scope.toggleCreateAnnouncements = function () {
             $scope.createAnnouncements = true;
-        }
+        };
     }
 
 })();
