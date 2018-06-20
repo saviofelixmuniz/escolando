@@ -11,7 +11,6 @@
         Principal.identity().then(function (user) {
             $scope.user = user;
         });
-
         $scope.student = {};
         $scope.coordinator = {};
         $scope.teacher = {};
