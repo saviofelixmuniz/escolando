@@ -6,9 +6,9 @@
         .module('escolando')
         .controller('GroupsController', GroupsController);
 
-    GroupsController.$inject = ['$scope', 'Easy', 'User', 'Principal'];
+    GroupsController.$inject = ['$scope', 'Easy', 'User', 'Toaster', 'Principal'];
 
-    function GroupsController ($scope, Easy, User, Principal) {
+    function GroupsController ($scope, Easy, User, Toaster, Principal) {
         $scope.newGroup = {};
         $scope.createGroups = false;
 
@@ -25,17 +25,31 @@
                 $scope.groups = groups;
             });
         });
-        
+
         $scope.$watch('group', function (group) {
             User.getStudentsInGroup(group).then(function (students) {
                 $scope.students = students;
             })
         });
 
+        $scope.getCourseNameById = function(course_id) {
+          for (var i in $scope.courses) {
+            if (course_id == $scope.courses[i]._id) {
+              return $scope.courses[i].name;
+            }
+          }
+          return null;
+        }
+
         $scope.createGroup = function() {
             Easy.create('groups', $scope.newGroup).then(function (group) {
                 $scope.newGroup = {};
             });
+
+            Toaster.pop('success', 'Turma criada!',
+              '<ul><li>' + $scope.newGroup.name +
+                ' / ' + $scope.getCourseNameById($scope.newGroup.course_id) + '</li></ul>',
+              5000, 'trustedHtml');
         };
 
         $scope.toggleGroups = function () {
