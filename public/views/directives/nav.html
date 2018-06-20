@@ -1,27 +1,27 @@
-  <ul id="sidebar" class="nav flex-column">
-      <li class="nav-item" style="margin-top: 15%">
-          <a class="nav-link active"><img src="/images/e-icon.png" style="max-width: 50%; max-height: auto" alt=""></a>
-          <p style="font-family: 'Indie Flower', cursive; font-size: 20px">escolando</p>
-      </li>
-      <li class="nav-item">
-          <img src="/images/avatar.png" ui-sref="profile" alt="">
-          <p style="margin-top: 1rem" ui-sref="profile"><strong>{{user.name}}</strong></p>
+<div class="wrapper">
+  <nav id="sidebar" class="nav flex-column" ng-class="{'active': collapsed}">
+      <div class="sidebar-header">
+          <img src="/images/avatar.png" ui-sref="profile" style="max-width: 8rem; cursor: pointer">
+          <p style="margin-top: 1rem; cursor: pointer" ui-sref="profile"><strong>{{user.name}}</strong></p>
           <p style="margin-top: -1rem">{{user.role}}</p>
-          <a ui-sref="login">Logout</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="groups" style="cursor: pointer">Gerenciamento de Turmas</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="home">Cadastro de token</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="announcement">Comunicados</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="activities">Atividades</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" ui-sref="marks">Notas</a>
-      </li>
-  </ul>
+          <a ui-sref="login"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+      <ul class="list-unstyled components">
+          <li ui-sref-active="active">
+              <a class="nav-link" ui-sref="groups" style="cursor: pointer">Gerenciamento de Turmas</a>
+          </li>
+          <li ui-sref-active="active">
+              <a class="nav-link" ui-sref="home">Cadastro de token</a>
+          </li>
+          <li ui-sref-active="active">
+              <a class="nav-link" ui-sref="announcement">Comunicados</a>
+          </li>
+          <li ui-sref-active="active">
+              <a class="nav-link" ui-sref="activities">Atividades</a>
+          </li>
+          <li ui-sref-active="active">
+              <a class="nav-link" ui-sref="marks">Notas</a>
+          </li>
+      </ul>
+  </nav>
+</div>
