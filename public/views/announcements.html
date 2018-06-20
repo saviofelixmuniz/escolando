@@ -10,7 +10,7 @@
             <div class="ng-scope">
                 <span ng-hide="createAnnouncements" style="font-size: 26px">Comunicados</span>
                 <span ng-show="createAnnouncements" style="font-size: 26px">Criar Comunicado</span>
-                <div class="btn-group btn-group-md" style="margin-left: 5px">
+                <div ng-show="toggleRole()" class="btn-group btn-group-md" style="margin-left: 5px">
                     <button type="button" class="btn btn-default" ng-class="{active: !createAnnouncements}" ng-click="toggleAnnouncements()"><i class="fas fa-search"></i></button>
                     <button type="button" class="btn btn-default" ng-class="{active: createAnnouncements}" ng-click="toggleCreateAnnouncements()"><i class="fas fa-plus"></i></button>
                 </div>

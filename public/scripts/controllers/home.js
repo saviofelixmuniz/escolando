@@ -91,7 +91,6 @@
         });
 
         $scope.$watch('params.role', function (role) {
-            console.log(role);
             if (role) {
                 $scope.registering = getRegisteringType(role);
                 console.log($scope.registering);
@@ -102,7 +101,6 @@
             return role === 'aux_admin' ? 'student' :
                 role === 'coordinator'? 'teacher' : 'auxCoordinator'
         }
-
     }
 
 })();

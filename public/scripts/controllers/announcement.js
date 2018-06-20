@@ -17,6 +17,9 @@
         $scope.newAnnouncement = {};
         $scope.group = null;
 
+        $scope.teacherRole = $scope.user.role === "teacher";
+        $scope.adminRole = $scope.user.role === "admin";
+        $scope.coordinatorRole = $scope.user.role === "coordinator";
 
         Easy.getAll('courses').then(function (courses) {
             console.log('pegou series');
@@ -33,6 +36,10 @@
                 $scope.groups = groups;
             });
         };
+
+        $scope.toggleRole = function () {
+            return $scope.teacherRole || $scope.adminRole || $scope.coordinatorRole;
+        }
 
         $scope.loadAnnouncements = function (group) {
             if (!group) {

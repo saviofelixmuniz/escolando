@@ -9,19 +9,19 @@
           <p style="margin-top: -1rem">{{user.role}}</p>
           <a ui-sref="login">Logout</a>
       </li>
-      <li class="nav-item">
+      <li ng-show="userEnableGroups()" class="nav-item">
           <a class="nav-link" ui-sref="groups" style="cursor: pointer">Gerenciamento de Turmas</a>
       </li>
-      <li class="nav-item">
+      <li ng-show="userEnableTokens()" class="nav-item">
           <a class="nav-link" ui-sref="home">Cadastro de token</a>
       </li>
-      <li class="nav-item">
+      <li ng-show="userEnableAnnouncements()" class="nav-item">
           <a class="nav-link" ui-sref="announcement">Comunicados</a>
       </li>
-      <li class="nav-item">
+      <li ng-show="userEnableActivities()" class="nav-item">
           <a class="nav-link" ui-sref="activities">Atividades</a>
       </li>
-      <li class="nav-item">
+      <li ng-show="userEnableMarks()" class="nav-item">
           <a class="nav-link" ui-sref="marks">Notas</a>
       </li>
   </ul>
