@@ -5,6 +5,7 @@ angular.module('escolando')
     });
     
     $scope.params = {};
+
     Easy.getAll('courses').then(function (courses) {
         $scope.courses = courses;
     });
@@ -18,7 +19,15 @@ angular.module('escolando')
             $scope.subjects = subjects;
         });
     });
-    
+
+    $scope.loadActivities = function() {
+        if ($scope.user.role==='student') {
+            Easy.query('activities', {group_id: $scope.user.group_id}).then(function (activities) {
+                $scope.activities = activities;
+            });
+        }
+    };
+
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
         if (newVal.course && newVal.group && newVal.subject) {
             console.log(newVal);

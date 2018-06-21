@@ -7,19 +7,19 @@
           <a ui-sref="login"><i class="fas fa-sign-out-alt"></i></a>
       </div>
       <ul class="list-unstyled components">
-          <li ui-sref-active="active">
+          <li ng-show="user.role==='admin' || user.role==='teacher' || user.role==='coordinator'" ui-sref-active="active">
               <a class="nav-link" ui-sref="groups" style="cursor: pointer">Gerenciamento de Turmas</a>
           </li>
-          <li ui-sref-active="active">
+          <li ng-show="user.role==='admin' || user.role==='coordinator' || user.role==='admin_aux'" ui-sref-active="active">
               <a class="nav-link" ui-sref="home">Cadastro de token</a>
           </li>
-          <li ui-sref-active="active">
+          <li ng-show="user.role==='admin' || user.role==='parent' || user.role==='student' || user.role==='teacher' || user.role==='coordinator'" ui-sref-active="active">
               <a class="nav-link" ui-sref="announcement">Comunicados</a>
           </li>
-          <li ui-sref-active="active">
+          <li ng-show="user.role==='admin' || user.role==='parent' || user.role==='student' || user.role==='teacher'" ui-sref-active="active">
               <a class="nav-link" ui-sref="activities">Atividades</a>
           </li>
-          <li ui-sref-active="active">
+          <li ng-show="user.role==='parent' || user.role==='student' || user.role==='teacher'" ui-sref-active="active">
               <a class="nav-link" ui-sref="marks">Notas</a>
           </li>
       </ul>
