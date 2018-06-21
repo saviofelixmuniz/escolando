@@ -1,5 +1,7 @@
 angular.module('escolando')
 .controller('MarksController', function ($scope, Easy, User, Marks) {
+    var gActivities = {};
+
     Easy.getAll('courses').then(function (courses) {
         $scope.courses = courses;
     });
@@ -14,23 +16,27 @@ angular.module('escolando')
         });
     });
 
-    $scope.test = function () {
-        console.log($scope.marks);
-    };
     $scope.getStudentAvg = function (studentId) {
-        var marks = $scope.marks[studentId];
+        var stdActivities = $scope.marks[studentId];
         var sum = 0;
-        for (var mark of Object.keys(marks)) {
-            sum += marks[mark].value;
+        var totalWeight = 0;
+        for (var activityId of Object.keys(stdActivities)) {
+            var activityWeight = gActivities[activityId].weight;
+            sum += stdActivities[activityId].value * activityWeight;
+            totalWeight += activityWeight
         }
 
-        return sum / $scope.activities.length;
+        return sum / totalWeight;
     };
 
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
         if (newVal.course && newVal.group && newVal.subject) {
             Easy.query('activities', {group_id: newVal.group, subject_id: newVal.subject}).then(function (activities) {
                 $scope.activities = activities;
+                console.log($scope.activities.length);
+                for (var activity of $scope.activities) {
+                    gActivities[activity._id] = activity;
+                }
             });
 
             User.getStudentsInGroup(newVal.group).then(function (students) {

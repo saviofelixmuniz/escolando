@@ -26,13 +26,25 @@ function getMappedMarks(req, res) {
 async function commitMarks(req, res) {
     var marks = req.body;
     var students = Object.keys(marks);
+    var groupId = req.params.groupId;
+    var subjectId = req.params.subjectId;
 
     for (var student of students) {
         var activities = Object.keys(marks[student]);
         for (var activity of activities) {
             var markId = marks[student][activity]._id;
             var value = marks[student][activity].value;
-            await Marks.update({_id: markId}, {"$set": {value: value}})
+
+            if (markId)
+                await Marks.update({_id: markId}, {"$set": {value: value}})
+            else
+                await Marks.create({
+                    "value": value,
+                    "activity_id": activity,
+                    "student_id": student,
+                    "group_id": groupId,
+                    "subject_id": subjectId
+                })
         }
     }
 
