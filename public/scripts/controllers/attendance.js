@@ -1,0 +1,17 @@
+
+(function() {
+    'use strict';
+
+    angular
+        .module('escolando')
+        .controller('AttendanceController', AttendanceController);
+
+    AttendanceController.$inject = ['$scope', 'Easy', 'Principal'];
+
+    function AttendanceController ($scope, Easy, Principal) {
+        Principal.identity().then(function (user) {
+            $scope.user = user;
+        });
+    }
+
+})();
