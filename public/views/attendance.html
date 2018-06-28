@@ -1,0 +1,33 @@
+<div class="pagebody">
+    <navbar></navbar>
+
+    <div class="container">
+        <div class="chart-title">
+            <div class="ng-scope">
+                <h1 class="d-inline">Frequência</h1>
+            </div>
+        </div>
+
+        <div>
+            <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
+        </div>
+
+        <div class="mt-3">
+          <table class="table table-bordered table-striped table-hover table-condensed">
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="subject in subjects">
+                <td class="text-center">
+                  <a><span style="text-transform: uppercase">{{ subject.name }}</span></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+</div>
