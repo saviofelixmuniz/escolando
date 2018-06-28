@@ -6,8 +6,8 @@
             <div class="ng-scope">
                 <h1 class="d-inline" ng-hide="createAnnouncements">Comunicados</h1>
                 <h1 class="d-inline" ng-show="createAnnouncements">Criar Comunicado</h1>
-                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="!createAnnouncements" ng-click="toggleAnnouncements()"><i class="fas fa-list"></i> Listar</button>
-                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="createAnnouncements && (user.role==='coordinator' || user.role==='teacher' || user.role==='admin')" ng-click="toggleCreateAnnouncements()"><i class="fas fa-plus"></i> Criar</button>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="createAnnouncements" ng-click="toggleAnnouncements()"><i class="fas fa-list"></i> Listar</button>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="!createAnnouncements && (user.role==='coordinator' || user.role==='teacher' || user.role==='admin')" ng-click="toggleCreateAnnouncements()"><i class="fas fa-plus"></i> Criar</button>
             </div>
         </div>
 

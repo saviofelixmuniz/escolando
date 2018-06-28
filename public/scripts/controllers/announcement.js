@@ -10,6 +10,7 @@
     function AnnouncementsController ($scope, Easy, User, Announcements, Toaster, Principal) {
         Principal.identity().then(function (user) {
             $scope.user = user;
+            if (user.role==='student' || user.role==='parent') $scope.initAnnouncements(user);
         });
 
         $scope.announcements = [];
@@ -32,28 +33,19 @@
             });
         };
 
-        // $scope.initAnnouncements = function() {
-        //     console.log("loading");
-        //     console.log($scope.user);
-        //     Easy.query('announcement', {'group_id': $scope.user.group_id}).then(function (announcements) {
-        //         $scope.announcements = announcements;
-        //     });
-        //
-        //     if ($scope.user.role==='student') {
-        //         console.log("student");
-        //         $scope.announcements.filter(function isFromSameGroup(announcement) {
-        //             return announcement.group_id === $scope.user.role.group_id;
-        //         });
-        //     } else if ($scope.user.role==='parent') {
-        //         console.log("parent");
-        //         Easy.query('students', {parent_ids: [user._id]}).then(function (student) {
-        //             console.log(student);
-        //             $scope.announcements.filter(function isFromSameGroup(announcement) {
-        //                 return announcement.group_id === student.group_id;
-        //             });
-        //         });
-        //     }
-        // };
+        $scope.initAnnouncements = function(user) {
+            if (user.role==='student') {
+                Easy.query('announcement', {'group_id': user.group_id}).then(function (announcements) {
+                    $scope.announcements = announcements;
+                });
+            } else if (user.role==='parent') {
+                User.getStudentByParentId(user._id).then(function (student) {
+                    Easy.query('announcement', {'group_id': student.group_id}).then(function (announcements) {
+                       $scope.announcements = announcements;
+                    });
+                });
+            }
+        };
 
         $scope.loadAnnouncements = function (group) {
             if (!group && ($scope.user.role==='coordinator' || $scope.user.role==='teacher' || $scope.user.role==='admin')) {
