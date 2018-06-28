@@ -11,6 +11,7 @@
         Principal.identity().then(function (user) {
             $scope.user = user;
         });
+
         $scope.student = {};
         $scope.coordinator = {};
         $scope.teacher = {};
@@ -90,7 +91,6 @@
         });
 
         $scope.$watch('params.role', function (role) {
-            console.log(role);
             if (role) {
                 $scope.registering = getRegisteringType(role);
                 console.log($scope.registering);

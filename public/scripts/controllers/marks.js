@@ -2,6 +2,7 @@ angular.module('escolando')
 .controller('MarksController', function ($scope, Easy, User, Marks, Principal) {
     Principal.identity().then(function (user) {
         $scope.user = user;
+        if (user.role==='student' || user.role==='parent') $scope.loadStudentActivities(user);
     });
 
     var gActivities = {};
@@ -19,14 +20,30 @@ angular.module('escolando')
         });
     });
 
+    $scope.loadStudentActivities = function (user) {
+        if (user.role==='student') {
+            Easy.query('activities', {group_id: $scope.user.group_id}).then(function (activities) {
+                console.log(activities);
+                $scope.activities = activities;
+            });
+        } else if (user.role==='parent') {
+            User.getStudentByParentId(user._id).then(function (student) {
+                Easy.query('activities', {'group_id': student.group_id}).then(function (activities) {
+                    console.log(activities);
+                    $scope.activities = activities;
+                });
+            });
+        }
+    };
+
     $scope.getStudentAvg = function (studentId) {
         var stdActivities = $scope.marks[studentId];
         var sum = 0;
         var totalWeight = 0;
         for (var activityId of Object.keys(stdActivities)) {
             var activityWeight = gActivities[activityId].weight;
-            sum += stdActivities[activityId].value * activityWeight;
-            totalWeight += activityWeight
+            sum += stdActivities[activityId].value * activityWeight
+            totalWeight += activityWeight;
         }
 
         return sum / totalWeight;

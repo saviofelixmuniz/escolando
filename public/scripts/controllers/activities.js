@@ -1,10 +1,12 @@
 angular.module('escolando')
-.controller('ActivityController', function controller ($scope, Easy, Principal) {
+.controller('ActivityController', function controller ($scope, Easy, Principal, User) {
     Principal.identity().then(function (user) {
         $scope.user = user;
+        if (user.role==='student' || user.role==='parent') $scope.loadStudentActivities(user);
     });
     
     $scope.params = {};
+
     Easy.getAll('courses').then(function (courses) {
         $scope.courses = courses;
     });
@@ -18,7 +20,28 @@ angular.module('escolando')
             $scope.subjects = subjects;
         });
     });
-    
+
+    $scope.loadStudentActivities = function (user) {
+        if (user.role==='student') {
+            Easy.query('activities', {group_id: $scope.user.group_id}).then(function (activities) {
+                $scope.activities = activities;
+                console.log(activities);
+            });
+        } else if (user.role==='parent') {
+            User.getStudentByParentId(user._id).then(function (student) {
+                Easy.query('activities', {'group_id': student.group_id}).then(function (activities) {
+                    $scope.activities = activities;
+                });
+            });
+        }
+    };
+
+    $scope.loadActivities = function() {
+        Easy.query('activities', {group_id: $scope.user.group_id}).then(function (activities) {
+            $scope.activities = activities;
+        });
+    };
+
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
         if (newVal.course && newVal.group && newVal.subject) {
             console.log(newVal);

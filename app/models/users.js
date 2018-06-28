@@ -25,7 +25,7 @@ const userSchema = Schema({
     },
     role: {
         type: String,
-        enum: ['student', 'parent', 'admin', 'coordinator', 'admin_aux'],
+        enum: ['student', 'parent', 'admin', 'coordinator', 'admin_aux', 'teacher'],
         required: true
     },
     birthday: {

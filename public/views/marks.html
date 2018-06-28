@@ -2,7 +2,7 @@
     <navbar></navbar>
     <div class="container">
         <h1>Notas</h1>
-        <div class="mt-3">
+        <div class="mt-3" ng-hide="user.role==='student' || user.role==='parent'">
             <div class="col-md-4" style="float: left">
                 <label for="course">Série</label>
                 <select id="course" ng-model="course" class="form-control">
@@ -55,6 +55,32 @@
                             <input style="text-align: center" type="number" max="10" min="0" class="form-control" ng-if="edittingMarks" ng-model="marks[student.user_id][activity._id].value">
                         </td>
                         <td>{{getStudentAvg(student.user_id) | number: 2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div ng-if="user.role==='student' || user.role==='parent'">
+
+            <table style="width: 100%; border-collapse: separate; border-spacing: 15px; text-align: center">
+                <thead>
+                    <tr>
+                        <th ng-repeat="activity in activities" scope="col">{{activity.name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td ng-repeat="activity in activities">Peso = {{activity.weight}}</td>
+                        <td></td>
+                    </tr>
+                    <tr ng-init="student.marks = {}">
+                        <!--<td>{{student.name}}</td>-->
+                        <td ng-repeat="activity in activities track by $index">
+                            <span>{{marks[student.user_id][activity._id].value}}</span>
+                            <!--<input style="text-align: center" type="number" max="10" min="0" class="form-control" ng-if="edittingMarks" ng-model="marks[student.user_id][activity._id].value">-->
+                        </td>
+                        <!--<td>{{getStudentAvg(student.user_id) | number: 2}}</td>-->
                     </tr>
                 </tbody>
             </table>

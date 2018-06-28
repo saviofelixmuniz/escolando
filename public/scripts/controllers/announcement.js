@@ -10,6 +10,7 @@
     function AnnouncementsController ($scope, Easy, User, Announcements, Toaster, Principal) {
         Principal.identity().then(function (user) {
             $scope.user = user;
+            if (user.role==='student' || user.role==='parent') $scope.initAnnouncements(user);
         });
 
         $scope.announcements = [];
@@ -17,9 +18,7 @@
         $scope.newAnnouncement = {};
         $scope.group = null;
 
-
         Easy.getAll('courses').then(function (courses) {
-            console.log('pegou series');
             $scope.courses = courses;
         });
 
@@ -28,21 +27,35 @@
                 $scope.announcements = [];
                 return;
             }
-            console.log('serie mudou');
+
             Easy.query('groups', {'course_id' : course}).then(function (groups) {
                 $scope.groups = groups;
             });
         };
 
+        $scope.initAnnouncements = function(user) {
+            if (user.role==='student') {
+                Easy.query('announcement', {'group_id': user.group_id}).then(function (announcements) {
+                    $scope.announcements = announcements;
+                });
+            } else if (user.role==='parent') {
+                User.getStudentByParentId(user._id).then(function (student) {
+                    Easy.query('announcement', {'group_id': student.group_id}).then(function (announcements) {
+                       $scope.announcements = announcements;
+                    });
+                });
+            }
+        };
+
         $scope.loadAnnouncements = function (group) {
-            if (!group) {
+            if (!group && ($scope.user.role==='coordinator' || $scope.user.role==='teacher' || $scope.user.role==='admin')) {
                 $scope.announcements = [];
                 return;
             }
-            console.log('turma mudou');
+
             Easy.query('announcement', {'group_id': group._id}).then(function (announcements) {
                 $scope.announcements = announcements;
-            })
+            });
         };
 
         $scope.createAnnouncement = function () {
@@ -65,11 +78,12 @@
         };
 
         $scope.toggleAnnouncements = function () {
-            $scope.createAnnouncements = false;
+            if ($scope.user.role === 'student' || $scope.user.role === 'parent') $scope.createAnnouncements = false;
+            else $scope.createAnnouncements = !$scope.createAnnouncements;
         };
 
         $scope.toggleCreateAnnouncements = function () {
-            $scope.createAnnouncements = true;
+            $scope.createAnnouncements = !$scope.createAnnouncements;
         };
     }
 
