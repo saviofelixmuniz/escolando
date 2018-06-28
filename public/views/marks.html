@@ -29,6 +29,11 @@
         </div>
 
         <div ng-if="group && subject">
+
+            <button class="btn btn-primary col-md-4 offset-md-4" style="margin-top: 2%" ng-click="edittingMarks = !edittingMarks">
+                {{edittingMarks? 'Visualizar Notas' : 'Cadastrar/Editar Notas'}}
+            </button>
+
             <table style="width: 100%; border-collapse: separate; border-spacing: 15px; text-align: center">
                 <thead>
                     <tr>
@@ -38,10 +43,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td></td>
+                        <td ng-repeat="activity in activities">Peso = {{activity.weight}}</td>
+                        <td></td>
+                    </tr>
                     <tr ng-repeat="student in students" ng-init="student.marks = {}">
                         <td>{{student.name}}</td>
                         <td ng-repeat="activity in activities track by $index">
-                            <input style="text-align: center" type="number" max="10" min="0" class="form-control" ng-model="marks[student.user_id][activity._id].value">
+                            <span ng-if="!edittingMarks">{{marks[student.user_id][activity._id].value}}</span>
+                            <input style="text-align: center" type="number" max="10" min="0" class="form-control" ng-if="edittingMarks" ng-model="marks[student.user_id][activity._id].value">
                         </td>
                         <td>{{getStudentAvg(student.user_id) | number: 2}}</td>
                     </tr>

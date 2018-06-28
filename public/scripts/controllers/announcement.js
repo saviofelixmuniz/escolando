@@ -73,7 +73,12 @@
             });
 
             // Toaster.pop('success', "title", 'jumping to https://google.com.', 15000, 'trustedHtml');
-            Toaster.pop('success', 'Comunicado criado!', '<ul><li>' + $scope.newAnnouncement.title + '</li></ul>', 5000, 'trustedHtml');
+            Toaster.pop(
+              'success',
+              'Comunicado criado!',
+              '<ul><li>' + $scope.newAnnouncement.title + '</li></ul>', 
+              5000,
+              'trustedHtml');
             // Toaster.pop('error', "title", '<ul><li>Render html</li></ul>', null, 'trustedHtml');
             // Toaster.pop('wait', "title", null, null, 'template');
             // Toaster.pop('warning', "title", "myTemplate.html", null, 'template');
