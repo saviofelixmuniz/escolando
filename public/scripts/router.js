@@ -79,6 +79,13 @@ angular.module('escolando')
       controller : 'AttendanceController'
     };
 
+    const subjects = {
+      name : 'subjects',
+      url : '/subjects',
+      templateUrl : '/views/subjects.html',
+      controller : 'SubjectsController'
+    };
+
     $stateProvider
         .state(login)
         .state(accessdenied)
@@ -90,7 +97,8 @@ angular.module('escolando')
         .state(profile)
         .state(mark)
         .state(activity)
-        .state(attendance);
+        .state(attendance)
+        .state(subjects);
 
     $urlRouterProvider.otherwise("/");
 
