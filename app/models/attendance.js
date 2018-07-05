@@ -3,12 +3,13 @@
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Formatter = require('../helpers/format');
 
 const attendanceSchema = Schema({
     date: {
-        type: Date,
+        type: String,
         required: true,
-        default: new Date()
+        default: Formatter.formatDate(new Date())
     },
     student_id: {
         type: Schema.Types.ObjectId,
@@ -25,5 +26,6 @@ const attendanceSchema = Schema({
         required: true
     }
 }, {collection : 'attendances'});
+
 
 module.exports = mongoose.model("Attendance", attendanceSchema);
