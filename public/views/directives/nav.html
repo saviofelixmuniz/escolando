@@ -28,6 +28,9 @@
           <li ng-show="user.role==='admin' || user.role==='coordinator' || user.role==='admin_aux'" ui-sref-active="active">
               <a class="nav-link" ui-sref="subjects">Disciplinas</a>
           </li>
+          <li ng-show="user.role==='admin' || user.role==='coordinator' || user.role==='admin_aux'" ui-sref-active="active">
+              <a class="nav-link" ui-sref="teachers">Professores</a>
+          </li>
       </ul>
   </nav>
 </div>

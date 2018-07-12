@@ -14,7 +14,7 @@
             <div>
                 <div class="card" ng-repeat="subject in subjects track by $index" style="align-content: left; margin-top: 2%;">
                     <div class="card-header">
-                        <h5 class="card-title" style="font-weight: bold; float: left"> {{ subject.name }} </h5>
+                        <a ng-click="selectSubject(subject)"><h5 class="card-title" style="font-weight: bold; float: left; cursor: pointer">{{ subject.name }} </h5></a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,25 @@
                 <label for="subjectNameU">Nome</label>
                 <input type="text" class="form-control" id="subjectNameU" ng-model="subjectSelected.name" placeholder="Nome (ex: Biologia)">
             </div>
-            <button class="btn btn-primary" ng-click="createSubject()">Atualizar disciplina</button>
+            <p>Associar Séries</p>
+            <div class="row mb-3">
+                <div class="col-md-5" id="courses2">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="course in courses track by $index">{{course.name}}
+                            <button class="btn btn-sm btn-primary float-right" ng-click="addCourse(course)">+</button> </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h1 class="text-center"><i class="fas fa-arrow-right"></i></h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="course in subjectSelected.courses track by $index">{{course.name}}
+                            <button class="btn btn-sm btn-danger float-right" ng-click="removeCourse(course)">-</button> </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-click="updateSubject()">Atualizar disciplina</button>
         </div>
     </div>
 </div>

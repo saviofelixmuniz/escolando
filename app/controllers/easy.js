@@ -6,7 +6,11 @@ const RestHelper = require('../helpers/rest-helper');
 
 function register(req, res) {
     var table = req.params.table;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
     var newObj = req.body;
 
     objModel.create(newObj).then(function (obj) {
@@ -18,7 +22,11 @@ function register(req, res) {
 
 function getAll(req, res) {
     var table = req.params.table;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
 
     objModel.find({}).then(function (objs) {
         RestHelper.sendJsonResponse(res, 200, objs);
@@ -30,7 +38,11 @@ function getAll(req, res) {
 function query(req, res) {
     var table = req.params.table;
     var query = req.body;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
 
     objModel.find(query).then(function (objs) {
         RestHelper.sendJsonResponse(res, 200, objs);
@@ -42,7 +54,11 @@ function query(req, res) {
 function findOne(req, res) {
     var table = req.params.table;
     var id = req.params.id;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
 
     objModel.findOne({_id: id}).then(function (obj) {
         RestHelper.sendJsonResponse(res, 200, obj);
@@ -54,7 +70,11 @@ function findOne(req, res) {
 function update(req, res) {
     var table = req.params.table;
     var id = req.params.id;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
     var updateObj = req.body;
 
     objModel.update({_id : id}, {$set : updateObj}, {multi : false}).then(function (updated) {
@@ -67,7 +87,11 @@ function update(req, res) {
 function remove(req, res) {
     var table = req.params.table;
     var id = req.params.id;
-    var objModel = require(`../models/${table}`);
+    if (table === 'teacher' || table === 'student' || table === 'aux_admin') {
+        var objModel = require(`../models/roles/${table}`);
+    } else {
+        var objModel = require(`../models/${table}`);
+    }
 
     objModel.deleteOne({_id: id}).then(function (result) {
         RestHelper.sendJsonResponse(res, 200, result);
