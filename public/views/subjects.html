@@ -14,7 +14,7 @@
             <div>
                 <div class="card" ng-repeat="subject in subjects track by $index" style="align-content: left; margin-top: 2%;">
                     <div class="card-header">
-                        <h5 class="card-title" style="font-weight: bold; float: left"><a ng-click="selectSubject(subject)">{{ subject.name }} </a></h5>
+                        <a ng-click="selectSubject(subject)"><h5 class="card-title" style="font-weight: bold; float: left; cursor: pointer">{{ subject.name }} </h5></a>
                     </div>
                 </div>
             </div>

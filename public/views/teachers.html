@@ -1,0 +1,64 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container">
+        <div class="chart-title">
+            <div class="ng-scope">
+                <h1 class="d-inline" ng-show="!updating">Professores</h1>
+                <h1 class="d-inline" ng-show="updating">Atualizar Professor</h1>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="updating" ng-click="back()">Voltar</button>
+            </div>
+        </div>
+        <div class="col-mt-3" ng-hide="updating">
+            <div>
+                <div class="card" ng-repeat="teacher in teachers track by $index" style="align-content: left; margin-top: 2%;">
+                    <div class="card-header">
+                        <h5 class="card-title" style="font-weight: bold; float: left"><a ng-click="selectTeacher(teacher)">{{ teacher.user.name }} </a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3" ng-show="updating">
+            <div class="form-group">
+                <label>Nome</label>
+                <h3>{{ teacherSelected.user.name }}</h3>
+            </div>
+            <p>Disciplinas</p>
+            <div class="row mb-3">
+                <div class="col-md-5" id="subjects">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="subject in subjects track by $index">{{ subject.name }}
+                            <button class="btn btn-sm btn-primary float-right" ng-click="addSubject(subject)">+</button> </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h1 class="text-center"><i class="fas fa-arrow-right"></i></h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="subject in teacherSelected.subjects track by $index">{{subject.name}}
+                            <button class="btn btn-sm btn-danger float-right" ng-click="removeSubject(subject)">-</button> </li>
+                    </ul>
+                </div>
+            </div>
+            <p>Séries Permitidas</p>
+            <div class="row mb-3">
+                <div class="col-md-5" id="courses">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="course in courses track by $index">{{course.name}}
+                            <button class="btn btn-sm btn-primary float-right" ng-click="addCourse(course)">+</button> </li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h1 class="text-center"><i class="fas fa-arrow-right"></i></h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="course in teacherSelected.courses track by $index">{{course.name}}
+                            <button class="btn btn-sm btn-danger float-right" ng-click="removeCourse(course)">-</button> </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-primary" ng-click="updateTeacher()">Atualizar professor</button>
+        </div>
+    </div>
+</div>

@@ -33,6 +33,7 @@
 
         $scope.updateSubject = function() {
             console.log('atualizou disciplina');
+            delete $scope.subjectSelected.courses;
             Easy.update('subjects', $scope.subjectSelected._id, $scope.subjectSelected).then(function (subject) {
                 $scope.newSubject = {
                     name: '',
