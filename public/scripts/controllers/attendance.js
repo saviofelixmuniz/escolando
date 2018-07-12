@@ -29,41 +29,12 @@
             $scope.groups = groups;
         });
 
-       // Easy.getAll('attendance').then(function (attendance) {
-        //    $scope.attendance = attendance;
-        //});
-
         $scope.loadTeacherInformation = function (user) {
             User.getTeacherById(user._id).then(function (teacher) {
               console.log(teacher);
               $scope.teacher = teacher;
             });
         };
-
-        $scope.loadAttendanceList = function () {
-            /*Easy.create('attendance', 
-                {
-                    'group_id': '5b2069269499f304f8bd9690',
-                    'date' : '2018-07-12'
-                }
-                ).then(function (t) {
-                console.log(t);
-                $scope.attendanceList.push(t);
-            });*/
-            
-        };
-
-        $scope.initAttendances = function () {
-           /*$scope.newAttendance = {
-            "group_id": "5b0618fe8a9ff236423d9bf4",
-            "date": "2018-08-05"
-            }
-            Easy.create('attendance', $scope.newAttendance).then(function (attendance) {
-                console.log(attendance);
-                 $scope.attendanceList.push(attendance);
-            });*/
-        };
-
     }
 
 })();
