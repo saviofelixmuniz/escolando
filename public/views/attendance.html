@@ -19,7 +19,7 @@
               <label for="group">Turma</label>
               <select id="group" ng-model="group" class="form-control">
                   <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                  <option ng-repeat="group in groups" ng-value="group._id" >{{group.name}}</option>
+                  <option ng-repeat="group in groups" ng-value="group._id" ng-if="!teacher.courses_enabled.indexOf(group.course_id)">{{group.name}}</option>
               </select>
           </div>
 
