@@ -15,20 +15,46 @@
         <!-- TEACHER VIEW -->
         <div class="mt-3" ng-show="user.role==='teacher'">
 
-          <table class="table table-bordered table-striped table-hover table-condensed">
-            <thead>
-              <tr>
-                <th>Disciplinas Ministradas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="subject in subjects">
-                <td class="text-center" ng-if="!teacher.subject_ids.indexOf(subject._id)">
-                  <a><span style="text-transform: uppercase">{{ subject.name }}</span></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="col-md-10" style="float: right;">
+              <label for="group">Turma</label>
+              <select id="group" ng-model="group" class="form-control">
+                  <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                  <option ng-repeat="group in groups" ng-value="group._id" >{{group.name}}</option>
+              </select>
+          </div>
+
+          <table class="table" style="border-spacing: 20px 0;" ng-show="group" ng-value="group._id">
+                <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Presença</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students track by $index">
+                        <td>{{student.name}}</td>
+                        <td>
+                            <label class="switch">
+                              <input type="checkbox">
+                              <span class="slider round"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-show="group" class="form-group col-md-6">
+                <button type="button" class="btn btn-primary" ng-click="registerAttendance()">Registrar presença</button>
+                <button type="button" class="btn btn-second mark-all" ng-click="markAll()">Marcar todas</button>
+            </div>
+
+           <script type="text/javascript">
+              $(document).ready(function(){
+                $('.mark-all').on('click', function(){
+                  $('.switch').click();
+                });
+              });
+            </script>
 
         </div>
 
@@ -198,7 +224,7 @@
                   });
                 });
               });
-            </script>>
+            </script>
 
         </div>
 
