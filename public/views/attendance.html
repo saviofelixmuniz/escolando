@@ -22,9 +22,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="subject in subjects">
-                <td class="text-center" ng-if="!teacher.subject_ids.indexOf(subject._id)">
-                  <a><span style="text-transform: uppercase">{{ subject.name }}</span></a>
+              <tr ng-repeat="group in groups">
+                <td class="text-center" ng-if="!teacher.courses_enabled.indexOf(group.course_id)">
+                  <a><span style="text-transform: uppercase">{{ group.name }}</span></a>
                 </td>
               </tr>
             </tbody>

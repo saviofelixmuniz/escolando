@@ -29,11 +29,20 @@
             $scope.groups = groups;
         });
 
+        $scope.getStudents = function(group) {
+            User.getStudentsInGroup(group).then(function (students) {
+                return students;
+            });
+            return null;
+        }
+
         $scope.loadTeacherInformation = function (user) {
             User.getTeacherById(user._id).then(function (teacher) {
-              console.log(CONSTANTS.MONTHS);  
-              console.log(teacher);
               $scope.teacher = teacher;
+              $scope.teacher.courses_enabled.push('5b2068d39499f304f8bd968e');
+              $scope.teacher.courses_enabled.push('5b2068db9499f304f8bd968f');
+              $scope.teacher.courses_enabled.push('5b2eb161b7479b4b9cabc7dc');
+              console.log($scope.teacher);
             });
         };
 
