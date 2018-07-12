@@ -14,6 +14,6 @@ usersRouter.get('/students', usersController.getStudents);
 usersRouter.put('/:role/:id', usersController.updateRoleObj);
 usersRouter.get('/students/parent/:parentId', usersController.getStudentByParent);
 usersRouter.get('/students/groups/:groupId', usersController.getStudentsByGroup);
-
+usersRouter.get('/teacher/:teacherId', usersController.getTeacherById);
 
 module.exports = usersRouter;

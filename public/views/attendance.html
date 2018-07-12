@@ -12,21 +12,30 @@
             <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
         </div>
 
-        <div class="mt-3">
+        <!-- TEACHER VIEW -->
+        <div class="mt-3" ng-show="user.role==='teacher'">
+
           <table class="table table-bordered table-striped table-hover table-condensed">
             <thead>
               <tr>
-                <th>Disciplina</th>
+                <th>Disciplinas Ministradas</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="subject in subjects">
-                <td class="text-center">
+                <td class="text-center" ng-if="!teacher.subject_ids.indexOf(subject._id)">
                   <a><span style="text-transform: uppercase">{{ subject.name }}</span></a>
                 </td>
               </tr>
             </tbody>
           </table>
+
+        </div>
+
+        <!-- PARENT AND STUDENT VIEW -->
+        <div class="mt-3" ng-show="user.role==='parent' || user.role==='student'">
+
+          
         </div>
 
     </div>
