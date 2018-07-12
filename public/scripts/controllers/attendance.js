@@ -29,11 +29,14 @@
             $scope.groups = groups;
         });
 
-        $scope.getStudents = function(group) {
+        $scope.$watch('group', function (group) {
             User.getStudentsInGroup(group).then(function (students) {
-                return students;
-            });
-            return null;
+                $scope.students = students;
+            })
+        });
+
+        $scope.registerAttendance = function () {
+
         }
 
         $scope.loadTeacherInformation = function (user) {
