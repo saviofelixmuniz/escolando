@@ -30,5 +30,19 @@ angular.module('escolando').constant('CONSTANTS', {
            'São Paulo',
            'Sergipe',
            'Tocantins'
-       ]
+       ],
+      MONTHS: [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro'
+      ]
 });
