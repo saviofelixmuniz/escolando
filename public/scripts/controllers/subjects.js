@@ -27,10 +27,6 @@
             console.log('criou disciplina');
             delete $scope.newSubject.courses;
             Easy.create('subjects', $scope.newSubject).then(function (subject) {
-                /*$scope.newSubject.course_id = $scope.courseSelected._id;
-                $scope.subjectSelected = subject;
-                $scope.creating = false;
-                $scope.updating = true;*/
                 $scope.back();
             });
         };
@@ -42,9 +38,7 @@
                     name: '',
                     course_id: undefined
                 };
-                $scope.subjectSelected = subject;
-                $scope.creating = false;
-                $scope.updating = true;
+                $scope.back();
             });
         };
 
@@ -53,6 +47,10 @@
             if (!$scope.updating) {
                 $scope.newSubject.courses_id.push(course._id);
                 $scope.newSubject.courses.push(course);
+                removeElement($scope.courses, course._id);
+            } else {
+                $scope.subjectSelected.courses_id.push(course._id);
+                $scope.subjectSelected.courses.push(course);
                 removeElement($scope.courses, course._id);
             }
             console.log('adicionou disciplina');
@@ -64,6 +62,10 @@
                 $scope.courses.push(course);
                 removeElement($scope.newSubject.courses_id, course._id, true);
                 removeElement($scope.newSubject.courses, course._id);
+            } else {
+                $scope.courses.push(course);
+                removeElement($scope.subjectSelected.courses_id, course._id, true);
+                removeElement($scope.subjectSelected.courses, course._id);
             }
             console.log('removeu disciplina');
         };
@@ -98,6 +100,15 @@
 
         $scope.selectSubject = function (subject) {
             $scope.subjectSelected = subject;
+            $scope.subjectSelected.courses = [];
+            loadCourses();
+            for (let course_id of subject.courses_id) {
+                Easy.getOne('courses', course_id).then(function (course) {
+                    console.log('carregou serie');
+                    $scope.subjectSelected.courses.push(course);
+                    removeElement($scope.courses, course._id);
+                });
+            }
             $scope.updating = true;
         };
 
