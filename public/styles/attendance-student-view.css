@@ -86,7 +86,10 @@
 	.calendar-day {
 		text-align: center;
 	    font-size: 14pt;
-	    padding-top: 8%;	
+	    padding-top: 3%;
+	}
+	.absence-mark {
+	    color: red;	
 	}
 	.calendar-day > time {
 		position: absolute;
@@ -118,4 +121,9 @@
 	}
 	.calendar-day > .events > .event > .progress {
 		height: 10px;
+	}
+	.absence {
+		float: right;
+		position: relative;
+		margin-right: 10%;
 	}

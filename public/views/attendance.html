@@ -35,6 +35,8 @@
         <!-- PARENT AND STUDENT VIEW -->
         <div class="mt-3" ng-show="user.role==='parent' || user.role==='student'">
 
+           <div class="absence"> <b>Total de faltas: {{ getAbsenceCount() }} </b></div>
+
            <h1 class="title text-center"> {{ getMonthYear() }}  </h1>
             <div class="calendar" data-toggle="calendar">
               <div class="row">
@@ -75,7 +77,7 @@
                 </div>
                 <div class="col-xs-12 calendar-day">
                   <time datetime="2018-07-12">12</time>
-                  F
+                  <span class="absence-mark">F<span>
                 </div>
                 <div class="col-xs-12 calendar-day">
                   <time datetime="2018-07-13">13</time>

@@ -42,6 +42,10 @@
             return CONSTANTS.MONTHS[d.getMonth()] + " " + d.getFullYear();
         }
 
+        $scope.getAbsenceCount = function() {
+            return 1;
+        }
+
     }
 
 })();
