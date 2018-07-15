@@ -12,9 +12,11 @@
         Principal.identity().then(function (user) {
             $scope.user = user;
             if (user.role==='teacher') $scope.loadTeacherInformation(user);
+            if (user.role==='parent' || user.role==='student') $scope.loadStudentAttendance(user);
         });
 
         $scope.markAllTrue = true;
+        $scope.studentAttendance = {};
 
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
@@ -60,6 +62,26 @@
             });
         };
 
+        $scope.loadStudentAttendance = function (user) {
+            if (user.role==='student') {
+                Easy.query('student', {'user_id': user._id}).then(function (student) {
+                    console.log(student[0]);
+                    Easy.query('attendance', {'student_id': student[0]._id, 'attended': false}).then(function (studentAttendance) {
+                        $scope.studentAttendance = studentAttendance;
+                        console.log($scope.studentAttendance);
+                    });
+                });
+            } else if (user.role==='parent') {
+                User.getStudentByParentId(user._id).then(function (student) {
+                    console.log(student);
+                    Easy.query('attendance', {'student_id': student._id, 'attended': false}).then(function (studentAttendance) {
+                        $scope.studentAttendance = studentAttendance;
+                        console.log($scope.studentAttendance);
+                    });
+                });
+            }
+        }
+
         $scope.markAll = function () {
             angular.forEach($scope.students, function(student){
                 student.attended = $scope.markAllTrue;
@@ -72,10 +94,6 @@
         $scope.getMonthYear = function() {
             var d = new Date();
             return CONSTANTS.MONTHS[d.getMonth()] + " " + d.getFullYear();
-        }
-
-        $scope.getAbsenceCount = function() {
-            return 1;
         }
 
     }
