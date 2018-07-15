@@ -32,10 +32,10 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="student in students track by $index">
-                        <td>{{student.name}}</td>
+                        <td>{{ student.name }}</td>
                         <td>
-                            <label class="switch">
-                              <input type="checkbox">
+                            <label class="switch" ng-init="student.attended=false">
+                              <input type="checkbox" class="switch-checkbox" ng-model="student.attended">
                               <span class="slider round"></span>
                             </label>
                         </td>
@@ -44,15 +44,15 @@
             </table>
 
             <div ng-show="group" class="form-group col-md-6">
-                <button type="button" class="btn btn-primary" ng-click="registerAttendance()">Registrar presença</button>
-                <button type="button" class="btn btn-second mark-all" ng-click="markAll()">Marcar todas</button>
+                <button type="button" class="btn btn-primary" ng-click="registerAttendance(group)">Registrar presença</button>
+                <button  type="button" class="btn btn-second mark-all" ng-click="markAll()">
+                  {{ markAllTrue ? 'Marcar' : 'Desmarcar'}} todas
+                </button>
             </div>
 
            <script type="text/javascript">
               $(document).ready(function(){
-                $('.mark-all').on('click', function(){
-                  $('.switch').click();
-                });
+                  $('.switch-checkbox').toggle();
               });
             </script>
 
