@@ -12,9 +12,11 @@
         Principal.identity().then(function (user) {
             $scope.user = user;
             if (user.role==='teacher') $scope.loadTeacherInformation(user);
+            if (user.role==='parent' || user.role==='student') $scope.loadStudentAttendance(user);
         });
 
         $scope.markAllTrue = true;
+        $scope.studentAttendance = {};
 
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
@@ -59,6 +61,18 @@
               console.log($scope.teacher);
             });
         };
+
+        $scope.loadStudentAttendance = function (user) {
+            if (user.role==='student') {
+                Easy.query('student', {'user_id': user._id}).then(function (student) {
+                    console.log(student[0]);
+                    Easy.query('attendance', {'student_id': student[0]._id}).then(function (studentAttendance) {
+                        $scope.studentAttendance = studentAttendance;
+                        console.log($scope.studentAttendance);
+                    });
+                });
+            }
+        }
 
         $scope.markAll = function () {
             angular.forEach($scope.students, function(student){
