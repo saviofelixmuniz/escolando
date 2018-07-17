@@ -11,11 +11,13 @@ async function registerAttendanceList(req, res) {
         }
         else {
             await Attendance.create({
-                student_id: student.id,
-                group_id: req.params.groupId,
-                attended: student.attended,
-                date: date
+                'student_id': student.id,
+                'group_id': req.params.groupId,
+                'attended': student.attended,
+                'date': date
             });
+            console.log("na criacao");
+            console.log(date);
         }
     }
 

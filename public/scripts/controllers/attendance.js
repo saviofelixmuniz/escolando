@@ -17,6 +17,7 @@
 
         $scope.markAllTrue = true;
         $scope.studentAttendance = {};
+        $scope.attendanceDate = new Date();
 
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
@@ -44,21 +45,21 @@
             })
 
             var form = {
-                'students' : $scope.attendanceList
+                'students' : $scope.attendanceList,
+                'date': $scope.getAttendanceDate()
             };
 
+            console.log(form);
             Attendance.registerAttendanceList(form, groupId).then(function (data) {
                 console.log("registrou frequência!");
                 console.log(data);
+                Toaster.pop('success', 'Frequência Registrada!', '', 5000, 'trustedHtml');
             });
         }
 
         $scope.loadTeacherInformation = function (user) {
             User.getTeacherById(user._id).then(function (teacher) {
               $scope.teacher = teacher;
-              $scope.teacher.courses_enabled.push('5b2068d39499f304f8bd968e');
-              $scope.teacher.courses_enabled.push('5b2068db9499f304f8bd968f');
-              console.log($scope.teacher);
             });
         };
 
@@ -96,6 +97,16 @@
             return CONSTANTS.MONTHS[d.getMonth()] + " " + d.getFullYear();
         }
 
+        $scope.getAttendanceDate = function () {
+            var today = new Date( $scope.attendanceDate );
+            var dd = today.getDate();
+            var MM = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            if (dd < 10) { dd = '0' + dd; }
+            if (MM < 10) { MM = '0' + MM; }
+            today = String(yyyy + '-' + MM + '-' + dd);
+            return today;
+        }
     }
 
 })();
