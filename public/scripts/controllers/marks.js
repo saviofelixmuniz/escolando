@@ -39,15 +39,21 @@ angular.module('escolando')
     };
 
     $scope.getStudentAvg = function (studentId) {
-        var stdActivities = $scope.marks[studentId];
-        var sum = 0;
-        var totalWeight = 0;
-        for (var activityId of Object.keys(stdActivities)) {
-            var activityWeight = gActivities[activityId].weight;
-            sum += stdActivities[activityId].value * activityWeight
-            totalWeight += activityWeight;
+        if (!isUndefined($scope.marks)) {
+            var stdActivities = $scope.marks[studentId];
+            var sum = 0;
+            var totalWeight = 0;
+            if (!isUndefined(stdActivities) && stdActivities !== null) {
+                for (var activityId of Object.keys(stdActivities)) {
+                    var activityWeight = gActivities[activityId].weight;
+                    sum += stdActivities[activityId].value * activityWeight
+                    totalWeight += activityWeight;
+                }
+                return sum / totalWeight;
+            }
         }
-        return sum / totalWeight;
+
+        return 0;
     };
 
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
@@ -71,5 +77,11 @@ angular.module('escolando')
 
     $scope.$watch('marks', function (marks) {
         Marks.commitMarks($scope.group, $scope.subject, marks).then();
-    }, true)
+    }, true);
+
+    function isUndefined(value) {
+        var undef = void(0);
+        return value === undef;
+    }
+
 });
