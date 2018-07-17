@@ -6,12 +6,12 @@
     </div>
 
     <div class="container">
-        <div class="chart-title">
+        <div class="chart-title" ng-if="user.role==='coordinator' || user.role==='admin'">
             <div class="ng-scope">
                 <h1 ng-hide="createGroups" class="d-inline">Turmas</h1>
                 <h1 ng-show="createGroups" class="d-inline">Criar Turma</h1>
                 <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="!createGroups" ng-click="toggleGroups()"><i class="fas fa-list"></i> Listar</button>
-                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="createGroups && (user.role==='coordinator' || user.role==='teacher' || user.role==='admin')" ng-click="toggleCreateGroups()"><i class="fas fa-plus"></i> Criar</button>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="createGroups && (user.role==='coordinator' || user.role==='admin')" ng-click="toggleCreateGroups()"><i class="fas fa-plus"></i> Criar</button>
             </div>
         </div>
 

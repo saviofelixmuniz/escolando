@@ -35,8 +35,10 @@
 
         $scope.initAnnouncements = function(user) {
             if (user.role==='student') {
-                Easy.query('announcement', {'group_id': user.group_id}).then(function (announcements) {
-                    $scope.announcements = announcements;
+                Easy.query('student', {'user_id': user._id}).then(function (student) {
+                  Easy.query('announcement', {'group_id': student[0].group_id}).then(function (announcements) {
+                      $scope.announcements = announcements;
+                  });
                 });
             } else if (user.role==='parent') {
                 User.getStudentByParentId(user._id).then(function (student) {
@@ -68,7 +70,7 @@
             Toaster.pop(
               'success',
               'Comunicado criado!',
-              '<ul><li>' + $scope.newAnnouncement.title + '</li></ul>', 
+              '<ul><li>' + $scope.newAnnouncement.title + '</li></ul>',
               5000,
               'trustedHtml');
             // Toaster.pop('error', "title", '<ul><li>Render html</li></ul>', null, 'trustedHtml');

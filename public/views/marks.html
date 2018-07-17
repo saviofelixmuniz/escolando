@@ -54,7 +54,7 @@
                             <span ng-if="!edittingMarks">{{marks[student.user_id][activity._id].value}}</span>
                             <input style="text-align: center" type="number" max="10" min="0" class="form-control" ng-if="edittingMarks" ng-model="marks[student.user_id][activity._id].value">
                         </td>
-                        <td>{{getStudentAvg(student.user_id) | number: 2}}</td>
+                        <td ng-show="marks.length > 0">{{ getStudentAvg(student.user_id) | number: 2 }}</td>
                     </tr>
                 </tbody>
             </table>
