@@ -11,8 +11,8 @@
         <div class="col-mt-3" ng-hide="updating">
             <div>
                 <div class="card" ng-repeat="teacher in teachers track by $index" style="align-content: left; margin-top: 2%;">
-                    <div class="card-header">
-                        <h5 class="card-title" style="font-weight: bold; float: left; cursor: pointer"><a ng-click="selectTeacher(teacher)">{{ teacher.user.name }} </a></h5>
+                    <div class="card-header item-selection" ng-click="selectTeacher(teacher)">
+                        <h5 class="card-title" style="font-weight: bold; float: left">{{ teacher.user.name }}</h5>
                     </div>
                 </div>
             </div>

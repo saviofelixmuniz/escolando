@@ -232,3 +232,8 @@ Intro Page
 h1 {
     color: #006c96;
 }
+
+.item-selection:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
