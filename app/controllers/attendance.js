@@ -16,8 +16,6 @@ async function registerAttendanceList(req, res) {
                 'attended': student.attended,
                 'date': date
             });
-            console.log("na criacao");
-            console.log(date);
         }
     }
 
