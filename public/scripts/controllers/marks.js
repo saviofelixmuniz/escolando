@@ -40,13 +40,16 @@ angular.module('escolando')
         var stdActivities = $scope.marks[studentId];
         var sum = 0;
         var totalWeight = 0;
-        for (var activityId of Object.keys(stdActivities)) {
-            var activityWeight = gActivities[activityId].weight;
-            sum += stdActivities[activityId].value * activityWeight
-            totalWeight += activityWeight;
+        if (!isUndefined(stdActivities) && stdActivities !== null) {
+            for (var activityId of Object.keys(stdActivities)) {
+                var activityWeight = gActivities[activityId].weight;
+                sum += stdActivities[activityId].value * activityWeight
+                totalWeight += activityWeight;
+            }
+            return sum / totalWeight;
         }
-
-        return sum / totalWeight;
+        
+        return 0;
     };
 
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
@@ -70,5 +73,13 @@ angular.module('escolando')
 
     $scope.$watch('marks', function (marks) {
         Marks.commitMarks($scope.group, $scope.subject, marks).then();
-    }, true)
+    }, true);
+
+    function isUndefined(value){
+        // Obtain `undefined` value that's
+        // guaranteed to not have been re-assigned
+        var undefined = void(0);
+        return value === undefined;
+    }
+
 });
