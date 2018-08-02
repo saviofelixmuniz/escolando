@@ -32,17 +32,39 @@
         });
 
         $scope.$watch('group', function (group) {
+            if (!group) return;
+            loadStudents(group);
+        });
+
+        $scope.$watch('attendanceDate', function (date) {
+            if (!date || !$scope.group) return;
+            loadStudents($scope.group);
+        });
+
+        function loadStudents(group) {
+            if (!group) return;
+            $scope.students = [];
             User.getStudentsInGroup(group).then(function (students) {
                 $scope.students = students;
-            })
-        });
+                var date = $scope.attendanceDate.getFullYear() + "-" + ("0"+($scope.attendanceDate.getMonth()+1)).slice(-2) + "-" + ("0" + $scope.attendanceDate.getDate()).slice(-2);
+                Easy.query('attendance', {'date': date}).then(function (studentAttendance) {
+                    for (var att of studentAttendance) {
+                        for (var student of $scope.students) {
+                            if (student._id == att.student_id) {
+                                student.attended = att.attended;
+                            }
+                        }
+                    }
+                });
+            });
+        }
 
         $scope.registerAttendance = function (groupId) {
 
-            $scope.attendanceList = []
+            $scope.attendanceList = [];
             angular.forEach($scope.students, function(student){
                 $scope.attendanceList.push({'id': student._id, 'attended': student.attended});
-            })
+            });
 
             var form = {
                 'students' : $scope.attendanceList,
@@ -55,7 +77,7 @@
                 console.log(data);
                 Toaster.pop('success', 'Frequência Registrada!', '', 5000, 'trustedHtml');
             });
-        }
+        };
 
         $scope.loadTeacherInformation = function (user) {
             User.getTeacherById(user._id).then(function (teacher) {
