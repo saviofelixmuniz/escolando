@@ -3,7 +3,7 @@
     <div class="container">
         <h1 class="d-inline">Cadastro</h1>
         <div class="mt-3">
-            <div ng-if="user.role === 'aux_admin' || user.role === 'coordinator'">
+            <div ng-if="user.role === 'aux_admin' || user.role === 'coordinator' || user.role === 'admin'">
                 <select ng-model="params.role" class="form-control" style="height: 34px" ng-if="!params.role">
                     <option value="" selected disabled>Selecione um tipo de usuário</option>
                     <option value="admin">Coordenador</option>
