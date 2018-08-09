@@ -1,12 +1,10 @@
 <div class="pagebody">
     <navbar></navbar>
     <div class="container">
-        
+        <h1 class="d-inline">Cadastro</h1>
         <div class="mt-3">
-
             <div ng-if="user.role === 'aux_admin' || user.role === 'coordinator'">
-                <h1>Cadastro</h1>
-                <select ng-model="params.role" class="form-control" ng-if="!params.role">
+                <select ng-model="params.role" class="form-control" style="height: 34px" ng-if="!params.role">
                     <option value="" selected disabled>Selecione um tipo de usuário</option>
                     <option value="admin">Coordenador</option>
                     <option value="coordinator">Professor</option>
@@ -14,98 +12,99 @@
                 </select>
             </div>
 
-            <div ng-if="registering === 'student'">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Nome do aluno</label>
-                        <input type="text" class="form-control" id="name" ng-model="student.name" placeholder="Nome">
+            <div class="container">
+                <div ng-if="registering === 'student'">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Nome do aluno</label>
+                            <input type="text" class="form-control" id="name" ng-model="student.name" placeholder="Nome">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="name">E-mail do aluno</label>
+                            <input type="text" class="form-control" id="email" ng-model="student.email" placeholder="E-Mail">
+                        </div>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="name">E-mail do aluno</label>
-                        <input type="text" class="form-control" id="email" ng-model="student.email" placeholder="E-Mail">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Nome do responsável</label>
+                            <input type="text" class="form-control" id="parentname" ng-model="parent.name" placeholder="Nome">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="name">E-mail do responsável</label>
+                            <input type="text" class="form-control" id="parentemail" ng-model="parent.email" placeholder="E-Mail">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="course">Série</label>
+                            <select id="course" ng-model="student.course" class="form-control" style="height: 34px">
+                                <option value="" selected disabled>Selecione uma série</option>
+                                <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="group">Turma</label>
+                            <select id="group" ng-model="student.group" class="form-control" style="height: 34px">
+                                <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
+                                <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                                <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Nome do responsável</label>
-                        <input type="text" class="form-control" id="parentname" ng-model="parent.name" placeholder="Nome">
-                    </div>
+                <div ng-if="registering === 'teacher'">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nameTeacher">Nome do professor</label>
+                            <input type="text" class="form-control" id="nameTeacher" ng-model="teacher.name" placeholder="Nome">
+                        </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="name">E-mail do responsável</label>
-                        <input type="text" class="form-control" id="parentemail" ng-model="parent.email" placeholder="E-Mail">
+                        <div class="form-group col-md-6">
+                            <label for="emailTeacher">E-mail do professor</label>
+                            <input type="text" class="form-control" id="emailTeacher" ng-model="teacher.email" placeholder="E-Mail">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="subject">Disciplina</label>
+                            <select id="subject" ng-model="teacher.subject" class="form-control" style="height: 34px">
+                                <option value="" selected disabled>Selecione uma disciplina</option>
+                                <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="course">Série</label>
-                        <select id="course" ng-model="student.course" class="form-control">
-                            <option value="" selected disabled>Selecione uma série</option>
-                            <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
-                        </select>
+                <div ng-if="registering === 'auxCoordinator'">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nameTeacher">Nome do coordenador</label>
+                            <input type="text" class="form-control" id="nameAux" ng-model="coordinator.name" placeholder="Nome">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="emailTeacher">E-mail do coordenador</label>
+                            <input type="text" class="form-control" id="emailAux" ng-model="coordinator.email" placeholder="E-Mail">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="group">Turma</label>
-                        <select id="group" ng-model="student.group" class="form-control">
-                            <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
-                            <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                            <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="coursesection">Divisão de ensino</label>
+                            <select id="coursesection" ng-model="coordinator.courseSection" class="form-control" style="height: 34px">
+                                <option value="" selected disabled>Selecione uma divisão de ensino</option>
+                                <option ng-repeat="courseSection in courseSections" ng-value="courseSection._id">{{courseSection.name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
+
+                <button class="btn btn-primary" ng-if="registering" ng-click="registerToken()">Cadastrar Token</button>
             </div>
-
-            <div ng-if="registering === 'teacher'">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nameTeacher">Nome do professor</label>
-                        <input type="text" class="form-control" id="nameTeacher" ng-model="teacher.name" placeholder="Nome">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="emailTeacher">E-mail do professor</label>
-                        <input type="text" class="form-control" id="emailTeacher" ng-model="teacher.email" placeholder="E-Mail">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="subject">Disciplina</label>
-                        <select id="subject" ng-model="teacher.subject" class="form-control">
-                            <option value="" selected disabled>Selecione uma disciplina</option>
-                            <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div ng-if="registering === 'auxCoordinator'">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nameTeacher">Nome do coordenador</label>
-                        <input type="text" class="form-control" id="nameAux" ng-model="coordinator.name" placeholder="Nome">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="emailTeacher">E-mail do coordenador</label>
-                        <input type="text" class="form-control" id="emailAux" ng-model="coordinator.email" placeholder="E-Mail">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="coursesection">Divisão de ensino</label>
-                        <select id="coursesection" ng-model="coordinator.courseSection" class="form-control">
-                            <option value="" selected disabled>Selecione uma divisão de ensino</option>
-                            <option ng-repeat="courseSection in courseSections" ng-value="courseSection._id">{{courseSection.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
-            <button class="btn btn-primary" ng-if="registering" ng-click="registerToken()">Cadastrar Token</button>
         </div>
     </div>
 </div>

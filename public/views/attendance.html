@@ -12,89 +12,90 @@
             <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
         </div>
 
-        <!-- TEACHER VIEW -->
-        <div class="mt-3" ng-show="user.role==='teacher'">
+        <div class="container">
+            <!-- TEACHER VIEW -->
+            <div class="mt-3" ng-show="user.role==='teacher'">
 
-          <div class="form-row">
-              <div class="form-group col-md-3">
-                  <label for="date">Data</label> 
-                  <input type="date" id="date" class="form-control" value="{{ getAttendaneDate() }}" ng-model="attendanceDate" placeholder="Data da Frequência">
+              <div class="form-row">
+                  <div class="form-group col-md-3">
+                      <label for="date">Data</label>
+                      <input type="date" id="date" class="form-control" value="{{ getAttendaneDate() }}" ng-model="attendanceDate" placeholder="Data da Frequência">
+                  </div>
+                  <div class="form-group col-md-9">
+                      <label for="group">Turma</label>
+                      <select id="group" ng-model="group" class="form-control" style="height: 34px">
+                          <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
+                          <option ng-repeat="group in groups" ng-value="group._id" ng-if="!teacher.courses_enabled.indexOf(group.course_id)">{{group.name}}</option>
+                      </select>
+                  </div>
               </div>
-              <div class="form-group col-md-9">
+
+              <!--<div class="col-md-10" style="float: right;">
                   <label for="group">Turma</label>
                   <select id="group" ng-model="group" class="form-control">
                       <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                      <option ng-repeat="group in groups" ng-value="group._id" ng-if="!teacher.courses_enabled.indexOf(group.course_id)">{{group.name}}</option>
+                      <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
                   </select>
-              </div>
-          </div>
+              </div>-->
 
-          <!--<div class="col-md-10" style="float: right;">
-              <label for="group">Turma</label>
-              <select id="group" ng-model="group" class="form-control">
-                  <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                  <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
-              </select>
-          </div>-->
-
-          <table class="table" style="border-spacing: 20px 0;" ng-show="group" ng-value="group._id">
-                <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Presença</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="student in students track by $index">
-                        <td>{{ student.name }}</td>
-                        <td>
-                            <label class="switch" ng-init="student.attended=false">
-                              <input type="checkbox" class="switch-checkbox" ng-model="student.attended">
-                              <span class="slider round"></span>
-                            </label>
-                        </td>
+              <table class="table" style="border-spacing: 20px 0;" ng-show="group" ng-value="group._id">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Presença</th>
                     </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="student in students track by $index">
+                            <td>{{ student.name }}</td>
+                            <td>
+                                <label class="switch" ng-init="student.attended=false">
+                                  <input type="checkbox" class="switch-checkbox" ng-model="student.attended">
+                                  <span class="slider round"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <div ng-show="group" class="form-group col-md-6">
-                <button type="button" class="btn btn-primary" ng-click="registerAttendance(group)">Registrar presença</button>
-                <button  type="button" class="btn btn-second mark-all" ng-click="markAll()">
-                  {{ markAllTrue ? 'Marcar' : 'Desmarcar'}} todas
-                </button>
+                <div ng-show="group" class="form-group col-md-6">
+                    <button type="button" class="btn btn-primary" ng-click="registerAttendance(group)">Registrar presença</button>
+                    <button  type="button" class="btn btn-second mark-all" ng-click="markAll()">
+                      {{ markAllTrue ? 'Marcar' : 'Desmarcar'}} todas
+                    </button>
+                </div>
+
+               <script type="text/javascript">
+                  $(document).ready(function(){
+                      $('.switch-checkbox').toggle();
+                  });
+                </script>
+
             </div>
 
-           <script type="text/javascript">
-              $(document).ready(function(){
-                  $('.switch-checkbox').toggle();
-              });
-            </script>
+            <!-- PARENT AND STUDENT VIEW -->
+            <div class="mt-3" ng-show="user.role==='parent' || user.role==='student'">
 
+                <h3 ng-hide="studentAttendance.length">Não há faltas</h3>
+                <table class="table" style="border-spacing: 20px 0;" ng-show="studentAttendance.length > 0">
+                    <thead>
+                      <tr>
+                        <td>Total de faltas: {{ studentAttendance.length }}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">Data</th>
+                          <th scope="col">Presença</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="absence in studentAttendance track by $index">
+                            <td>{{ absence.date }}</td>
+                            <td>F</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-
-        <!-- PARENT AND STUDENT VIEW -->
-        <div class="mt-3" ng-show="user.role==='parent' || user.role==='student'">
-
-            <h3 ng-hide="studentAttendance.length">Não há faltas</h3>
-            <table class="table" style="border-spacing: 20px 0;" ng-show="studentAttendance.length > 0">
-                <thead>
-                  <tr>
-                    <td>Total de faltas: {{ studentAttendance.length }}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Data</th>
-                      <th scope="col">Presença</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="absence in studentAttendance track by $index">
-                        <td>{{ absence.date }}</td>
-                        <td>F</td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-
     </div>
 </div>

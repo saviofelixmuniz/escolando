@@ -2,78 +2,82 @@
     <navbar></navbar>
     <div class="container">
         <h1>Atividades</h1>
-        <div ng-hide="user.role==='student' || user.role==='parent'" class="mt-3">
-            <div class="col-md-4" style="float: left">
-                <label for="course">Série</label>
-                <select id="course" ng-model="course" class="form-control">
-                    <option value="" selected disabled>Selecione uma série</option>
-                    <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
-                </select>
-            </div>
-            <div class="col-md-4" style="float: left;">
-                <label for="group">Turma</label>
-                <select id="group" ng-model="group" class="form-control">
-                    <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
-                    <option value="" selected disabled ng-if="course">Selecione uma turma</option>
-                    <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
-                </select>
-            </div>
-            <div class="col-md-4" style="float: right;">
-                <label for="subject">Disciplina</label>
-                <select id="subject" ng-model="subject" class="form-control">
-                    <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
-                    <option value="" selected disabled ng-if="course">Selecione uma disciplina</option>
-                    <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
-                </select>
-            </div>
-        </div>
-
-        <div style="font-weight: bold" ng-show="activities.length === 0"> <p> Nenhuma atividade </p> </div>
-
-        <div ng-if="(group && subject) || user.role==='student' || user.role==='parent'">
-            <div id="listingTasks">
-                <div style="margin-top: 10%;" ng-if="!params.creatingTasks">
-                    <div class="col-ms-12" style="padding: 15px">
-                        <div class="card" ng-repeat="activity in activities track by $index" style="align-content: left; margin-top: 2%;">
-                            <div class="card-header">
-                                <h5 class="card-title" style="font-weight: bold; float: left"> {{ activity.name }} </h5>
-                                <i class="fa fa-chevron-down" style="cursor: pointer;float: right" ng-if="!activity.showDescription" ng-click="activity.showDescription = true"></i>
-                                <i class="fa fa-chevron-up" style="cursor: pointer;float: right" ng-if="activity.showDescription" ng-click="activity.showDescription = false"></i>
-                            </div>
-                            <div class="card-body" ng-if="activity.showDescription">
-                                <blockquote class="blockquote mb-0">
-                                    <p class="card-text"> {{ activity.description }} </p>
-                                </blockquote>
-                            </div>
-                        </div>
+        <div class="container">
+            <div ng-hide="user.role==='student' || user.role==='parent'" class="mt-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="course">Série</label>
+                        <select id="course" ng-model="course" class="form-control" style="height: 34px">
+                            <option value="" selected disabled>Selecione uma série</option>
+                            <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
+                        </select>
                     </div>
-
-                    <div class="col-md-4" style="float: right" ng-hide="user.role==='student' || user.role==='parent'">
-                        <button type="button" class="btn btn-primary" style="float: right;" ng-click="params.creatingTasks = true">Criar nova</button>
+                    <div class="col-md-4">
+                        <label for="group">Turma</label>
+                        <select id="group" ng-model="group" class="form-control" style="height: 34px">
+                            <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
+                            <option value="" selected disabled ng-if="course">Selecione uma turma</option>
+                            <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="subject">Disciplina</label>
+                        <select id="subject" ng-model="subject" class="form-control" style="height: 34px">
+                            <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
+                            <option value="" selected disabled ng-if="course">Selecione uma disciplina</option>
+                            <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
-            <div ng-hide="user.role==='student' || user.role==='parent'" id="creatingTasks">
-                <div style="margin-top: 10%;" ng-if="params.creatingTasks">
-                    <div class="col-ms-12" style="padding: 15px">
-                        <div class="form-group">
-                            <label for="inputTitle">Título da atividade</label>
-                            <input type="text" class="form-control" id="inputTitle" ng-model="newActivity.name" placeholder="Título da atividade">
+            <h3 ng-show="activities.length === 0">Nenhuma atividade</h3>
+
+            <div ng-if="(group && subject) || user.role==='student' || user.role==='parent'">
+                <div id="listingTasks">
+                    <div ng-if="!params.creatingTasks">
+                        <div class="col-ms-12" style="padding: 15px">
+                            <div class="card" ng-repeat="activity in activities track by $index" style="align-content: left; margin-top: 2%;">
+                                <div class="card-header">
+                                    <h5 class="card-title" style="font-weight: bold; float: left"> {{ activity.name }} </h5>
+                                    <i class="fa fa-chevron-down" style="cursor: pointer;float: right" ng-if="!activity.showDescription" ng-click="activity.showDescription = true"></i>
+                                    <i class="fa fa-chevron-up" style="cursor: pointer;float: right" ng-if="activity.showDescription" ng-click="activity.showDescription = false"></i>
+                                </div>
+                                <div class="card-body" ng-if="activity.showDescription">
+                                    <blockquote class="blockquote mb-0">
+                                        <p class="card-text"> {{ activity.description }} </p>
+                                    </blockquote>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputDescription">Descrição da atividade</label>
-                            <textarea type="text" class="form-control" id="inputDescription" ng-model="newActivity.description" placeholder="Descrição da atividade" rows="5" style="resize: none;"></textarea>
-                        </div>
-                        <div class="form-group" style="width: 20%;">
-                            <label for="inputWeight">Peso da atividade</label>
-                            <input type="number" class="form-control" id="inputWeight" ng-model="newActivity.weight" placeholder="Peso" style="width: 50%">
+
+                        <div class="col-md-4" style="float: right" ng-hide="user.role==='student' || user.role==='parent'">
+                            <button type="button" class="btn btn-primary" style="float: right;" ng-click="params.creatingTasks = true">Criar nova</button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-4" style="float: right">
-                        <button type="button" class="btn btn-warning" style="float: right;margin-left: 5%" ng-click="params.creatingTasks = false">Voltar</button>
-                        <button type="button" class="btn btn-primary" style="float: right" ng-click="createActivity(newActivity)">Adicionar</button>
+                <div ng-hide="user.role==='student' || user.role==='parent'" id="creatingTasks">
+                    <div ng-if="params.creatingTasks">
+                        <div class="col-ms-12" style="padding: 15px">
+                            <div class="form-group">
+                                <label for="inputTitle">Título da atividade</label>
+                                <input type="text" class="form-control" id="inputTitle" ng-model="newActivity.name" placeholder="Título da atividade">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">Descrição da atividade</label>
+                                <textarea type="text" class="form-control" id="inputDescription" ng-model="newActivity.description" placeholder="Descrição da atividade" rows="5" style="resize: none;"></textarea>
+                            </div>
+                            <div class="form-group" style="width: 20%;">
+                                <label for="inputWeight">Peso da atividade</label>
+                                <input type="number" class="form-control" id="inputWeight" ng-model="newActivity.weight" placeholder="Peso" style="width: 50%">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="float: right">
+                            <button type="button" class="btn btn-warning" style="float: right;margin-left: 5%" ng-click="params.creatingTasks = false">Voltar</button>
+                            <button type="button" class="btn btn-primary" style="float: right" ng-click="createActivity(newActivity)">Adicionar</button>
+                        </div>
                     </div>
                 </div>
             </div>

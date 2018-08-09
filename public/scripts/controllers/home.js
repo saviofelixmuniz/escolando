@@ -10,6 +10,11 @@
     function HomeController ($scope, $state, Principal, Easy, User) {
         Principal.identity().then(function (user) {
             $scope.user = user;
+            if (user.role === 'teacher') {
+                $state.go('groups');
+            } else if (user.role === 'student' || user.role === 'parent') {
+                $state.go('announcement');
+            }
         });
 
         $scope.student = {};

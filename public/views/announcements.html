@@ -1,7 +1,7 @@
 <div class="pagebody">
     <navbar></navbar>
 
-    <div class="container">
+    <div class="container" style="margin-top: 11.5rem">
         <div class="chart-title">
             <div class="ng-scope">
                 <h1 class="d-inline" ng-hide="createAnnouncements">Comunicados</h1>
@@ -19,14 +19,14 @@
             <div class="mt-3">
                 <div class="col-md-6" style="float: left">
                     <label for="course">Série</label>
-                    <select id="course" ng-model="course" class="form-control" ng-change="loadGroups(course)">
+                    <select id="course" ng-model="course" class="form-control" ng-change="loadGroups(course)" style="height: 34px">
                         <option value="" selected disabled>Selecione uma série</option>
                         <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
                     </select>
                 </div>
                 <div class="col-md-6 float-right">
                     <label for="group">Turma</label>
-                    <select id="group" ng-model="group" class="form-control" ng-change="loadAnnouncements(group)">
+                    <select id="group" ng-model="group" class="form-control" ng-change="loadAnnouncements(group)" style="height: 34px">
                         <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
                         <option value="" selected disabled ng-if="course">Selecione uma turma</option>
                         <option ng-repeat="group in groups" ng-value="group">{{group.name}}</option>

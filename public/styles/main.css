@@ -174,7 +174,6 @@ Intro Page
   height: 100%;
   max-height: 100%;
   margin: 0;
-  overflow: auto;
   padding-bottom: 30%;
 }
 
@@ -187,11 +186,11 @@ Intro Page
 }
 
 .intro-page .sign-up {
-  border: 1px solid #f1681e;
   position: relative;
   margin: 0 auto;
   width: 30%;
   padding: 10px 20px;
+  background-color: #00baf8;
 }
 
 .sign-up a {

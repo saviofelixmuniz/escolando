@@ -3,7 +3,9 @@
       <div class="sidebar-header">
           <img src="/images/avatar.png" ui-sref="profile" style="max-width: 8rem; cursor: pointer">
           <p style="margin-top: 1rem; cursor: pointer" ui-sref="profile"><strong>{{user.name}}</strong></p>
-          <p style="margin-top: -1rem">{{user.role}}</p>
+          <p style="margin-top: -1rem">{{user.role === 'teacher' ? 'Professor' : user.role === 'student' ? 'Aluno' :
+              user.role === 'parent' ? 'Responsável' : user.role === 'coordinator' ? 'Coordenador' :
+              user.role === 'admin_aux' ? 'Auxiliar Administrativo' : user.role}}</p>
           <a ui-sref="login"><i class="fas fa-sign-out-alt"></i></a>
       </div>
       <ul class="list-unstyled components">

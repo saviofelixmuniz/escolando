@@ -1,17 +1,19 @@
 <div class="pagebody">
     <navbar></navbar>
 
-    <div class="container">
+    <div>
         <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
     </div>
 
     <div class="container">
-        <div class="chart-title" ng-if="user.role==='coordinator' || user.role==='admin'">
+        <div class="chart-title">
             <div class="ng-scope">
                 <h1 ng-hide="createGroups" class="d-inline">Turmas</h1>
                 <h1 ng-show="createGroups" class="d-inline">Criar Turma</h1>
-                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="!createGroups" ng-click="toggleGroups()"><i class="fas fa-list"></i> Listar</button>
-                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="createGroups && (user.role==='coordinator' || user.role==='admin')" ng-click="toggleCreateGroups()"><i class="fas fa-plus"></i> Criar</button>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="!createGroups" ng-click="toggleGroups()"
+                    ng-if="user.role==='coordinator' || user.role==='admin'"><i class="fas fa-list"></i> Listar</button>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-hide="createGroups && (user.role==='coordinator' || user.role==='admin')"
+                    ng-if="user.role==='coordinator' || user.role==='admin'" ng-click="toggleCreateGroups()"><i class="fas fa-plus"></i> Criar</button>
             </div>
         </div>
 
@@ -19,14 +21,14 @@
             <div class="mt-3">
                 <div class="col-md-6" style="float: left">
                     <label for="course">Série</label>
-                    <select id="course" ng-model="course" class="form-control">
+                    <select id="course" ng-model="course" class="form-control" style="height: 34px">
                         <option value="" selected disabled>Selecione uma série</option>
                         <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
                     </select>
                 </div>
                 <div class="col-md-6" style="float: right;">
                     <label for="group">Turma</label>
-                    <select id="group" ng-model="group" class="form-control">
+                    <select id="group" ng-model="group" class="form-control" style="height: 34px">
                         <option value="" selected disabled ng-if="!student.course">Selecione antes uma série</option>
                         <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
                         <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
@@ -43,7 +45,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="group2">Série</label>
-                    <select id="group2" ng-model="newGroup.course_id" class="form-control">
+                    <select id="group2" ng-model="newGroup.course_id" class="form-control" style="height: 34px">
                         <option value="" selected disabled>Selecione uma série</option>
                         <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
                     </select>
@@ -53,23 +55,24 @@
                 </div>
             </div>
         </div>
-        <br>
-        <table class="table" style="border-spacing: 20px 0;" ng-show="group && course && !createGroups">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Cadastro realizado?</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="student in students track by $index">
-                    <th scope="row">{{$index + 2}}</th>
-                    <td>{{student.name}}</td>
-                    <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
-                    <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
+        <div class="container">
+            <table class="table" style="border-spacing: 20px 0;" ng-show="group && course && !createGroups">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Cadastro realizado?</th>
                 </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students track by $index">
+                        <th scope="row">{{$index + 2}}</th>
+                        <td>{{student.name}}</td>
+                        <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
+                        <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
