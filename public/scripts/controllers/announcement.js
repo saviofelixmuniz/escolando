@@ -5,9 +5,9 @@
         .module('escolando')
         .controller('AnnouncementsController', AnnouncementsController);
 
-    AnnouncementsController.$inject = ['$scope', 'Easy', 'User', 'Announcement', 'Toaster', 'Principal'];
+    AnnouncementsController.$inject = ['$scope', 'Easy', 'User', 'Announcement', 'Toaster', 'Principal', 'Courses', '$state'];
 
-    function AnnouncementsController ($scope, Easy, User, Announcements, Toaster, Principal) {
+    function AnnouncementsController ($scope, Easy, User, Announcements, Toaster, Principal, Courses, $state) {
         Principal.identity().then(function (user) {
             $scope.user = user;
             if (user.role==='student' || user.role==='parent') $scope.initAnnouncements(user);
@@ -16,22 +16,14 @@
         $scope.announcements = [];
         $scope.createAnnouncements = false;
         $scope.newAnnouncement = {};
-        $scope.group = null;
+        $scope.group = Courses.getSelectedGroup();
 
-        Easy.getAll('courses').then(function (courses) {
-            $scope.courses = courses;
-        });
-
-        $scope.loadGroups = function (course) {
-            if (!course) {
-                $scope.announcements = [];
-                return;
-            }
-
-            Easy.query('groups', {'course_id' : course}).then(function (groups) {
-                $scope.groups = groups;
-            });
-        };
+        if (!$scope.group) {
+            $state.go('groups');
+            return;
+        } else {
+            loadAnnouncements($scope.group);
+        }
 
         $scope.initAnnouncements = function(user) {
             if (user.role==='student') {
@@ -49,7 +41,7 @@
             }
         };
 
-        $scope.loadAnnouncements = function (group) {
+        function loadAnnouncements (group) {
             if (!group && ($scope.user.role==='coordinator' || $scope.user.role==='teacher' || $scope.user.role==='admin')) {
                 $scope.announcements = [];
                 return;
@@ -58,12 +50,13 @@
             Easy.query('announcement', {'group_id': group._id}).then(function (announcements) {
                 $scope.announcements = announcements;
             });
-        };
+        }
 
         $scope.createAnnouncement = function () {
             $scope.newAnnouncement.group_id = $scope.group._id;
             Easy.create('announcement', $scope.newAnnouncement).then(function (announcement) {
                 $scope.newAnnouncement = {};
+                loadAnnouncements($scope.group);
             });
 
             // Toaster.pop('success', "title", 'jumping to https://google.com.', 15000, 'trustedHtml');

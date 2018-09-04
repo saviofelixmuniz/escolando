@@ -1,24 +1,22 @@
 angular.module('escolando')
-.controller('MarksController', function ($scope, Easy, User, Marks, Principal) {
+.controller('MarksController', function ($scope, Easy, User, Marks, Principal, $state, Courses) {
     Principal.identity().then(function (user) {
         $scope.user = user;
         if (user.role==='student' || user.role==='parent') $scope.loadStudentActivities(user);
     });
 
     var gActivities = {};
-    Easy.getAll('courses').then(function (courses) {
-        $scope.courses = courses;
-    });
+    $scope.group = Courses.getSelectedGroup();
+    var course = Courses.getSelectedCourse();
 
-    $scope.$watch('course', function (course) {
-        Easy.query('groups', {'course_id': course}).then(function (groups) {
-            $scope.groups = groups;
-        });
-
-        Easy.query('subjects', {courses_id: course}).then(function (subjects) {
+    if (!$scope.group) {
+        $state.go('groups');
+        return;
+    } else {
+        Easy.query('subjects', {courses_id: course._id}).then(function (subjects) {
             $scope.subjects = subjects;
         });
-    });
+    }
 
     $scope.loadStudentActivities = function (user) {
         if (user.role==='student') {
