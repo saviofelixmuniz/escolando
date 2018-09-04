@@ -4,14 +4,12 @@
         <h1>Atividades</h1>
         <div class="container">
             <div ng-hide="user.role==='student' || user.role==='parent'" class="mt-3">
-                <div class="row">
-                    <div>
-                        <label for="subject">Disciplina</label>
-                        <select id="subject" ng-model="subject" class="form-control" style="height: 34px">
-                            <option value="" selected disabled ng-if="course">Selecione uma disciplina</option>
-                            <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
-                        </select>
-                    </div>
+                <div>
+                    <label for="subject">Disciplina</label>
+                    <select id="subject" ng-model="subject" class="form-control" style="height: 34px">
+                        <option value="" selected disabled ng-if="course">Selecione uma disciplina</option>
+                        <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
+                    </select>
                 </div>
             </div>
 
