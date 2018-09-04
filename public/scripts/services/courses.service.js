@@ -20,6 +20,11 @@ angular.module('escolando').factory('Courses', function ($http, Easy) {
 
         getSelectedCourse: function() {
             return _courseSelected;
+        },
+
+        clear: function () {
+            _groupSelected = undefined;
+            _courseSelected = undefined;
         }
     }
 });
