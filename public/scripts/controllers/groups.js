@@ -6,31 +6,27 @@
         .module('escolando')
         .controller('GroupsController', GroupsController);
 
-    GroupsController.$inject = ['$scope', 'Easy', 'User', 'Toaster', 'Principal'];
+    GroupsController.$inject = ['$scope', 'Easy', 'User', 'Toaster', 'Principal', 'Courses'];
 
-    function GroupsController ($scope, Easy, User, Toaster, Principal) {
+    function GroupsController ($scope, Easy, User, Toaster, Principal, Courses) {
         $scope.newGroup = {};
         $scope.createGroups = false;
+        $scope.groupSelected = Courses.getSelectedGroup();
+        $scope.courseSelected = Courses.getSelectedCourse();
+        $scope.students = [];
 
         Principal.identity().then(function (user) {
             $scope.user = user;
         });
 
-        Easy.getAll('courses').then(function (courses) {
-            $scope.courses = courses;
-        });
+        getAllGroups();
 
-        $scope.$watch('course', function (course) {
-            Easy.query('groups', {'course_id' : course}).then(function (groups) {
-                $scope.groups = groups;
-            });
-        });
-
-        $scope.$watch('group', function (group) {
-            User.getStudentsInGroup(group).then(function (students) {
-                $scope.students = students;
-            })
-        });
+        $scope.selectGroup = function (group, course) {
+            Courses.selectGroup(group, course);
+            $scope.groupSelected = Courses.getSelectedGroup();
+            $scope.courseSelected = Courses.getSelectedCourse();
+            getStudents(group);
+        };
 
         $scope.getCourseNameById = function(course_id) {
           for (var i in $scope.courses) {
@@ -39,11 +35,12 @@
             }
           }
           return null;
-        }
+        };
 
         $scope.createGroup = function() {
             Easy.create('groups', $scope.newGroup).then(function (group) {
                 $scope.newGroup = {};
+                getAllGroups();
             });
 
             Toaster.pop('success', 'Turma criada!',
@@ -54,10 +51,32 @@
 
         $scope.toggleGroups = function () {
             $scope.createGroups = false;
-        }
+        };
 
         $scope.toggleCreateGroups = function () {
             $scope.createGroups = true;
+        };
+
+        function getStudents (group) {
+            User.getStudentsInGroup(group._id).then(function (students) {
+                $scope.students = students;
+            });
+        }
+
+        function getAllGroups () {
+            // TODO: Se for professor, carregar apenas as turmas do professor
+            Courses.getAll().then(function (courses) {
+                courses.forEach((course) => {
+                    Easy.query('groups', {'course_id': course._id}).then(function (groups) {
+                        course.groups = groups;
+                    });
+                });
+                $scope.courses = courses;
+            });
+
+            if ($scope.groupSelected) {
+                getStudents($scope.groupSelected);
+            }
         }
     }
 

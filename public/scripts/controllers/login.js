@@ -6,9 +6,9 @@
         .module('escolando')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'Auth', 'Principal'];
+    LoginController.$inject = ['$scope', '$rootScope', '$state', '$timeout', 'Auth', 'Principal', 'Courses'];
 
-    function LoginController ($scope, $rootScope, $state, $timeout, Auth, Principal) {
+    function LoginController ($scope, $rootScope, $state, $timeout, Auth, Principal, Courses) {
 
       $scope.email = '';
       $scope.password = '';
@@ -16,6 +16,7 @@
       $scope.authenticationError = false;
 
       Auth.logout();
+      Courses.clear();
 
       $scope.login = function login (event) {
           event.preventDefault();

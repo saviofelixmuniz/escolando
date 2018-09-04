@@ -4,25 +4,9 @@
         <h1>Notas</h1>
         <div class="container">
             <div class="mt-3" ng-hide="user.role==='student' || user.role==='parent'">
-                <div class="col-md-4" style="float: left">
-                    <label for="course">Série</label>
-                    <select id="course" ng-model="course" class="form-control" style="height: 34px">
-                        <option value="" selected disabled>Selecione uma série</option>
-                        <option ng-repeat="course in courses" ng-value="course._id">{{course.name}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4" style="float: left;">
-                    <label for="group">Turma</label>
-                    <select id="group" ng-model="group" class="form-control" style="height: 34px">
-                        <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
-                        <option value="" selected disabled ng-if="course">Selecione uma turma</option>
-                        <option ng-repeat="group in groups" ng-value="group._id">{{group.name}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4" style="float: right;">
+                <div>
                     <label for="subject">Disciplina</label>
                     <select id="subject" ng-model="subject" class="form-control" style="height: 34px">
-                        <option value="" selected disabled ng-if="!course">Selecione antes uma série</option>
                         <option value="" selected disabled ng-if="course">Selecione uma disciplina</option>
                         <option ng-repeat="subject in subjects" ng-value="subject._id">{{subject.name}}</option>
                     </select>
