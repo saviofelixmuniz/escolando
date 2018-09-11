@@ -15,10 +15,10 @@
             if (user.role==='parent' || user.role==='student') $scope.loadStudentAttendance(user);
         });
 
-        $scope.markAllTrue = true;
         $scope.studentAttendance = {};
         $scope.attendanceDate = new Date();
         $scope.attendanceWeek = getWeek(new Date());
+        $scope.markAllTrue = [];
 
         function getWeek(date) {
             var weekDates = [];
@@ -150,14 +150,20 @@
             }
         }
 
-        $scope.markAll = function () {
+        $scope.markAll = function (index) {
+            $scope.markAllTrue[index] = !$scope.markAllTrue[index];
+
             angular.forEach($scope.students, function(student){
-                student.attended = $scope.markAllTrue;
+                student.attended[index] = $scope.markAllTrue[index];
             });
 
-            $scope.markAllTrue = !$scope.markAllTrue;
-            console.log($scope.markAllTrue);
         }
+
+        $scope.getDayOfWeek = function(date) {
+            var days = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
+            return days[date.getDay()];
+        };
 
         $scope.getMonthYear = function() {
             var d = new Date();

@@ -42,7 +42,10 @@
                     <thead>
                     <tr>
                         <th scope="col">Nome</th>
-                        <th scope="col" ng-repeat="day in attendanceWeek">{{day.getTime() | date:'dd/MM/yyyy'}}</th>
+                        <th scope="col" ng-repeat="day in attendanceWeek" style="text-align: center">
+                            {{day.getTime() | date:'dd/MM/yyyy'}}<br>
+                            {{getDayOfWeek(day)}}
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,14 +58,19 @@
                                 </label>
                             </td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td ng-repeat="day in attendanceWeek track by $index">
+                                <button  type="button" class="btn btn-second mark-all" ng-click="markAll($index)">
+                                    {{ markAllTrue[$index] ? 'Desmarcar' : 'Marcar'}} todas
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <div ng-show="group" class="form-group col-md-6">
                     <button type="button" class="btn btn-primary" ng-click="registerAttendance(group)">Registrar presença</button>
-                    <button  type="button" class="btn btn-second mark-all" ng-click="markAll()">
-                      {{ markAllTrue ? 'Marcar' : 'Desmarcar'}} todas
-                    </button>
                 </div>
 
                <script type="text/javascript">
