@@ -19,7 +19,7 @@
               <div class="form-row">
                   <div class="form-group col-md-3">
                       <label for="date">Data</label>
-                      <input type="date" id="date" class="form-control" value="{{ getAttendaneDate() }}" ng-model="attendanceDate" placeholder="Data da Frequência">
+                      <input type="date" id="date" class="form-control" value="{{ getAttendanceDate() }}" ng-model="attendanceDate" placeholder="Data da Frequência">
                   </div>
                   <div class="form-group col-md-9">
                       <label for="group">Turma</label>
@@ -42,15 +42,15 @@
                     <thead>
                     <tr>
                         <th scope="col">Nome</th>
-                        <th scope="col">Presença</th>
+                        <th scope="col" ng-repeat="day in attendanceWeek">{{day.getTime() | date:'dd/MM/yyyy'}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="student in students track by $index">
+                        <tr ng-repeat="student in students">
                             <td>{{ student.name }}</td>
-                            <td>
-                                <label class="switch" ng-init="student.attended=false">
-                                  <input type="checkbox" class="switch-checkbox" ng-model="student.attended">
+                            <td ng-repeat="day in attendanceWeek track by $index">
+                                <label class="switch">
+                                  <input type="checkbox" class="switch-checkbox" ng-model="student.attended[$index]">
                                   <span class="slider round"></span>
                                 </label>
                             </td>

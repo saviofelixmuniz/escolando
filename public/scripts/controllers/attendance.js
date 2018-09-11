@@ -18,6 +18,19 @@
         $scope.markAllTrue = true;
         $scope.studentAttendance = {};
         $scope.attendanceDate = new Date();
+        $scope.attendanceWeek = getWeek(new Date());
+
+        function getWeek(date) {
+            var weekDates = [];
+
+            for(var i=0; i<7; i++) {
+                var dayDate = new Date(date.getTime());
+                dayDate.setDate(dayDate.getDate() - dayDate.getDay() + i);
+                weekDates.push(dayDate);
+            }
+
+            return weekDates;
+        }
 
         Easy.getAll('courses').then(function (courses) {
             $scope.courses = courses;
@@ -38,41 +51,73 @@
 
         $scope.$watch('attendanceDate', function (date) {
             if (!date || !$scope.group) return;
+            $scope.attendanceWeek = getWeek(date);
             loadStudents($scope.group);
         });
+
+        function formatDate(date) {
+            return date.getFullYear() + "-" +
+            ("0"+(date.getMonth()+1)).slice(-2) + "-" +
+            ("0" + date.getDate()).slice(-2);
+        }
 
         function loadStudents(group) {
             if (!group) return;
             $scope.students = [];
             User.getStudentsInGroup(group).then(function (students) {
+                startStudentAttendance(students);
                 $scope.students = students;
-                var date = $scope.attendanceDate.getFullYear() + "-" + ("0"+($scope.attendanceDate.getMonth()+1)).slice(-2) + "-" + ("0" + $scope.attendanceDate.getDate()).slice(-2);
-                Easy.query('attendance', {'date': date}).then(function (studentAttendance) {
-                    for (var att of studentAttendance) {
-                        for (var student of $scope.students) {
-                            if (student._id == att.student_id) {
-                                student.attended = att.attended;
+
+                var attendancePromises = [];
+                for (var date of $scope.attendanceWeek) {
+                    attendancePromises.push(Easy.query('attendance', {'date': formatDate(date)}));
+                }
+
+                Promise.all(attendancePromises).then(function (attendances) {
+                    for (var i = 0; i<attendances.length; i++) {
+                        for (var att of attendances[i]) {
+                            for (var student of $scope.students) {
+                                if (student._id == att.student_id) {
+                                    student.attended[i] = att.attended;
+                                }
                             }
                         }
                     }
+                    $scope.$apply();
                 });
+
             });
         }
 
+        function startStudentAttendance(students) {
+            for (var student of students) {
+                student.attended = [];
+            }
+
+            console.log(students);
+        }
+
         $scope.registerAttendance = function (groupId) {
+            $scope.attendanceLists = [];
+            for (var i = 0; i<7; i++) {
+                $scope.attendanceLists.push([]);
+                angular.forEach($scope.students, function(student){
+                    $scope.attendanceLists[i].push({'id': student._id, 'attended': student.attended[i] || false});
+                });
+            }
 
-            $scope.attendanceList = [];
-            angular.forEach($scope.students, function(student){
-                $scope.attendanceList.push({'id': student._id, 'attended': student.attended});
-            });
+            var registerPromises = [];
 
-            var form = {
-                'students' : $scope.attendanceList,
-                'date': $scope.getAttendanceDate()
-            };
+            for (var i=0; i<$scope.attendanceWeek.length; i++) {
+                var form = {
+                    'students' : $scope.attendanceLists[i],
+                    'date': formatDate($scope.attendanceWeek[i])
+                };
 
-            console.log(form);
-            Attendance.registerAttendanceList(form, groupId).then(function (data) {
+                registerPromises.push(Attendance.registerAttendanceList(form, groupId));
+            }
+
+            Promise.all(registerPromises).then(function (data) {
                 console.log("registrou frequência!");
                 console.log(data);
                 Toaster.pop('success', 'Frequência Registrada!', '', 5000, 'trustedHtml');
