@@ -12,9 +12,9 @@
           <li ng-show="user.role==='admin' || user.role==='teacher' || user.role==='coordinator'" ui-sref-active="active">
               <a class="nav-link" ui-sref="groups" style="cursor: pointer">Gerenciamento de Turmas</a>
           </li>
-          <li ng-show="user.role==='admin' || user.role==='admin_aux' || user.role==='coordinator' || user.role==='teacher'" ui-sref-active="active">
+          <!-- <li ng-show="user.role==='admin' || user.role==='admin_aux' || user.role==='coordinator' || user.role==='teacher'" ui-sref-active="active">
               <a class="nav-link" ui-sref="accounts" style="cursor: pointer">Gerenciamento de Contas</a>
-          </li>
+          </li> -->
           <li ng-show="user.role==='admin' || user.role==='coordinator' || user.role==='admin_aux'" ui-sref-active="active">
               <a class="nav-link" ui-sref="home">Cadastro de token</a>
           </li>
