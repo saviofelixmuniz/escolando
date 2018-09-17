@@ -151,7 +151,7 @@
                             teacher['courses_'].push(course.name);
                         });
                     }
-                    
+
                 }
             });
         }
