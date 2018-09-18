@@ -17,8 +17,8 @@
             </div>
         </div>
 
-        <div class="container" ng-hide="createGroups">
-            <div class="mt-3">
+        <div class="inner-container" style="margin-left: 0%" ng-hide="createGroups">
+            <div>
                 <div>
                     <label for="groups">Selecione uma turma</label>
                     <div id="groups" class="row mb-2" ng-repeat="course in courses">
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="container" ng-show="createGroups">
+        <div class="inner-container" ng-show="createGroups">
             <div style="margin-top: 3%" class="form-row">
                 <div class="form-group col-md-6">
                     <label for="groupName">Nome</label>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="inner-container">
             <table class="table" style="border-spacing: 20px 0;" ng-show="groupSelected && courseSelected && !createGroups">
                 <thead>
                 <tr>

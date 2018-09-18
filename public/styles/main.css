@@ -4,8 +4,12 @@ body {
 
 .container {
   float: left;
-  margin: 5% 0 0 15%;
+  margin: 5% 0 0 20%;
   width: 80%;
+}
+
+.inner-container {
+  margin: 5% 0 0 0;
 }
 
 /* Sidebar */

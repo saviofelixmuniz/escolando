@@ -1,0 +1,34 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container" style="width: 80%">
+        <h1>Plano de aula</h1>
+        <br>
+        <div ng-show="!creating">
+            <div class="col-md-8 form-inline" >
+                <label for="date" style="float: left">Data</label>
+                <input type="date" id="date" class="form-control" style="margin-left: 7%; float: right" ng-model="params.date" placeholder="Data da aula">
+                <button class="btn btn-primary ml-5" ng-show="user.role === 'teacher'" ng-click="creating = true">Criar novo</button>
+            </div>
+
+            <div class="col-md-10" ng-repeat="oneClass in classes" ng-show="!creating">
+                <h2>{{oneClass.subject_name}}</h2>
+                <p>{{oneClass.plan}}</p>
+            </div>
+        </div>
+        <div ng-show="creating">
+            <div class="col-md-6 mb-5">
+                <label for="subject">Disciplina</label><br>
+                <small style="color: red" ng-show="!params.plan || !params.subject">Selecione uma disciplina e digite o plano para salvar</small>
+                <select ng-model="params.subject" class="form-control col-md-8" style="height: 34px">
+                    <option ng-value="subject._id" ng-repeat="subject in subjects">{{subject.name}}</option>
+                </select>
+            </div>
+
+            <textarea class="form-control mb-5" cols="30" rows="10" ng-show="params.subject" ng-model="params.plan" style="resize: none"></textarea>
+            <div class="col-md-12">
+                <button class="btn btn-primary mr-3" ng-show="params.plan && params.subject" ng-click="save()">Salvar</button>
+                <button class="btn btn-danger" ng-click="creating = false">Voltar</button>
+            </div>
+        </div>
+    </div>
+</div>

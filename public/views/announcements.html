@@ -15,7 +15,7 @@
             <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
         </div>
 
-        <div class="container" ng-hide="createAnnouncements">
+        <div class="inner-container" ng-hide="createAnnouncements">
             <div style="font-weight: bold" ng-show="announcements.length === 0"> <p> Nenhum comunicado </p> </div>
             <div style="font-weight: bold" ng-hide="announcements.length === 0"> <p> Total de {{ announcements.length }} comunicados </p> </div>
             <div class="row-md-12" style="height: 550px; overflow: auto">
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="container" ng-show="createAnnouncements">
+        <div class="inner-container" ng-show="createAnnouncements">
             <div class="form-row mt-3">
                 <div class="col-md-12">
                     <label for="announcementTitle">Titulo</label>

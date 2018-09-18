@@ -15,6 +15,9 @@
           <li ng-show="user.role==='admin' || user.role==='admin_aux' || user.role==='teacher' || user.role==='coordinator'" ui-sref-active="active">
               <a class="nav-link" ui-sref="students" style="cursor: pointer">Gerenciamento de Turmas</a>
           </li>
+          <li>
+              <a class="nav-link" ui-sref="classes" style="cursor: pointer">Plano de aulas</a>
+          </li>
           <li ng-show="user.role==='admin' || user.role==='coordinator' || user.role==='admin_aux'" ui-sref-active="active">
               <a class="nav-link" ui-sref="home">Cadastro de token</a>
           </li>
