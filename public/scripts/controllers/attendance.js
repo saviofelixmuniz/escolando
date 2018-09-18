@@ -6,14 +6,20 @@
         .module('escolando')
         .controller('AttendanceController', AttendanceController);
 
-    AttendanceController.$inject = ['$scope', 'Easy', 'User', 'CONSTANTS', 'Attendance', 'Toaster', 'Principal'];
+    AttendanceController.$inject = ['$scope', 'Courses', '$state', 'Easy', 'User', 'CONSTANTS', 'Attendance', 'Toaster', 'Principal'];
 
-    function AttendanceController ($scope, Easy, User, CONSTANTS, Attendance, Toaster, Principal) {
+    function AttendanceController ($scope, Courses, $state, Easy, User, CONSTANTS, Attendance, Toaster, Principal) {
         Principal.identity().then(function (user) {
             $scope.user = user;
-            if (user.role==='teacher') $scope.loadTeacherInformation(user);
-            if (user.role==='parent' || user.role==='student') $scope.loadStudentAttendance(user);
         });
+
+        $scope.group = Courses.getSelectedGroup();
+        var course = Courses.getSelectedCourse();
+
+        if (!$scope.group) {
+            $state.go('groups');
+            return;
+        }
 
         $scope.studentAttendance = {};
         $scope.attendanceDate = new Date();
@@ -32,27 +38,12 @@
             return weekDates;
         }
 
-        Easy.getAll('courses').then(function (courses) {
-            $scope.courses = courses;
-        });
-
-        Easy.getAll('subjects').then(function (subjects) {
-          $scope.subjects = subjects;
-        });
-
-        Easy.getAll('groups').then(function (groups) {
-            $scope.groups = groups;
-        });
-
-        $scope.$watch('group', function (group) {
-            if (!group) return;
-            loadStudents(group);
-        });
+        loadStudents($scope.group._id);
 
         $scope.$watch('attendanceDate', function (date) {
             if (!date || !$scope.group) return;
             $scope.attendanceWeek = getWeek(date);
-            loadStudents($scope.group);
+            loadStudents($scope.group._id);
         });
 
         function formatDate(date) {

@@ -56,6 +56,8 @@ angular.module('escolando').controller('ClassesController', function ($scope, $s
         }).then(function (res) {
             console.log(res);
             $scope.creating = false;
+            $scope.params.subject = null;
+            $scope.params.plan = null;
             loadClasses();
         })
     };

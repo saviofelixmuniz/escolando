@@ -42,7 +42,7 @@ angular.module('escolando')
     };
 
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
-        if (newVal.course && newVal.group && newVal.subject) {
+        if (course && newVal.group && newVal.subject) {
             console.log(newVal);
             Easy.query('activities', {group_id: newVal.group, subject_id: newVal.subject}).then(function (activities) {
                 $scope.activities = activities;

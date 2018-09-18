@@ -44,7 +44,7 @@ angular.module('escolando')
             if (!isUndefined(stdActivities) && stdActivities !== null) {
                 for (var activityId of Object.keys(stdActivities)) {
                     var activityWeight = gActivities[activityId].weight;
-                    sum += stdActivities[activityId].value * activityWeight
+                    sum += stdActivities[activityId].value * activityWeight;
                     totalWeight += activityWeight;
                 }
                 return sum / totalWeight;
@@ -55,7 +55,7 @@ angular.module('escolando')
     };
 
     $scope.$watchCollection('{course: course, group: group, subject: subject}', function (newVal) {
-        if (newVal.course && newVal.group && newVal.subject) {
+        if (course && newVal.group && newVal.subject) {
             Easy.query('activities', {group_id: newVal.group, subject_id: newVal.subject}).then(function (activities) {
                 $scope.activities = activities;
                 for (var activity of $scope.activities) {
@@ -63,18 +63,19 @@ angular.module('escolando')
                 }
             });
 
-            User.getStudentsInGroup(newVal.group).then(function (students) {
+            User.getStudentsInGroup(newVal.group._id).then(function (students) {
+                console.log(students);
                 $scope.students = students;
             });
 
-            Marks.getGroupSubjectMarks(newVal.group, newVal.subject).then(function (marks) {
+            Marks.getGroupSubjectMarks(newVal.group._id, newVal.subject).then(function (marks) {
                 $scope.marks = marks;
             });
         }
     });
 
     $scope.$watch('marks', function (marks) {
-        Marks.commitMarks($scope.group, $scope.subject, marks).then();
+        Marks.commitMarks($scope.group._id, $scope.subject, marks).then();
     }, true);
 
     function isUndefined(value) {

@@ -21,13 +21,6 @@
                       <label for="date">Data</label>
                       <input type="date" id="date" class="form-control" value="{{ getAttendanceDate() }}" ng-model="attendanceDate" placeholder="Data da Frequência">
                   </div>
-                  <div class="form-group col-md-9">
-                      <label for="group">Turma</label>
-                      <select id="group" ng-model="group" class="form-control" style="height: 34px">
-                          <option value="" selected disabled ng-if="student.course">Selecione uma turma</option>
-                          <option ng-repeat="group in groups" ng-value="group._id" ng-if="!teacher.courses_enabled.indexOf(group.course_id)">{{group.name}}</option>
-                      </select>
-                  </div>
               </div>
 
               <!--<div class="col-md-10" style="float: right;">
@@ -70,7 +63,7 @@
                 </table>
 
                 <div ng-show="group" class="form-group col-md-6">
-                    <button type="button" class="btn btn-primary" ng-click="registerAttendance(group)">Registrar presença</button>
+                    <button type="button" class="btn btn-primary" ng-click="registerAttendance(group._id)">Registrar presença</button>
                 </div>
 
                <script type="text/javascript">
