@@ -12,7 +12,7 @@
 
             <div class="col-md-10" ng-repeat="oneClass in classes" ng-show="!creating">
                 <h2>{{oneClass.subject_name}}</h2>
-                <p>{{oneClass.plan}}</p>
+                <span style="white-space: pre-line">{{oneClass.plan}}</span>
             </div>
         </div>
         <div ng-show="creating">
