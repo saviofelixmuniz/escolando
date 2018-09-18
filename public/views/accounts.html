@@ -1,0 +1,17 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container">
+
+      <div class="chart-title">
+          <div class="ng-scope">
+
+              <h1 ng-show="user.role==='admin' || user.role==='admin_aux'" class="d-inline">Contas</h1>
+              <h1 ng-show="user.role==='coordinator'" class="d-inline">Contas de professores</h1>
+              <h1 ng-show="user.role==='teacher'" class="d-inline">Contas de alunos</h1>
+              <h1 ng-show="user.role==='student'" class="d-inline">Detalhes da conta</h1>
+              
+          </div>
+      </div>
+
+    </div>
+</div>

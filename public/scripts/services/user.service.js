@@ -15,6 +15,11 @@ angular.module('escolando').factory('User', function ($http) {
                 return res.data;
             });
         },
+        getParentById: function (parentId) {
+            return $http.get(USERS + `parent/${parentId}`).then(function (res) {
+                return res.data;
+            });
+        },
         updateStudent: function (studentId, studentObj) {
             return $http.put(USERS + `student/${studentId}`, studentObj, { headers: {'Content-Type': 'application/json; charset=UTF-8' } });
         },

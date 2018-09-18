@@ -12,7 +12,27 @@
             <div>
                 <div class="card" ng-repeat="teacher in teachers track by $index" style="align-content: left; margin-top: 2%;">
                     <div class="card-header item-selection" ng-click="selectTeacher(teacher)">
-                        <h5 class="card-title" style="font-weight: bold; float: left">{{ teacher.user.name }}</h5>
+
+                        <!-- <h5 class="card-title" style="font-weight: bold; float: left">{{ teacher.user.name }}</h5> -->
+                        <div style="width: 100px; height: 100px; float: left; margin-right:10px;">
+                          <img class="ml-auto mr-auto" style="max-height: 100px" src="/images/avatar.png" alt="{{ teacher.user.email }}">
+                        </div>
+                        <ul style="list-style: none">
+                          <li><b>{{ teacher.user.name }}</b></li>
+                          <li><b>Email: </b>{{ teacher.user.email }}</li>
+                          <li><b>UF/Cidade: </b>{{ teacher.user.address.state }} / {{ teacher.user.address.city }}
+                            <span style="float:right"><b>Data de Nasc.: </b>{{ teacher.user.birthday | date:'dd/MM/yyyy'}}</span></li>
+                          <li><b>Contato: </b> {{ teacher.user.phone }}</li>
+
+                          <li><b>Disciplinas que leciona: </b>
+                              <span style="background-color: #deeede; padding:5px; border-radius:10px" ng-repeat="subject_name in teacher.disciplines_"> {{ subject_name }}</span>
+                          </li>
+
+                          <li style="float:right"><b>Turmas: </b>
+                              <span style="background-color: #feee54; padding:5px; margin: 5px; border-radius:10px" ng-repeat="course_name in teacher.courses_"> {{ course_name }} </span>
+                          </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>

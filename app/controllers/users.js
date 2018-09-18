@@ -140,7 +140,7 @@ async function registerAuxAdmin(form) {
 
 function mailToken(email, token) {
     var html = `Um usuário foi pré-cadastrado para você em nosso sistema, acesse
-                <a href="http://localhost:8080/token-confirmation">EscolandoApp</a> e use o token 
+                <a href="http://localhost:8080/token-confirmation">EscolandoApp</a> e use o token
                 <strong>${token}</strong> para terminar o seu cadastro!`;
     Mail.send(email, 'Token de cadastro', html);
 }
@@ -160,6 +160,14 @@ async function getStudentByParent(req, res) {
     var userStudent = await User.findOne({_id: student.user_id}, '', {lean: true});
 
     var mergedObj = {...userStudent, ...student};
+
+    RestHelper.sendJsonResponse(res, 200, mergedObj);
+}
+
+async function getParentById(req, res) {
+    var parent = await User.findOne({_id: req.params.parentId}, '', {lean: true});
+
+    var mergedObj = {...parent};
 
     RestHelper.sendJsonResponse(res, 200, mergedObj);
 }
@@ -242,7 +250,8 @@ module.exports = {
     getUserByToken: getUserByToken,
     registerRoledUser: registerRoledUser,
     getStudents : getStudents,
-    getStudentByParent: getStudentByParent,
+    getStudentByParent : getStudentByParent,
+    getParentById : getParentById,
     updateRoleObj: updateRoleObj,
     getStudentsByGroup: getStudentsByGroup,
     getTeacherById : getTeacherById

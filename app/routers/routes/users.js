@@ -13,6 +13,7 @@ usersRouter.post('/role/:role/:token', usersController.registerRoledUser);
 usersRouter.get('/students', usersController.getStudents);
 usersRouter.put('/:role/:id', usersController.updateRoleObj);
 usersRouter.get('/students/parent/:parentId', usersController.getStudentByParent);
+usersRouter.get('/parent/:parentId', usersController.getParentById);
 usersRouter.get('/students/groups/:groupId', usersController.getStudentsByGroup);
 usersRouter.get('/teacher/:teacherId', usersController.getTeacherById);
 

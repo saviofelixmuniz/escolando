@@ -11,9 +11,9 @@
         Principal.identity().then(function (user) {
             $scope.user = user;
             if (user.role === 'teacher') {
-                $state.go('groups');
+                $state.go('students');
             } else if (user.role === 'student' || user.role === 'parent') {
-                $state.go('announcement');
+                $state.go('announcements');
             }
         });
 
@@ -79,7 +79,7 @@
                   'course_section_id' : $scope.coordinator.subject,
                   'role' : 'coordinator'
               };
-              
+
               User.registerToken(form).then(function (res) {
                  $scope.coordinator = {};
                  var token = res.token;

@@ -15,6 +15,7 @@
 
         $scope.courses = [];
         $scope.subjects = [];
+        $scope.teachersDisciplines = {};
         $scope.teacherSelected = undefined;
         $scope.teachers = [];
         $scope.updating = false;
@@ -136,6 +137,21 @@
                     Easy.getOne('users', teacher.user_id).then(function (user) {
                         teacher.user = user;
                     });
+
+                    teacher['disciplines_'] = [];
+                    for (let subject_id of teacher.subject_ids) {
+                        Easy.getOne('subjects', subject_id).then(function (subject) {
+                            teacher['disciplines_'].push(subject.name);
+                        });
+                    }
+
+                    teacher['courses_'] = [];
+                    for (let course_id of teacher.courses_enabled) {
+                        Easy.getOne('courses', course_id).then(function (course) {
+                            teacher['courses_'].push(course.name);
+                        });
+                    }
+
                 }
             });
         }
