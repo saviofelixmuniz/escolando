@@ -1,0 +1,153 @@
+<div class="pagebody">
+    <navbar></navbar>
+
+    <div>
+        <toaster-container toaster-options="{'time-out': 3000, 'close-button':true}"></toaster-container>
+    </div>
+
+    <div class="container">
+        <div class="chart-title">
+            <div class="ng-scope">
+                <h1 ng-show="!studentInfo" class="d-inline">Alunos</h1>
+                <h1 ng-show="studentInfo" class="d-inline">Alunos / {{ studentSelected.name }}</h1>
+                <button type="button" class="btn btn-default mb-3 ml-3" ng-show="studentInfo" ng-click="back()">Voltar</button>
+            </div>
+        </div>
+
+        <div class="container" ng-show="studentInfo" style="margin-bottom: 100px">
+
+          <div style="width: 100px; height: 100px; margin-right:10px; position: relative">
+            <img class="ml-auto mr-auto" style="max-height: 50px" src="/images/avatar.png" alt="{{ studentSelected.email }}">
+          </div>
+
+          <ul style="list-style: none; line-height: 2em; padding: 0">
+            <li><b>{{ studentSelected.name }}</b></li>
+            <li><b>Email: </b>{{ studentSelected.email }}</li>
+            <li><b>UF/Cidade: </b>{{ studentSelected.address.state }} / {{ studentSelected.address.city }}
+              <span style="float:right"><b>Data de Nasc.: </b>{{ studentSelected.birthday | date:'dd/MM/yyyy'}}</span></li>
+            <li><b>Contato: </b> {{ studentSelected.phone }}</li>
+
+            <li>
+              <b>Situação: </b>
+              <span ng-if="!studentSelected.birthday" style="color: red;"><b>Matrícula pendente</b></span>
+              <span ng-if="studentSelected.birthday" style="color: green;"><b>Matriculado</b></span>
+            </li>
+
+            <li ng-if="studentSelected.birthday">
+              <b>Matriculado em: </b> {{ studentSelected.registered_on | date:'dd/MM/yyyy'}}
+            </li>
+
+            <li><b>Turma: </b>{{ courseSelected.name + ' ' + groupSelected.name}}</li>
+
+            <hr>
+
+            <li ng-show="studentSelected.allergies.length > 0"><b>Alergias: </b>
+                <span style="background-color: #deaaed; padding:5px; margin-right: 5px; border-radius:10px" ng-repeat="allergy in studentSelected.allergies">
+                   {{ allergy }}
+                </span>
+            </li>
+
+            <li ng-show="studentSelected.disabilities.length > 0"><b>Deficiências: </b>
+                <span style="background-color: #bbeeff; padding:5px; margin-right: 5px; border-radius:10px" ng-repeat="disability in studentSelected.disabilities">
+                  {{ disability }}
+                </span>
+            </li>
+
+            <li ng-show="studentSelected.notes.length > 0"><b>Notas: </b>
+                <span style="background-color: #bbeeff; padding:5px; margin-right: 5px; border-radius:10px" ng-repeat="note in studentSelected.notes">
+                  {{ note }}
+                </span>
+            </li>
+
+            <li ng-show="studentSelected.attachments.length > 0"><b>Anexos: </b>
+                <span style="background-color: #bbeeff; padding:5px; margin-right: 5px; border-radius:10px" ng-repeat="attachment in studentSelected.attachments">
+                  {{ attachments }}
+                </span>
+            </li>
+
+            <hr>
+
+            <li><b>Responsáveis: </b>
+              <ul style="list-style: none; line-height: 2em">
+                <li style="padding-bottom: 15px;" ng-repeat="parent in studentSelected.parents">
+                  <i><b style="text-transform: uppercase">{{ parent.name }}</b></i><br>
+                  <i><b>Email </b>: {{ parent.email }}</i><br>
+                  <i><b>Contato </b>: {{ parent.phone }}</i>
+                </li>
+              </ul>
+            </li>
+
+            <hr>
+
+            <li>
+              <b>Frequência:</b>
+              <span style="background-color: #ffc583; padding:5px; margin-right: 5px; border-radius:10px">
+                {{ studentSelected.attendance.length + ' faltas' }}
+              </span>
+              <ul style="list-style: none">
+                <li style="padding-bottom: 15px;" ng-repeat="absence in studentSelected.attendance">
+                  <i>{{ absence.date }}</i>
+                </li>
+              </ul>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="container" ng-hide="studentInfo">
+            <div class="mt-3">
+                <div>
+                    <label for="groups">Selecione uma turma</label>
+                    <div id="groups" class="row mb-2" ng-repeat="course in courses">
+                        <div class="col" ng-repeat="group in course.groups">
+                            <div class="card" ng-if="user.role==='teacher' && teacher.courses_enabled.includes(course._id)" ng-class="{'bg-light': group._id == groupSelected._id}">
+                                <div class="card-body" ng-click="selectGroup(group, course)" style="cursor: pointer">
+                                    {{course.name}} {{group.name}}
+                                </div>
+                            </div>
+                            <div class="card" ng-if="user.role!=='teacher'" ng-class="{'bg-light': group._id == groupSelected._id}">
+                                <div class="card-body" ng-click="selectGroup(group, course)" style="cursor: pointer">
+                                    {{course.name}} {{group.name}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding-bottom: 100px" ng-hide="studentInfo">
+
+          <div ng-repeat="student in students track by $index">
+
+            <div class="card-header item-selection" ng-click="selectStudent(student)">
+                <img class="ml-auto mr-auto" style="max-height: 50px" src="/images/avatar.png" alt="{{ student.email }}">
+                <b>{{ student.name }}</b>
+                <span ng-if="!student.birthday" style="color: red; float:right"><b>&#127761;</b></span>
+                <span ng-if="student.birthday" style="color: green; float:right"><b>&#127761;</b></span>
+            </div>
+
+          </div>
+
+
+            <!-- <table class="table" style="border-spacing: 20px 0;" ng-show="groupSelected && courseSelected && !createGroups">
+                <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Informações do aluno</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in students track by $index">
+                        <td>{{student.name}}</td>
+                        <td ng-if="!student.birthday" style="color: red;"><strong>Não</strong></td>
+                        <td ng-if="student.birthday" style="color: green;"><strong>Sim</strong></td>
+                    </tr>
+                </tbody>
+            </table> -->
+
+
+        </div>
+    </div>
+</div>

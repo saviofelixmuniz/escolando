@@ -100,6 +100,13 @@ angular.module('escolando')
       controller : 'AccountsController'
     };
 
+    const students = {
+      name : 'students',
+      url : '/students',
+      templateUrl : '/views/students.html',
+      controller : 'StudentsController'
+    };
+
     $stateProvider
         .state(login)
         .state(accessdenied)
@@ -114,7 +121,8 @@ angular.module('escolando')
         .state(attendance)
         .state(subjects)
         .state(teachers)
-        .state(accounts);
+        .state(accounts)
+        .state(students);
 
     $urlRouterProvider.otherwise("/");
 
