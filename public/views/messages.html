@@ -1,0 +1,31 @@
+<div class="pagebody">
+    <navbar></navbar>
+    <div class="container" style="width: 80%">
+        <h1>Mensagens</h1>
+        <br>
+        <div class="inner-container" ng-show="!selectedUser">
+            <div ng-repeat="user in users track by $index">
+
+                <div class="card-header item-selection" ng-click="selectUser(user)">
+                    <img class="ml-auto mr-auto" style="max-height: 50px" src="/images/avatar.png" alt="{{ user.email }}">
+                    <b>{{ user.name }}</b>
+                </div>
+
+            </div>
+        </div>
+        <div class="inner-container mb-5" ng-show="selectedUser">
+            <div class="mb-5">
+                <h3>{{selectedUser.name}} <button type="button" class="btn btn-default float-right" ng-click="deselectUser()">Voltar</button></h3>
+            </div>
+            <div class="chat-container" ng-repeat="message in messages" ng-class="{'darker': message.from._id == user._id}">
+                <img src="/images/avatar.png" alt="{{ user.email }}" style="max-height:50px;" ng-class="{'right': message.from._id == user._id}">
+                <p ng-style="{'text-align': message.from._id == user._id ? 'right' : 'left'}">{{ message.content }}</p>
+                <span ng-class="{'time-right': message.from._id == user._id, 'time-left': message.from._id != user._id}">{{ message.date | date: "dd/MM/yyyy 'às' HH:mm" }}</span>
+            </div>
+            <div class="mt-5">
+                <textarea rows="4" style="width: 100%" ng-model="message.content"></textarea>
+                <button type="button" class="btn btn-primary float-right" ng-click="sendMessage()">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
