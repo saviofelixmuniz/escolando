@@ -1,4 +1,4 @@
-angular.module('escolando').controller('MessagesController', function ($scope, $state, $filter, Principal, Message) {
+angular.module('escolando').controller('MessagesController', function ($scope, $state, $filter, Principal, Message, User) {
     Principal.identity().then(function (user) {
         $scope.user = user;
         getUsers();
@@ -9,11 +9,15 @@ angular.module('escolando').controller('MessagesController', function ($scope, $
         content: ''
     };
     $scope.messages = [];
+    $scope.searchInput = '';
+    $scope.usersFound = [];
 
     function getUsers() {
         Message.getUsersMessaged().then(function (users) {
             $scope.users = users;
-        })
+        });
+        $scope.searchInput = '';
+        $scope.usersFound = [];
     }
 
     $scope.selectUser = function (user) {
@@ -34,6 +38,14 @@ angular.module('escolando').controller('MessagesController', function ($scope, $
                 content: ''
             };
             $scope.messages.push(message);
+        });
+    };
+
+    $scope.searchUser = function () {
+        if (!$scope.searchInput || !$scope.searchInput.trim()) return;
+
+        User.getUsersByName($scope.searchInput).then(function (users) {
+            $scope.usersFound = users;
         });
     };
 
