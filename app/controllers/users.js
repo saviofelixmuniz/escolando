@@ -155,6 +155,16 @@ function getUserByToken(req, res) {
     });
 }
 
+function getUsersByName(req, res) {
+    var query = {name : { $regex: req.query.name, $options: 'i' }};
+
+    User.find(query, '', {lean: true}).then(function (users) {
+        RestHelper.sendJsonResponse(res, 200, users);
+    }).catch(function (err) {
+        RestHelper.sendJsonResponse(res, 500, err);
+    });
+}
+
 async function getStudentByParent(req, res) {
     var student = await ROLE_MODELS['student'].findOne({parent_ids: req.params.parentId}, '', {lean: true});
     var userStudent = await User.findOne({_id: student.user_id}, '', {lean: true});
@@ -254,5 +264,6 @@ module.exports = {
     getParentById : getParentById,
     updateRoleObj: updateRoleObj,
     getStudentsByGroup: getStudentsByGroup,
-    getTeacherById : getTeacherById
+    getTeacherById : getTeacherById,
+    getUsersByName : getUsersByName
 };

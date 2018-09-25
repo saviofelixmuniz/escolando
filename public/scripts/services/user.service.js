@@ -40,6 +40,11 @@ angular.module('escolando').factory('User', function ($http) {
             return $http.get(USERS + `teacher/${teacherId}`).then(function (res) {
                 return res.data;
             });
+        },
+        getUsersByName : function (name) {
+            return $http.get(USERS + `search?name=${name}`).then(function (res) {
+                return res.data;
+            });
         }
     }
 });
