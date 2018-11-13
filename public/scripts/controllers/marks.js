@@ -1,5 +1,24 @@
 angular.module('escolando')
 .controller('MarksController', function ($scope, Easy, User, Marks, Principal, $state, Courses) {
+    $scope.loadStudentActivities = function (user) {
+        if (user.role==='student') {
+            Easy.query('student', {'user_id': user._id}).then(function (student) {
+                Easy.query('activities', {'group_id': student[0].group_id}).then(function (activities) {
+                    console.log(activities);
+                    console.log("aqui");
+                    $scope.activities = activities;
+                });
+            });
+        } else if (user.role==='parent') {
+            User.getStudentByParentId(user._id).then(function (student) {
+                Easy.query('activities', {'group_id': student.group_id}).then(function (activities) {
+                    console.log(activities);
+                    $scope.activities = activities;
+                });
+            });
+        }
+    };
+
     Principal.identity().then(function (user) {
         $scope.user = user;
         if (user.role==='student' || user.role==='parent') $scope.loadStudentActivities(user);
@@ -18,23 +37,7 @@ angular.module('escolando')
         });
     }
 
-    $scope.loadStudentActivities = function (user) {
-        if (user.role==='student') {
-          Easy.query('student', {'user_id': user._id}).then(function (student) {
-              Easy.query('activities', {'group_id': student[0].group_id}).then(function (activities) {
-                  console.log(activities);
-                  $scope.activities = activities;
-              });
-          });
-        } else if (user.role==='parent') {
-            User.getStudentByParentId(user._id).then(function (student) {
-                Easy.query('activities', {'group_id': student.group_id}).then(function (activities) {
-                    console.log(activities);
-                    $scope.activities = activities;
-                });
-            });
-        }
-    };
+
 
     $scope.getStudentAvg = function (studentId) {
         if (!isUndefined($scope.marks)) {

@@ -11,15 +11,35 @@
     function AttendanceController ($scope, Courses, $state, Easy, User, CONSTANTS, Attendance, Toaster, Principal) {
         Principal.identity().then(function (user) {
             $scope.user = user;
+
+            if ($scope.user.role === "student" || $scope.user.role === "parent") {
+                Easy.query("student", {user_id: $scope.user._id}).then(function (student) {
+                    Easy.getOne("groups", student[0].group_id).then(function (group) {
+                        $scope.group = group;
+                        console.log($scope.group);
+                        if (!$scope.group) {
+                            $state.go('groups');
+                            return;
+                        }
+
+                        loadStudents($scope.group._id);
+                        $scope.loadStudentAttendance($scope.user)
+                    })
+
+                });
+            }
+            else {
+                $scope.group = Courses.getSelectedGroup();
+                var course = Courses.getSelectedCourse();
+
+                if (!$scope.group) {
+                    $state.go('groups');
+                    return;
+                }
+
+                loadStudents($scope.group._id);
+            }
         });
-
-        $scope.group = Courses.getSelectedGroup();
-        var course = Courses.getSelectedCourse();
-
-        if (!$scope.group) {
-            $state.go('groups');
-            return;
-        }
 
         $scope.studentAttendance = {};
         $scope.attendanceDate = new Date();
@@ -37,8 +57,6 @@
 
             return weekDates;
         }
-
-        loadStudents($scope.group._id);
 
         $scope.$watch('attendanceDate', function (date) {
             if (!date || !$scope.group) return;
