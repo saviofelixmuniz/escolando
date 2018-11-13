@@ -41,6 +41,10 @@ async function getUsersMessaged(req, res) {
                 res.status(500).json({message: err.stack});
             } else {
                 var users = [];
+                if (!obj[0]) {
+                    res.status(200).json([]);
+                    return;
+                }
                 for (let fromId of obj[0].from) {
                     if (!findUser(users, fromId.toString()) && fromId.toString() !== req.user._id.toString()) {
                         users.push(fromId);
